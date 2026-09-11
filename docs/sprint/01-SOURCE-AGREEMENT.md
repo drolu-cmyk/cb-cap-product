@@ -15,8 +15,8 @@ Review date target: ___________________
 ## What may not enter
 
 - Identifiable patient records.
-- Composite scores, ranks, or “highest need ZIP.”
-- Forecasts of individual health.
+- Composite scores, ranks, or a need ranking of ZCTA lenses.
+- Claims that describe individual health as a future outcome.
 - Files the owner cannot defend in a board meeting.
 
 ## Honesty language they keep

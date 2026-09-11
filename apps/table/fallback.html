@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CB-CAP · Lewis 2D table</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet"/>
+<style>
+:root { --ink:#15233b; --soft:#3d4b63; --line:#d7dde6; --paper:#f7f6f2; --blue:#2f5bff; --amber:#b45309; }
+body { margin:0; font:14px/1.45 "IBM Plex Sans",sans-serif; color:var(--ink); background:var(--paper); }
+header { padding:16px 20px; border-bottom:1px solid var(--line); background:#fff; }
+header strong { letter-spacing:.04em; }
+header span { display:block; font-size:11px; color:var(--soft); }
+banner, .banner { padding:8px 20px; background:#eef2fb; font-size:12px; color:var(--soft); }
+main { display:grid; grid-template-columns: 1fr 320px; min-height:70vh; }
+#stamps { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:16px; }
+.stamp { border:1px solid var(--line); background:#fff; border-radius:8px; padding:10px; text-align:left; }
+.stamp[aria-pressed="true"] { border-color:var(--blue); }
+.stamp b { display:block; }
+.stamp i { font-style:normal; font-size:11px; color:var(--soft); }
+.missing i { color:var(--amber); }
+aside { border-left:1px solid var(--line); padding:16px; background:#fff; }
+h1 { font-family:"Source Serif 4",Georgia,serif; font-size:28px; margin:4px 0 8px; }
+.meta { font-size:12px; color:var(--soft); }
+pre { white-space:pre-wrap; background:var(--paper); border:1px solid var(--line); padding:10px; font-size:12px; }
+@media (max-width:800px){ main { grid-template-columns:1fr; } aside { border-left:0; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<header>
+  <strong>CB-CAP</strong>
+  <span>SOZOROCK TECH INC. · 2D fallback · Lewis demonstration · not a deployment</span>
+</header>
+<div class="banner">Missing is not zero. ZIP codes are planning lenses, not labels for people.</div>
+<main>
+  <section id="stamps" aria-label="Twelve dimensions"></section>
+  <aside id="inspect"></aside>
+</main>
+<script src="./data/seed.js"></script>
+<script>
+const dims = (window.CBCAP_SEED && CBCAP_SEED.dimensions) || [];
+const names = (window.CBCAP_SEED && CBCAP_SEED.zctaNames) || {};
+let dim = "availability";
+function stateOf(id) {
+  if (id === "digital" || id === "trust") return "missing";
+  if (id === "administrative" || id === "quality" || id === "coordination") return "planned";
+  return "evidenced";
+}
+function render() {
+  document.getElementById("stamps").innerHTML = dims.map(d => {
+    const st = stateOf(d.id);
+    return `<button class="stamp ${st}" data-id="${d.id}" aria-pressed="${d.id===dim}"><b>${d.label}</b><i>${st==="missing"?"not available":st}</i></button>`;
+  }).join("");
+  document.querySelectorAll(".stamp").forEach(b => b.onclick = () => { dim = b.dataset.id; render(); });
+  const st = stateOf(dim);
+  const d = dims.find(x => x.id === dim);
+  document.getElementById("inspect").innerHTML = `
+    <p class="meta">ZIP lens 13367 · Lowville area · Lewis County NY 36049</p>
+    <h1>${d ? d.label : dim}</h1>
+    <p class="meta">State: ${st}. ${st==="missing"?"Not drawn as zero.":"Source estimate or planning view."}</p>
+    <p>Place used for planning. Not a label for people. Public-data demonstration. Not a Lewis County deployment.</p>
+    <button type="button" id="export">Draft Decision Record</button>
+    <pre id="record" hidden></pre>`;
+  document.getElementById("export").onclick = () => {
+    const rec = `DECISION RECORD (AI draft · awaiting human)\n\nPlace. ZIP lens 13367 · Lowville area · Lewis County, NY (36049)\nOwner. Unassigned\nReview date. Unset\n\n${d.label} is ${st}.\nDigital access is Not available and is not drawn as zero.\n\nLimits. CB-CAP does not diagnose, predict individual health, allocate funds, or replace CHA/CHIP.`;
+    const el = document.getElementById("record");
+    el.hidden = false;
+    el.textContent = rec;
+  };
+}
+render();
+</script>
+</body>
+</html>

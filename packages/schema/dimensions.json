@@ -1,0 +1,19 @@
+{
+  "$id": "https://sozorock.com/schema/cb-cap/dimensions-v1.json",
+  "title": "CB-CAP barrier dimensions",
+  "equalWeight": true,
+  "dimensions": [
+    {"id": "availability", "label": "Availability"},
+    {"id": "workforce", "label": "Workforce"},
+    {"id": "affordability", "label": "Affordability"},
+    {"id": "administrative", "label": "Administrative access"},
+    {"id": "quality", "label": "Quality and continuity"},
+    {"id": "trust", "label": "Trust and experience"},
+    {"id": "social", "label": "Social conditions"},
+    {"id": "digital", "label": "Digital access"},
+    {"id": "geography", "label": "Geography and transportation", "note": "One dimension. Never the whole model."},
+    {"id": "rural", "label": "Rural resilience"},
+    {"id": "coordination", "label": "System coordination"},
+    {"id": "alignment", "label": "Resource alignment"}
+  ]
+}

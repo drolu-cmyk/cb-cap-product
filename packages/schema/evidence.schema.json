@@ -1,0 +1,27 @@
+{
+  "$id": "https://sozorock.com/schema/cb-cap/evidence-v1.json",
+  "title": "CB-CAP evidence object",
+  "type": "object",
+  "required": ["title", "detail", "source", "date", "geography", "denominator", "missingness", "limitations", "mark"],
+  "properties": {
+    "title": {"type": "string"},
+    "detail": {"type": "string"},
+    "source": {"type": "string"},
+    "date": {"type": "string"},
+    "geography": {"type": "string"},
+    "denominator": {"type": "string"},
+    "missingness": {"type": "string"},
+    "limitations": {"type": "string"},
+    "mark": {
+      "enum": [
+        "Source estimate",
+        "Planning View",
+        "User assumption",
+        "Planning scenario",
+        "Local Evidence",
+        "Not available",
+        "Planned source"
+      ]
+    }
+  }
+}

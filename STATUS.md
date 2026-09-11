@@ -1,18 +1,18 @@
 # Status labels
 
-Use only these on capabilities.
-
 | Label | Meaning |
 |---|---|
-| LIVE | Present in the demonstration table |
+| LIVE | Present |
 | IMPLEMENTED_ACTIVATION_GATED | Built, not on for this surface |
 | PLANNED | Specified, not built |
 | RETIRED | Do not show |
 
-LIVE: See (planning table + stamps), Compare, Plan, Resource, Track, Decision Record draft/accept/reject, 8-step tour, county input + JSON import/export, SozoRock County synthetic seed, Lewis public-data seed, 2D fallback, 3D Lewis runtime.
+LIVE: product table acts, SozoRock seed, pack validator, Worker routes `/v1/health` `/v1/demo/sozorock` `/v1/packs/validate`, D1 schema, target operating model.
 
-IMPLEMENTED_ACTIVATION_GATED: Institutional Local Evidence form (browser-local only).
+IMPLEMENTED_ACTIVATION_GATED: Institutional Local Evidence form (browser-local); accept/reject in UI (not persisted).
 
-PLANNED: live ACS/PLACES adapters, institutional auth, dual-cloud, paid Workspace billing.
+PLANNED: D1 persistence, R2 export, Cloudflare Access, live adapters, dual-cloud, billing.
 
-Do not mark Lewis as LIVE-client. SozoRock County is synthetic. Not a real place.
+Worker `/v1/records/:id/accept` returns 403 by design.
+
+Do not mark Lewis as LIVE-client. SozoRock County is synthetic.

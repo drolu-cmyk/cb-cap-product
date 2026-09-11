@@ -1,0 +1,12 @@
+{
+  "name": "cbcap-platform",
+  "private": true,
+  "type": "module",
+  "version": "0.3.0",
+  "description": "CB-CAP edge API — SozoRock Tech Inc.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "node --test worker/validate.test.js"
+  }
+}

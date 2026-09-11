@@ -3,71 +3,110 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CB-CAP · Lewis 2D table</title>
+<title>CB-CAP · Lewis 2D planning table</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet"/>
 <style>
 :root { --ink:#15233b; --soft:#3d4b63; --line:#d7dde6; --paper:#f7f6f2; --blue:#2f5bff; --amber:#b45309; }
+* { box-sizing:border-box; }
 body { margin:0; font:14px/1.45 "IBM Plex Sans",sans-serif; color:var(--ink); background:var(--paper); }
-header { padding:16px 20px; border-bottom:1px solid var(--line); background:#fff; }
+header { padding:16px 20px; border-bottom:1px solid var(--line); background:#fff; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
 header strong { letter-spacing:.04em; }
 header span { display:block; font-size:11px; color:var(--soft); }
-banner, .banner { padding:8px 20px; background:#eef2fb; font-size:12px; color:var(--soft); }
-main { display:grid; grid-template-columns: 1fr 320px; min-height:70vh; }
-#stamps { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:16px; }
+.banner { padding:8px 20px; background:#eef2fb; font-size:12px; color:var(--soft); }
+nav { display:flex; gap:6px; flex-wrap:wrap; padding:10px 20px; }
+nav button { border:1px solid var(--line); background:#fff; border-radius:999px; padding:6px 12px; }
+nav button[aria-current="page"] { border-color:var(--blue); color:var(--blue); }
+main { display:grid; grid-template-columns: 1fr 340px; min-height:70vh; }
+#stamps { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:16px; align-content:start; }
 .stamp { border:1px solid var(--line); background:#fff; border-radius:8px; padding:10px; text-align:left; }
-.stamp[aria-pressed="true"] { border-color:var(--blue); }
+.stamp[aria-pressed="true"] { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
 .stamp b { display:block; }
 .stamp i { font-style:normal; font-size:11px; color:var(--soft); }
-.missing i { color:var(--amber); }
+.stamp.missing { background:repeating-linear-gradient(-45deg,#fff,#fff 6px,#f0f2f5 6px,#f0f2f5 12px); }
 aside { border-left:1px solid var(--line); padding:16px; background:#fff; }
 h1 { font-family:"Source Serif 4",Georgia,serif; font-size:28px; margin:4px 0 8px; }
 .meta { font-size:12px; color:var(--soft); }
+.pill { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:2px 8px; font-size:11px; margin:0 4px 8px 0; }
 pre { white-space:pre-wrap; background:var(--paper); border:1px solid var(--line); padding:10px; font-size:12px; }
+.scenario { border:1px dashed var(--amber); background:#fff6eb; border-radius:10px; padding:10px; margin:12px 0; }
+.legend { font-size:12px; color:var(--soft); padding:0 20px 12px; }
 @media (max-width:800px){ main { grid-template-columns:1fr; } aside { border-left:0; border-top:1px solid var(--line); } }
+@media print { header, nav, .banner, #stamps { display:none; } main { display:block; } }
 </style>
 </head>
 <body>
 <header>
-  <strong>CB-CAP</strong>
-  <span>SOZOROCK TECH INC. · 2D fallback · Lewis demonstration · not a deployment</span>
+  <div>
+    <strong>CB-CAP</strong>
+    <span>SOZOROCK TECH INC. · 2D fallback · Lewis demonstration · not a deployment</span>
+  </div>
+  <a href="./index.html">Open 3D table</a>
 </header>
-<div class="banner">Missing is not zero. ZIP codes are planning lenses, not labels for people.</div>
+<div class="banner">Missing is not zero. ZIP codes are planning lenses, not labels for people. AI drafts. People decide.</div>
+<nav aria-label="Planning workflow">
+  <button data-view="see">See</button>
+  <button data-view="compare">Compare</button>
+  <button data-view="plan">Plan</button>
+  <button data-view="resource">Resource</button>
+  <button data-view="track">Track</button>
+</nav>
+<p class="legend">Hatch = Not available. Color is the state of the open dimension. Not a grade. Not a rank.</p>
 <main>
   <section id="stamps" aria-label="Twelve dimensions"></section>
   <aside id="inspect"></aside>
 </main>
 <script src="./data/seed.js"></script>
+<script src="./data/seed-lenses.js"></script>
 <script>
-const dims = (window.CBCAP_SEED && CBCAP_SEED.dimensions) || [];
-const names = (window.CBCAP_SEED && CBCAP_SEED.zctaNames) || {};
+const dims = CBCAP_SEED.dimensions;
+const names = CBCAP_SEED.zctaNames;
 let dim = "availability";
-function stateOf(id) {
-  if (id === "digital" || id === "trust") return "missing";
-  if (id === "administrative" || id === "quality" || id === "coordination") return "planned";
-  return "evidenced";
-}
+let view = "see";
+let zcta = "13367";
+function lens() { return (window.CBCAP_LENSES && CBCAP_LENSES[zcta]) || { dimensions: {}, forecast: { caption: "Planning scenario — not a prediction of individual health", title: "—", horizon: "—", text: "" }, alignmentMatrix: { barriers: [], funding: [], workforce: [], priorities: [] } }; }
 function render() {
-  document.getElementById("stamps").innerHTML = dims.map(d => {
-    const st = stateOf(d.id);
+  document.querySelectorAll("nav [data-view]").forEach((b) => b.setAttribute("aria-current", b.dataset.view === view ? "page" : "false"));
+  document.getElementById("stamps").innerHTML = dims.map((d) => {
+    const st = (lens().dimensions[d.id] || {}).state || "missing";
     return `<button class="stamp ${st}" data-id="${d.id}" aria-pressed="${d.id===dim}"><b>${d.label}</b><i>${st==="missing"?"not available":st}</i></button>`;
   }).join("");
-  document.querySelectorAll(".stamp").forEach(b => b.onclick = () => { dim = b.dataset.id; render(); });
-  const st = stateOf(dim);
-  const d = dims.find(x => x.id === dim);
+  document.querySelectorAll(".stamp").forEach((b) => b.onclick = () => { dim = b.dataset.id; render(); });
+  const L = lens();
+  const d = dims.find((x) => x.id === dim);
+  const obj = L.dimensions[dim] || { state: "missing", mark: "Not available", items: [] };
+  const item = (obj.items && obj.items[0]) || {};
+  let extra = "";
+  if (view === "compare") extra = `<p class="meta">Two published releases: ${CBCAP_SEED.releases.map((r)=>r.date).join(" and ")}. Digital access stays Not available. Not a ranking.</p>`;
+  if (view === "plan" && L.forecast) extra = `<div class="scenario"><strong>${L.forecast.caption}</strong><p>${L.forecast.title} · ${L.forecast.horizon}</p><p>${L.forecast.text}</p></div>`;
+  if (view === "resource" && L.alignmentMatrix) extra = `<p class="meta">Barriers: ${(L.alignmentMatrix.barriers||[]).join("; ")}. Funding and workforce stay cited. No allocation.</p>`;
+  if (view === "track") extra = `<p class="meta">${(window.CBCAP_CHANGED||[]).map((c)=>c.title + " — " + c.detail).join(" ")}</p>`;
   document.getElementById("inspect").innerHTML = `
-    <p class="meta">ZIP lens 13367 · Lowville area · Lewis County NY 36049</p>
-    <h1>${d ? d.label : dim}</h1>
-    <p class="meta">State: ${st}. ${st==="missing"?"Not drawn as zero.":"Source estimate or planning view."}</p>
-    <p>Place used for planning. Not a label for people. Public-data demonstration. Not a Lewis County deployment.</p>
+    <p class="meta">ZIP lens ${zcta} · ${names[zcta] || ""} · Lewis County NY 36049</p>
+    <label class="meta">Lens
+      <select id="zsel">${Object.entries(names).map(([z,n])=>`<option value="${z}" ${z===zcta?"selected":""}>${z} · ${n}</option>`).join("")}</select>
+    </label>
+    <h1>${d.label}</h1>
+    <span class="pill">${obj.mark || ""}</span><span class="pill">${obj.state === "missing" ? "Not available" : obj.state}</span>
+    <p>${item.detail || "No sourced file at this geography."}</p>
+    <p class="meta"><strong>Source.</strong> ${item.source || "None"} · <strong>Missingness.</strong> ${item.missingness || "Not available"}</p>
+    <p class="meta">Place used for planning. Not a label for people. Public-data demonstration. Not a Lewis County deployment.</p>
+    ${extra}
     <button type="button" id="export">Draft Decision Record</button>
     <pre id="record" hidden></pre>`;
+  document.getElementById("zsel").onchange = (e) => { zcta = e.target.value; render(); };
   document.getElementById("export").onclick = () => {
-    const rec = `DECISION RECORD (AI draft · awaiting human)\n\nPlace. ZIP lens 13367 · Lowville area · Lewis County, NY (36049)\nOwner. Unassigned\nReview date. Unset\n\n${d.label} is ${st}.\nDigital access is Not available and is not drawn as zero.\n\nLimits. CB-CAP does not diagnose, predict individual health, allocate funds, or replace CHA/CHIP.`;
+    const rec = `DECISION RECORD (AI draft · awaiting human)\n\nPlace. ZIP lens ${zcta} · ${names[zcta]} · Lewis County, NY (36049)\nOwner. Unassigned\nReview date. Unset\nStatus. draft\n\n${d.label} is ${obj.state} (${obj.mark || ""}).\nDigital access is Not available and is not drawn as zero.\n\nLimits. CB-CAP does not diagnose, predict individual health, allocate funds, or replace CHA/CHIP.\nHonesty. Public-data demonstration. Not a Lewis County deployment.\nJudgment. AI drafts. People decide.`;
     const el = document.getElementById("record");
     el.hidden = false;
     el.textContent = rec;
+    const blob = new Blob([rec], { type: "text/markdown" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `cb-cap-decision-record-${zcta}-draft.md`;
+    a.click();
   };
 }
+document.querySelectorAll("nav [data-view]").forEach((b) => b.onclick = () => { view = b.dataset.view; render(); });
 render();
 </script>
 </body>

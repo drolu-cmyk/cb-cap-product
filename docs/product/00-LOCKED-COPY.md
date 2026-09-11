@@ -21,7 +21,8 @@ Do not invent new hero lines on pages, decks, or demos until this file changes.
 4. **Lens line:** ZIP codes are planning lenses, not labels for people.  
 5. **Missing line:** Missing is not zero.  
 6. **Scenario line:** A planning scenario describes system conditions. It is not a prediction of individual health.  
-7. **Demo honesty:** Public-data demonstration. Not a Lewis County deployment.
+7. **Demo honesty (Lewis):** Public-data demonstration. Not a Lewis County deployment.  
+8. **Demo honesty (synthetic):** Synthetic demonstration county. Not a real place. Not a deployment.
 
 ## Never say
 
@@ -38,6 +39,7 @@ Do not invent new hero lines on pages, decks, or demos until this file changes.
 | sozorock.com/cb-cap | Tech Inc. | Offer, SKUs, demo door |
 | cbcap.sozorockfoundation.org | Foundation | Institutional workspace (when live) |
 | health.sozorockfoundation.org/explore | Foundation | Public preview |
-| Lewis table file | Tech Inc. | Demo and social engine |
+| `apps/table/product.html` | Tech Inc. | Demonstrable product table (SozoRock County) |
+| Lewis table file | Tech Inc. | Public-data reference place |
 
-All four must describe the same object.
+All surfaces must describe the same object.

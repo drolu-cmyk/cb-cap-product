@@ -1,0 +1,11 @@
+{
+  "version": "cb-cap-county-v1",
+  "county": "SozoRock County",
+  "fips": "00000",
+  "honesty": "Synthetic demonstration county. Not a real place. Not a deployment.",
+  "names": {
+    "00000": "Seat town",
+    "00001": "North ridge",
+    "00002": "River mill"
+  }
+}

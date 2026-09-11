@@ -1,0 +1,31 @@
+{
+  "$id": "https://sozorock.com/schema/cb-cap/county-input-v1.json",
+  "title": "CB-CAP county input pack",
+  "type": "object",
+  "required": ["version", "county", "lenses"],
+  "properties": {
+    "version": { "const": "cb-cap-county-v1" },
+    "county": { "type": "string" },
+    "fips": { "type": "string", "description": "Use 00000 for a synthetic or unnamed place." },
+    "names": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "ZCTA or lens code to place name. Names are planning labels, not people labels."
+    },
+    "lenses": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "note": { "type": "string" },
+          "dimensions": { "type": "object" }
+        }
+      }
+    },
+    "local": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Local Evidence citations only. No PHI."
+    }
+  }
+}

@@ -1,11 +1,12 @@
-# PRD §10 acceptance — how a stranger checks this build
+# Acceptance — PRD §10
 
-| Check | Where |
-|---|---|
-| State what color and hatch mean | Tour step 1 + legend. Hatch = Not available, not zero. |
-| Find a missing dimension that is not zero | Open Digital access or Trust. Pale plate / hatched stamp. |
-| Open Compare and say what two dates are | 2025-12-04 and 2024-12-06 PLACES-class releases. |
-| Open Plan and read that it is not a prediction | Amber ring + locked scenario caption. |
-| Export a Decision Record that includes limits | Institutional → Draft Decision Record. File downloads. Limits paragraph present. |
+A reviewer who has never seen the file can, on `apps/table/product.html`:
 
-If any row fails, the table is not ready.
+1. State what color and hatch mean (evidence state of the open dimension; hatch = Not available).
+2. Find a missing dimension (North ridge → Trust) and see it is not zero.
+3. Open Compare and say what two dates are (2026-03-01 and 2025-03-01).
+4. Open Plan and read that it is not a prediction of individual health.
+5. Export a Decision Record that includes limits.
+6. Open Input county, leave one dimension blank, apply, and see hatch — not a rate of zero.
+
+If any of those fail, it is not ready.

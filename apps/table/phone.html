@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#f7f6f2"/>
+<title>CB-CAP · Lewis planning table</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet"/>
+<style>
+:root { --ink:#15233b; --soft:#3d4b63; --line:#d7dde6; --paper:#f7f6f2; --blue:#2f5bff; --amber:#b45309; --safe:env(safe-area-inset-bottom,0px); }
+* { box-sizing:border-box; }
+body { margin:0; font:15px/1.45 "IBM Plex Sans",sans-serif; color:var(--ink); background:var(--paper); }
+header { padding:14px 16px; border-bottom:1px solid var(--line); background:#fff; }
+header strong { letter-spacing:.04em; }
+header span { display:block; font-size:11px; color:var(--soft); }
+.banner { padding:8px 16px; background:#eef2fb; font-size:12px; color:var(--soft); }
+nav { display:flex; gap:6px; flex-wrap:wrap; padding:10px 16px; }
+nav button { border:1px solid var(--line); background:#fff; border-radius:999px; padding:8px 12px; }
+nav button[aria-current="page"] { border-color:var(--blue); color:var(--blue); }
+.legend { font-size:12px; color:var(--soft); padding:0 16px 8px; }
+#stamps { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; padding:12px 16px; }
+.stamp { border:1px solid var(--line); background:#fff; border-radius:10px; padding:10px; text-align:left; }
+.stamp[aria-pressed="true"] { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+.stamp b { display:block; }
+.stamp i { font-style:normal; font-size:11px; color:var(--soft); }
+.stamp.missing { background:repeating-linear-gradient(-45deg,#fff,#fff 6px,#f0f2f5 6px,#f0f2f5 12px); }
+aside { border-top:1px solid var(--line); padding:16px; background:#fff; padding-bottom:calc(20px + var(--safe)); }
+h1 { font-family:"Source Serif 4",Georgia,serif; font-size:26px; margin:4px 0 8px; }
+.meta { font-size:12px; color:var(--soft); }
+.pill { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:2px 8px; font-size:11px; margin:0 4px 8px 0; }
+pre { white-space:pre-wrap; background:var(--paper); border:1px solid var(--line); padding:10px; font-size:12px; }
+.scenario { border:1px dashed var(--amber); background:#fff6eb; border-radius:10px; padding:10px; margin:12px 0; }
+select { width:100%; margin:6px 0 10px; padding:8px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+button.primary { background:var(--blue); color:#fff; border:0; border-radius:8px; padding:10px 14px; width:100%; }
+@media (min-width:800px){ #stamps { grid-template-columns:repeat(3,1fr); } }
+</style>
+</head>
+<body>
+<header>
+  <strong>CB-CAP</strong>
+  <span>SOZOROCK TECH INC. · Lewis demonstration · not a deployment</span>
+</header>
+<div class="banner">Missing is not zero. ZIP codes are planning lenses, not labels for people. AI drafts. People decide.</div>
+<nav aria-label="Planning workflow">
+  <button data-view="see">See</button>
+  <button data-view="compare">Compare</button>
+  <button data-view="plan">Plan</button>
+  <button data-view="resource">Resource</button>
+  <button data-view="track">Track</button>
+</nav>
+<p class="legend">Hatch = Not available. Not a grade. Not a rank.</p>
+<section id="stamps" aria-label="Twelve dimensions"></section>
+<aside id="inspect"></aside>
+<script>
+window.CBCAP_SEED = {
+  meta: {
+    county: "Lewis County, NY",
+    fips: "36049",
+    banner: "Seeded demonstration · Lewis County, NY · public sources · ZIP codes are planning lenses, not labels for people.",
+    ai: "AI drafts. People decide."
+  },
+  dimensions: [
+    { id: "availability", label: "Availability" },
+    { id: "workforce", label: "Workforce" },
+    { id: "affordability", label: "Affordability" },
+    { id: "administrative", label: "Administrative access" },
+    { id: "quality", label: "Quality and continuity" },
+    { id: "trust", label: "Trust and experience" },
+    { id: "social", label: "Social conditions" },
+    { id: "digital", label: "Digital access" },
+    { id: "geography", label: "Geography and transportation" },
+    { id: "rural", label: "Rural resilience" },
+    { id: "coordination", label: "System coordination" },
+    { id: "alignment", label: "Resource alignment" }
+  ],
+  releases: [
+    { id: "places-2025", label: "CDC PLACES county release", date: "2025-12-04" },
+    { id: "places-2024", label: "Prior published release", date: "2024-12-06" }
+  ],
+  zctaNames: {
+    "13367": "Lowville area", "13327": "Croghan area", "13368": "Lyons Falls area",
+    "13343": "Glenfield area", "13325": "Constableville area", "13433": "Port Leyden area",
+    "13473": "Turin area", "13620": "Castorland area", "13626": "Copenhagen area",
+    "13648": "Harrisville area", "13312": "Brantingham area", "13345": "Greig area",
+    "13305": "Beaver Falls area", "13404": "Martinsburg area", "13489": "West Leyden area"
+  }
+};
+function ev(title, detail, mark) {
+  return { title, detail, source: "Seeded from public files for demonstration", date: "2025", geo: "Lewis County ZCTA lens", denominator: "As published", missingness: "Coverage varies", limitations: "Demonstration object. Not a complete inventory.", mark: mark || "Source estimate" };
+}
+function dim(state, mark, title, detail) {
+  return { state, mark, items: [ev(title, detail, mark)] };
+}
+const COMMON = {
+  administrative: dim("planned", "Planned source", "Enrollment path", "No county-wide file. Planned."),
+  quality: dim("planned", "Planned source", "Continuity", "Not assembled at ZCTA."),
+  trust: dim("missing", "Not available", "Trust", "No ZCTA trust measure. Not zero."),
+  coordination: dim("planned", "Planned source", "Shared planning", "Not sourced at ZCTA."),
+  digital: dim("missing", "Not available", "Digital access", "No complete file. Not zero.")
+};
+function pack(over) {
+  return Object.assign({
+    availability: dim("evidenced", "Source estimate", "Supply pressure", "Rural hospital plus extension clinics. Not a grade."),
+    workforce: dim("evidenced", "Source estimate", "Small pool", "Thin bench."),
+    affordability: dim("evidenced", "Source estimate", "Cost pressure", "PLACES/ACS class estimate."),
+    social: dim("evidenced", "Local Evidence", "Housing strain", "Lewis 2025 CHA/CHIP names housing."),
+    geography: dim("evidenced", "Source estimate", "Winter isolation", "One of twelve dimensions."),
+    rural: dim("evidenced", "Planning View", "Critical-access dependence", "One hospital."),
+    alignment: dim("evidenced", "Planning View", "Mismatch", "Not an allocation.")
+  }, COMMON, over);
+}
+window.CBCAP_LENSES = {};
+CBCAP_LENSES["13367"] = {
+  dimensions: pack({ digital: dim("suspected", "Suspected gap", "Portal access", "Seat town is not last-mile proof.") }),
+  forecast: { caption: "Planning scenario — not a prediction of individual health", title: "Winter coverage pressure", horizon: "12–24 months", text: "If housing strain stays high and the bench stays thin, access pressure rises in winter." },
+  alignmentMatrix: { barriers: ["Specialty leaving county", "Housing", "Winter travel"], funding: ["Public rural health — not an inventory"], workforce: ["LCGH + clinics"], priorities: ["Housing", "Anxiety and stress", "Suicide"] }
+};
+Object.keys(CBCAP_SEED.zctaNames).forEach((z) => {
+  if (CBCAP_LENSES[z]) return;
+  CBCAP_LENSES[z] = { dimensions: pack({}), forecast: CBCAP_LENSES["13367"].forecast, alignmentMatrix: CBCAP_LENSES["13367"].alignmentMatrix };
+});
+window.CBCAP_CHANGED = [
+  { title: "PLACES release refreshed", detail: "2025 next to 2024. Digital stays Not available." },
+  { title: "Lewis CHA/CHIP 2025 posted", detail: "Public plan names housing and mental health." }
+];
+const dims = CBCAP_SEED.dimensions;
+const names = CBCAP_SEED.zctaNames;
+let dimId = "availability";
+let view = "see";
+let zcta = "13367";
+function lens() { return CBCAP_LENSES[zcta]; }
+function render() {
+  document.querySelectorAll("nav [data-view]").forEach((b) => b.setAttribute("aria-current", b.dataset.view === view ? "page" : "false"));
+  document.getElementById("stamps").innerHTML = dims.map((d) => {
+    const st = (lens().dimensions[d.id] || {}).state || "missing";
+    return `<button class="stamp ${st}" data-id="${d.id}" aria-pressed="${d.id===dimId}"><b>${d.label}</b><i>${st==="missing"?"not available":st}</i></button>`;
+  }).join("");
+  document.querySelectorAll(".stamp").forEach((b) => b.onclick = () => { dimId = b.dataset.id; render(); });
+  const L = lens();
+  const d = dims.find((x) => x.id === dimId);
+  const obj = L.dimensions[dimId] || { state: "missing", mark: "Not available", items: [] };
+  const item = (obj.items && obj.items[0]) || {};
+  let extra = "";
+  if (view === "compare") extra = `<p class="meta">Two published releases: ${CBCAP_SEED.releases.map((r)=>r.date).join(" and ")}. Digital access stays Not available. Not a ranking.</p>`;
+  if (view === "plan") extra = `<div class="scenario"><strong>${L.forecast.caption}</strong><p>${L.forecast.title} · ${L.forecast.horizon}</p><p>${L.forecast.text}</p></div>`;
+  if (view === "resource") extra = `<p class="meta">Barriers: ${L.alignmentMatrix.barriers.join("; ")}. No allocation.</p>`;
+  if (view === "track") extra = `<p class="meta">${CBCAP_CHANGED.map((c)=>c.title + " — " + c.detail).join(" ")}</p>`;
+  document.getElementById("inspect").innerHTML = `
+    <p class="meta">ZIP lens ${zcta} · ${names[zcta]} · Lewis County NY 36049</p>
+    <label class="meta">Lens</label>
+    <select id="zsel">${Object.entries(names).map(([z,n])=>`<option value="${z}" ${z===zcta?"selected":""}>${z} · ${n}</option>`).join("")}</select>
+    <h1>${d.label}</h1>
+    <span class="pill">${obj.mark || ""}</span><span class="pill">${obj.state === "missing" ? "Not available" : obj.state}</span>
+    <p>${item.detail || "No sourced file at this geography."}</p>
+    <p class="meta"><strong>Source.</strong> ${item.source || "None"} · <strong>Missingness.</strong> ${item.missingness || "Not available"}</p>
+    <p class="meta">Place used for planning. Not a label for people. Public-data demonstration. Not a Lewis County deployment.</p>
+    ${extra}
+    <button class="primary" type="button" id="export">Draft Decision Record</button>
+    <pre id="record" hidden></pre>`;
+  document.getElementById("zsel").onchange = (e) => { zcta = e.target.value; render(); };
+  document.getElementById("export").onclick = () => {
+    const rec = `DECISION RECORD (AI draft · awaiting human)\n\nPlace. ZIP lens ${zcta} · ${names[zcta]} · Lewis County, NY (36049)\nOwner. Unassigned\nReview date. Unset\nStatus. draft\n\n${d.label} is ${obj.state} (${obj.mark || ""}).\nDigital access is Not available and is not drawn as zero.\n\nLimits. CB-CAP does not diagnose, predict individual health, allocate funds, or replace CHA/CHIP.\nHonesty. Public-data demonstration. Not a Lewis County deployment.\nJudgment. AI drafts. People decide.`;
+    const el = document.getElementById("record");
+    el.hidden = false;
+    el.textContent = rec;
+  };
+}
+document.querySelectorAll("nav [data-view]").forEach((b) => b.onclick = () => { view = b.dataset.view; render(); });
+render();
+</script>
+</body>
+</html>

@@ -1,9 +1,10 @@
-# Lewis County seed
+# Lewis County demonstration seed
 
-Public-data demonstration. Not a Lewis County deployment.
+FIPS 36049. Public files only. Not a Lewis County deployment.
 
-- FIPS 36049
-- ZCTA outlines: Census 2010 used as planning lenses, labeled on screen
-- Sites: LCGH and published extension clinics (seeded subset)
-- Local Evidence: 2025 CHA/CHIP priorities from the public plan
-- Digital access and trust: Not available in this seed
+Runtime seed lives in `apps/table/data/` so the table boots from one folder.
+
+- `apps/table/data/seed.js` — dimensions, sites, routes, names
+- `apps/table/data/seed-lenses.js` — evidence objects
+- `apps/table/data/zcta-3d.json` — projected 2010 ZCTA rings
+- `SOURCES.md` — source classes and vintages

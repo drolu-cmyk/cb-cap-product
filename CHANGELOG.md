@@ -1,13 +1,14 @@
 # Changelog
 
-## 0.1.1 — 2026-09-11
+## 0.2.0 — 2026-09-11
 
-### Added
-- SourceAdapter contract (`packages/evidence/adapter.js`).
-- 2D fallback table (`apps/table/fallback.html`).
-- Commercial page aligned in `sozorock-com` to locked copy.
+- Lifted Lewis 3D table runtime: `apps/table/js/app.js`, `css/app.css`, `data/zcta-3d.json`.
+- Eight-step self-explaining tour. SVG stamp multiples. Compare / Plan / Resource / Track.
+- Decision Record draft downloads Markdown. Status remains draft until a human accepts.
+- 2D fallback uses the same seed and lenses.
+- Planning Sprint kit under `docs/sprint/`.
+- Copy-lint workflow rejects "forecast emerging needs."
 
 ## 0.1.0 — 2026-09-11
 
-### Added
-- Product system, schemas, templates, Lewis seed, repository standards.
+- Product pack, schemas, Lewis seed, SourceAdapter stub, 2D fallback.

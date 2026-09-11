@@ -6,11 +6,29 @@ permissions:
   contents: read
   pages: write
   id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
 jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.maybe.outputs.url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Note
-        run: echo "Enable GitHub Pages on /docs or /apps/table in Settings if you want a hosted table. Workflow is a stub until Pages is switched on."
+      - name: Stage table
+        run: |
+          mkdir -p _site
+          cp -R apps/table/* _site/
+          echo "Enable GitHub Pages (Actions source) in Settings to host the table."
+      - name: Upload
+        id: maybe
+        continue-on-error: true
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy
+        continue-on-error: true
+        uses: actions/deploy-pages@v4

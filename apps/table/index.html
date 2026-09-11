@@ -41,7 +41,7 @@
     </header>
     <div class="banner">
       <span id="banner-text"></span>
-      <span class="hide-phone">Drag to orbit · pinch to zoom · tap a ZIP</span>
+      <span class="hide-phone">Drag to orbit · pinch to zoom · tap a ZIP · arrows change lens</span>
     </div>
     <div class="main">
       <aside class="rail" id="rail"></aside>
@@ -65,6 +65,7 @@
           <button class="flat-btn" id="btn-reset">Reset camera</button>
           <button class="flat-btn" id="btn-scenario">Planning scenario</button>
           <button class="flat-btn" id="btn-tour">Replay tour</button>
+          <a class="flat-btn" href="./fallback.html">2D table</a>
         </div>
         <button class="sheet-handle hide-desk" id="sheet-toggle" type="button">ZIP lens</button>
       </section>
@@ -72,6 +73,7 @@
     </div>
   </div>
   <script src="./data/seed.js"></script>
+  <script src="./data/seed-lenses.js"></script>
   <script type="module" src="./js/app.js"></script>
 </body>
 </html>

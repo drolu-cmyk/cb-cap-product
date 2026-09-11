@@ -1,0 +1,18 @@
+name: copy-lint
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  locked-copy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject banned marketing phrases
+        run: |
+          set -e
+          if git grep -n -i -E 'forecast emerging needs|highest need ZIP|predict outcomes|emerging risk as fate' -- ':!docs/product/00-LOCKED-COPY.md' ':!.github/workflows/copy-lint.yml'; then
+            echo "Banned phrase found. See docs/product/00-LOCKED-COPY.md"
+            exit 1
+          fi
+          echo "Locked-copy lint passed."

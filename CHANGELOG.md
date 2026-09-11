@@ -1,24 +1,22 @@
 # Changelog
 
+## 0.4.0 — 2026-09-11
+
+- Wave 0 target operating model approved.
+- Worker Wave 2: `POST /v1/packs`, `POST /v1/records/draft`, owner-gated accept/reject, `GET /v1/records/:id/export`.
+- Accept without owner returns 403. Accepted records cannot be overwritten.
+- Pack validator + store unit tests (`npm test` in `platform/`).
+- D1 schema adds `packs`. Bindings stay commented until the Tech Inc. Cloudflare account is provisioned.
+
 ## 0.3.0 — 2026-09-11
 
-- Primary demonstrable product is now SozoRock County (FIPS 00000, lenses 00000 / 00001 / 00002).
-- Synthetic seed covers all twelve barrier dimensions so every product act can run.
-- North ridge → Trust is Not available (hatch, not zero) so missingness is visible.
-- `apps/table/product.html` — single-file product table: See, Compare, Plan, Resource, Track, Input county, Decision Record.
-- County input pack: type values or import/export `cb-cap-county-v1` JSON. Empty detail → Not available.
-- Public vs Institutional surface. Acceptance requires owner + review date. AI never accepts.
-- Schema: `packages/schema/county-input.schema.json`.
+- SozoRock County product table and county-input pack.
+- Target operating model and Cloudflare platform skeleton.
 
 ## 0.2.0 — 2026-09-11
 
-- Lifted Lewis 3D table runtime: `apps/table/js/app.js`, `css/app.css`, `data/zcta-3d.json`.
-- Eight-step self-explaining tour. SVG stamp multiples. Compare / Plan / Resource / Track.
-- Decision Record draft downloads Markdown. Status remains draft until a human accepts.
-- 2D fallback uses the same seed and lenses.
-- Planning Sprint kit under `docs/sprint/`.
-- Copy-lint workflow rejects "forecast emerging needs."
+- Lewis 3D table runtime and sprint kit.
 
 ## 0.1.0 — 2026-09-11
 
-- Product pack, schemas, Lewis seed, SourceAdapter stub, 2D fallback.
+- Product pack, schemas, Lewis seed.

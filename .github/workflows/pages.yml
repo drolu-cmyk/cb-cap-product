@@ -1,0 +1,16 @@
+name: pages
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Note
+        run: echo "Enable GitHub Pages on /docs or /apps/table in Settings if you want a hosted table. Workflow is a stub until Pages is switched on."

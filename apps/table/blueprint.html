@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CB-CAP · Target operating model · SozoRock Tech Inc.</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet"/>
+<style>
+:root { --ink:#15233b; --soft:#3d4b63; --line:#d7dde6; --paper:#f7f6f2; --blue:#2f5bff; }
+* { box-sizing:border-box; }
+body { margin:0; font:16px/1.5 "IBM Plex Sans",sans-serif; color:var(--ink); background:var(--paper); }
+header { background:#fff; border-bottom:1px solid var(--line); padding:20px 24px; }
+header span { display:block; font-size:12px; color:var(--soft); letter-spacing:.08em; }
+main { max-width:880px; margin:0 auto; padding:28px 20px 80px; }
+h1 { font-family:"Source Serif 4",Georgia,serif; font-size:34px; line-height:1.2; margin:8px 0 12px; }
+h2 { font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin:32px 0 10px; }
+.lead { font-size:18px; }
+table { width:100%; border-collapse:collapse; font-size:14px; background:#fff; margin:10px 0 18px; }
+th,td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+th { background:#eef2fb; }
+.fail { background:#fff6eb; } .ok { background:#eef8f0; }
+pre { background:#15233b; color:#e8eef7; padding:14px; border-radius:10px; overflow:auto; font-size:12px; }
+.box { background:#fff; border:1px solid var(--line); padding:16px; border-radius:12px; }
+footer { font-size:12px; color:var(--soft); margin-top:40px; }
+a { color:var(--blue); }
+</style>
+</head>
+<body>
+<header>
+  <strong>CB-CAP</strong>
+  <span>SOZOROCK TECH INC. · TARGET OPERATING MODEL AND PLATFORM BLUEPRINT · 11 SEP 2026</span>
+</header>
+<main>
+<p>Wave 0 freeze</p>
+<h1>From a table file to a product a firm would sell and Cloudflare would host.</h1>
+<p class="lead">Deloitte and Accenture sell a value stream, an operating model, a control framework, and a platform. Cloudflare grants credits for Workers, Pages, D1, and R2 on a live software product — not for a brochure.</p>
+<h2>Diagnosis</h2>
+<table>
+<tr><th>Test</th><th>What we had</th><th>Required</th></tr>
+<tr class="fail"><td>Offer</td><td>SKUs on paper</td><td>SKU × host × write rights × SLA</td></tr>
+<tr class="fail"><td>System of record</td><td>localStorage</td><td>D1 packs + R2 exports + audit</td></tr>
+<tr class="fail"><td>Trust</td><td>Banner copy</td><td>Validator, accept rights, no PHI</td></tr>
+<tr class="fail"><td>Cloud</td><td>Static file</td><td>Pages + Worker + D1 + KV + R2 + Access</td></tr>
+<tr class="ok"><td>Method</td><td>Twelve dimensions, missing ≠ zero</td><td>Keep. This is the IP.</td></tr>
+</table>
+<h2>Value streams</h2>
+<table>
+<tr><th>Stream</th><th>Job</th><th>Output</th></tr>
+<tr><td>See</td><td>Sourced vs missing</td><td>Planning table</td></tr>
+<tr><td>Judge</td><td>Selection → dated record</td><td>Decision Record pack</td></tr>
+<tr><td>Refresh</td><td>New release, no silent overwrite</td><td>Compare + Track</td></tr>
+<tr><td>Govern</td><td>Language, rights, bounds</td><td>Audit + source agreement</td></tr>
+</table>
+<h2>Target architecture</h2>
+<pre>DNS + WAF
+  Pages   sozorock.com/cb-cap     offer
+  Pages   table.cbcap.*           app
+  Worker  api.cbcap.*             /v1/health /v1/demo /v1/packs/validate
+          D1   packs, records, audit
+          R2   Decision Record exports
+          KV   frozen demo seeds
+          Access on Workspace only</pre>
+<p>The Worker refuses <code>/v1/records/:id/accept</code> with 403. AI drafts. People decide. That is an API rule.</p>
+<h2>Waves</h2>
+<table>
+<tr><th>Wave</th><th>Build</th><th>Exit</th></tr>
+<tr><td>0</td><td>This blueprint</td><td>Accepted</td></tr>
+<tr><td>1</td><td>wrangler, Worker, D1 schema, table from pack</td><td>health + demo + validate</td></tr>
+<tr><td>2</td><td>D1 draft, R2 export, owner accept</td><td>Record persists</td></tr>
+<tr><td>3</td><td>Access + Local Evidence + tenant</td><td>Sprint can run</td></tr>
+<tr><td>4</td><td>Public-file adapters</td><td>New dated pack</td></tr>
+<tr><td>5</td><td>Dual-cloud only if a buyer requires it</td><td>Not a credit gate</td></tr>
+</table>
+<div class="box">
+<p>Apply for Cloudflare credits as SozoRock Tech Inc. after a public host exists. Business email on the company domain. Point reviewers at <code>platform/</code>, not at a ZIP of HTML. Do not spend the Workers AI cap on a model that accepts plans.</p>
+</div>
+<p><a href="./product.html">Product table</a> · <a href="https://github.com/drolu-cmyk/cb-cap-product">Repository</a></p>
+<footer>Synthetic demonstration. Not a real county. Not a Lewis County deployment. AI drafts. People decide.</footer>
+</main>
+</body>
+</html>

@@ -30,6 +30,15 @@ CREATE TABLE IF NOT EXISTS evidence (
   FOREIGN KEY (lens_id) REFERENCES lenses(id)
 );
 
+CREATE TABLE IF NOT EXISTS packs (
+  id TEXT PRIMARY KEY,
+  county_id TEXT NOT NULL,
+  version INTEGER NOT NULL,
+  pack_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  FOREIGN KEY (county_id) REFERENCES counties(id)
+);
+
 CREATE TABLE IF NOT EXISTS records (
   id TEXT PRIMARY KEY,
   county_id TEXT NOT NULL,

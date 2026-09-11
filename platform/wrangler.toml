@@ -1,8 +1,4 @@
 # CB-CAP edge platform — SozoRock Tech Inc.
-# Wave 1 contract: Pages (table) + Worker (API) + D1 + KV + R2 bindings.
-# Deploy: npx wrangler deploy --config platform/wrangler.toml
-# Local:  npx wrangler dev --config platform/wrangler.toml
-
 name = "cbcap-api"
 main = "worker/index.js"
 compatibility_date = "2026-09-01"
@@ -14,18 +10,19 @@ PRODUCT = "CB-CAP"
 BUILDER = "SozoRock Tech Inc."
 HONESTY = "Synthetic demonstration county. Not a real place. Not a deployment."
 
-[[d1_databases]]
-binding = "DB"
-database_name = "cbcap"
-database_id = "REPLACE_AFTER_CREATE"
-
-[[kv_namespaces]]
-binding = "DEMO"
-id = "REPLACE_AFTER_CREATE"
-
-[[r2_buckets]]
-binding = "ARTIFACTS"
-bucket_name = "cbcap-artifacts"
+# Uncomment after creating bindings on the Tech Inc. Cloudflare account.
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "cbcap"
+# database_id = "REPLACE_AFTER_CREATE"
+#
+# [[kv_namespaces]]
+# binding = "DEMO"
+# id = "REPLACE_AFTER_CREATE"
+#
+# [[r2_buckets]]
+# binding = "ARTIFACTS"
+# bucket_name = "cbcap-artifacts"
 
 [observability]
 enabled = true

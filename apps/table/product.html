@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="theme-color" content="#f7f6f2"/>
+<title>CB-CAP · SozoRock County product table</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --ink:#15233b; --soft:#3d4b63; --line:#d7dde6; --paper:#f7f6f2; --white:#fff;
+  --blue:#2f5bff; --amber:#b45309; --amber-soft:#fff6eb; --miss:#9aa3b2;
+  --sans:"IBM Plex Sans","Segoe UI",sans-serif; --serif:"Source Serif 4",Georgia,serif;
+  --safe:env(safe-area-inset-bottom,0px);
+}
+* { box-sizing:border-box; }
+html,body { margin:0; background:#d9d3c7; color:var(--ink); font:14px/1.45 var(--sans); }
+button,input,select,textarea { font:inherit; color:inherit; }
+button { cursor:pointer; }
+.app { min-height:100dvh; display:flex; flex-direction:column; }
+.top { background:var(--white); border-bottom:1px solid var(--line); padding:10px 14px; display:flex; justify-content:space-between; gap:10px; align-items:center; }
+.brand strong { letter-spacing:.04em; font-size:17px; }
+.brand span { display:block; font-size:10px; letter-spacing:.1em; color:var(--soft); }
+.seg { display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+.seg button { border:0; background:var(--white); padding:6px 10px; }
+.seg button[aria-pressed="true"] { background:var(--blue); color:#fff; }
+.banner { background:#eef2fb; padding:8px 14px; font-size:12px; color:var(--soft); }
+nav.flow { display:flex; gap:4px; overflow-x:auto; padding:8px 14px; background:var(--paper); border-bottom:1px solid var(--line); }
+nav.flow button { border:0; background:none; padding:8px 10px; color:var(--soft); white-space:nowrap; border-bottom:2px solid transparent; }
+nav.flow button[aria-current="page"] { color:var(--blue); border-bottom-color:var(--blue); font-weight:600; }
+.main { display:grid; grid-template-columns:1fr; }
+.stage { position:relative; background:linear-gradient(#cfc8b8,#e6e0d2); min-height:280px; padding:10px; }
+svg.table { width:100%; height:260px; display:block; }
+.plate { cursor:pointer; stroke:#15233b; stroke-width:1.2; }
+.plate[aria-selected="true"] { stroke:var(--blue); stroke-width:2.4; }
+.hatch { fill:url(#hatch); }
+.legend { display:flex; flex-wrap:wrap; gap:8px; font-size:11px; color:var(--soft); padding:0 4px 8px; }
+.sw { display:inline-block; width:12px; height:12px; border:1px solid var(--line); vertical-align:-2px; margin-right:4px; }
+.sw.ev { background:#9bb0ff; } .sw.su { background:#f3c48a; } .sw.pl { background:#c5ccd6; }
+.sw.mi { background:repeating-linear-gradient(-45deg,#fff,#fff 3px,#e6e8ed 3px,#e6e8ed 6px); }
+.stamps { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:8px 14px; background:var(--paper); }
+.stamp { border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px; text-align:left; min-height:64px; }
+.stamp b { display:block; font-size:12px; }
+.stamp i { font-style:normal; font-size:10px; color:var(--soft); }
+.stamp[aria-pressed="true"] { border-color:var(--blue); box-shadow:0 0 0 1px var(--blue); }
+.stamp.evidenced { background:#eef2ff; } .stamp.suspected { background:#fff6eb; }
+.stamp.planned { background:#f3f5f8; }
+.stamp.missing { background:repeating-linear-gradient(-45deg,#fff,#fff 5px,#eef0f3 5px,#eef0f3 10px); }
+.inspect { background:#fff; border-top:1px solid var(--line); padding:16px 16px calc(28px + var(--safe)); }
+h1 { font-family:var(--serif); font-size:26px; margin:4px 0 8px; }
+h2 { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); }
+.meta { font-size:12px; color:var(--soft); }
+.pill { display:inline-block; border:1px solid var(--line); border-radius:999px; padding:2px 8px; font-size:11px; margin:0 4px 8px 0; }
+.scenario { border:1px dashed var(--amber); background:var(--amber-soft); border-radius:10px; padding:10px; margin:10px 0; }
+.matrix { display:grid; gap:8px; }
+.matrix section { border:1px solid var(--line); border-radius:10px; padding:10px; background:var(--paper); }
+.matrix h3 { margin:0 0 6px; font-size:13px; }
+input,select,textarea { width:100%; margin:4px 0 10px; padding:10px; border:1px solid var(--line); border-radius:10px; background:#fff; }
+textarea { min-height:68px; }
+.primary { width:100%; background:var(--blue); color:#fff; border:0; border-radius:10px; padding:12px; }
+.ghost { width:100%; background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px; margin-top:8px; }
+.row { display:flex; gap:8px; }
+.row > * { flex:1; }
+pre { white-space:pre-wrap; background:var(--paper); border:1px solid var(--line); padding:10px; font-size:12px; }
+.tour { position:absolute; left:12px; right:12px; bottom:12px; background:#fff; border:1px solid var(--line); border-radius:14px; padding:14px; box-shadow:0 12px 30px rgba(21,35,59,.12); }
+.tour .kicker { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--soft); margin:0; }
+.tour h2 { font-family:var(--serif); font-size:20px; text-transform:none; letter-spacing:0; color:var(--ink); margin:4px 0 8px; }
+.evgrid { display:grid; grid-template-columns:90px 1fr; gap:4px 8px; font-size:12px; }
+.evgrid b { color:var(--soft); font-weight:500; }
+.compare { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.site-dot { fill:#15233b; }
+.tools { position:absolute; top:8px; right:8px; display:flex; gap:6px; }
+.tools button { background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
+@media (min-width:960px) {
+  .main { grid-template-columns:1.15fr .85fr; }
+  .inspect { border-top:0; border-left:1px solid var(--line); }
+  .stamps { grid-template-columns:repeat(4,1fr); }
+  svg.table { height:360px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <strong>CB-CAP</strong>
+      <span id="brand-sub">SOZOROCK TECH INC. · SYNTHETIC PRODUCT TABLE</span>
+    </div>
+    <div class="seg" role="group" aria-label="Surface">
+      <button data-surface="public" aria-pressed="true">Public</button>
+      <button data-surface="institutional">Institutional</button>
+    </div>
+  </header>
+  <div class="banner" id="banner">From evidence to a plan you can defend. Missing is not zero. AI drafts. People decide. Synthetic demonstration — not a real county.</div>
+  <nav class="flow" aria-label="Product acts">
+    <button data-view="see">See</button>
+    <button data-view="compare">Compare</button>
+    <button data-view="plan">Plan</button>
+    <button data-view="resource">Resource</button>
+    <button data-view="track">Track</button>
+    <button data-view="input">Input county</button>
+    <button data-view="record">Decision Record</button>
+  </nav>
+  <div class="main">
+    <section class="stage" id="stage">
+      <div class="tools">
+        <button id="btn-tour" type="button">Replay tour</button>
+      </div>
+      <svg class="table" id="map" viewBox="0 0 400 260" role="img" aria-label="SozoRock County planning table">
+        <defs>
+          <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <rect width="8" height="8" fill="#f4f5f7"/>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#c5ccd6" stroke-width="3"/>
+          </pattern>
+          <filter id="lift"><feDropShadow dx="0" dy="3" stdDeviation="2" flood-opacity=".25"/></filter>
+        </defs>
+        <polygon points="20,230 80,210 140,232 90,248" fill="#b7c4a4" opacity=".7"/>
+        <polygon points="240,40 310,28 360,70 300,78" fill="#c3cbb6" opacity=".7"/>
+        <path d="M188 70 L210 130 L198 200" fill="none" stroke="#6b7280" stroke-width="2" stroke-dasharray="4 4"/>
+        <polygon class="plate" data-z="00000" points="120,70 210,55 250,120 200,175 130,160" filter="url(#lift)"/>
+        <polygon class="plate" data-z="00001" points="210,55 310,40 355,95 300,150 250,120" filter="url(#lift)"/>
+        <polygon class="plate" data-z="00002" points="130,160 200,175 250,120 300,150 240,220 140,210" filter="url(#lift)"/>
+        <circle class="site-dot" cx="175" cy="110" r="4"/>
+        <circle class="site-dot" cx="290" cy="85" r="3"/>
+        <circle class="site-dot" cx="210" cy="190" r="3"/>
+        <text x="160" y="118" font-size="10" fill="#15233b">00000</text>
+        <text x="268" y="92" font-size="10" fill="#15233b">00001</text>
+        <text x="188" y="198" font-size="10" fill="#15233b">00002</text>
+      </svg>
+      <p class="legend">
+        <span><i class="sw ev"></i>Evidenced</span>
+        <span><i class="sw su"></i>Suspected gap</span>
+        <span><i class="sw pl"></i>Planned source</span>
+        <span><i class="sw mi"></i>Not available — not zero</span>
+      </p>
+      <div id="tour" class="tour" hidden>
+        <p class="kicker" id="tour-kicker">How to read this</p>
+        <h2 id="tour-title"></h2>
+        <p id="tour-body"></p>
+        <div class="row">
+          <button class="ghost" id="tour-skip" type="button">Enter product</button>
+          <button class="primary" id="tour-next" type="button">Next</button>
+        </div>
+        <p class="meta" id="tour-step"></p>
+      </div>
+    </section>
+    <aside>
+      <section class="stamps" id="stamps" aria-label="Twelve barrier dimensions"></section>
+      <div class="inspect" id="inspect"></div>
+    </aside>
+  </div>
+</div>
+<script>
+const DIMS = [
+  ["availability","Availability"],
+  ["workforce","Workforce"],
+  ["affordability","Affordability"],
+  ["administrative","Administrative access"],
+  ["quality","Quality and continuity"],
+  ["trust","Trust and experience"],
+  ["social","Social conditions"],
+  ["digital","Digital access"],
+  ["geography","Geography and transportation"],
+  ["rural","Rural resilience"],
+  ["coordination","System coordination"],
+  ["alignment","Resource alignment"]
+];
+
+function ev(title, detail, extra) {
+  return Object.assign({
+    title, detail,
+    source: "Synthetic demonstration file · SozoRock County seed v1",
+    date: "2026-03-01",
+    geography: "SozoRock County synthetic lens",
+    denominator: "Demonstration population 18,400",
+    missingness: "Fully specified in the seed so every product act can run",
+    limitations: "Synthetic. Not a real county. Not a health outcome. Not an inventory.",
+    mark: "Planning View"
+  }, extra || {});
+}
+function dim(state, mark, title, detail, extra) {
+  return { state, mark, items: [ev(title, detail, Object.assign({ mark }, extra || {}))] };
+}
+function missingDim(title) {
+  return dim("missing","Not available", title, "No sourced file at this geography. Absence is not drawn as zero.", {
+    source: "None", date: "n/a", denominator: "n/a",
+    missingness: "Not available",
+    limitations: "Missing is not zero."
+  });
+}
+
+function pack(over) {
+  return Object.assign({
+    availability: dim("evidenced","Planning View","One hospital, three extension clinics","Seat town holds the hospital. Outlying lenses use scheduled clinic days. Not a grade."),
+    workforce: dim("suspected","Planning View","Thin specialty bench","Primary care is staffed. Behavioral health and OB rotate. Vacancy is the constraint."),
+    affordability: dim("evidenced","Source estimate","Cost delay on insured and uninsured","Synthetic 2026 release: 8.1% delayed care due to cost. Prior release 8.9%. Same land. Not a rank."),
+    administrative: dim("evidenced","Planning View","Enrollment path exists","Navigator hours posted at the hospital and two town halls. Forms still require a return trip."),
+    quality: dim("evidenced","Planning View","Continuity after discharge","Follow-up slots exist in seat town. River mill waits 21 days in the seed."),
+    trust: dim("suspected","Planning View","Experience is uneven","Synthetic listening sessions name respect and after-hours access. No validated survey instrument."),
+    social: dim("evidenced","Local Evidence","Housing and winter fuel","Synthetic CHIP names housing stock and fuel assistance as access conditions."),
+    digital: dim("evidenced","Planning View","Portal in seat town, last-mile elsewhere","00000 has portal uptake. 00001 and 00002 have service but not reliable last-mile."),
+    geography: dim("evidenced","Planning View","One north corridor, winter isolation","Geography is one dimension. It is not the model."),
+    rural: dim("evidenced","Planning View","Critical-access dependence","One hospital. Diversion in winter is a system condition."),
+    coordination: dim("planned","Planned source","Shared referral write-back","Quarterly calendar exists. Shared referral write-back is a planned source, not a live feed."),
+    alignment: dim("evidenced","Planning View","Mismatch is the object","Documented barriers, cited funds, bench, and CHIP priorities sit side by side. No allocate button.")
+  }, over || {});
+}
+
+const SEED = {
+  county: "SozoRock County",
+  fips: "00000",
+  honesty: "Synthetic demonstration county. Not a real place. Not a deployment.",
+  names: { "00000":"Seat town", "00001":"North ridge", "00002":"River mill" },
+  sites: [
+    { zcta:"00000", name:"SozoRock County Hospital", kind:"hospital" },
+    { zcta:"00001", name:"North ridge clinic (2 days)", kind:"clinic" },
+    { zcta:"00002", name:"River mill extension clinic", kind:"clinic" }
+  ],
+  releases: [
+    { id:"syn-2026", date:"2026-03-01", label:"Current synthetic release" },
+    { id:"syn-2025", date:"2025-03-01", label:"Prior synthetic release" }
+  ],
+  scenario: {
+    caption: "Planning scenario — not a prediction of individual health",
+    title: "Winter coverage pressure",
+    horizon: "12–24 months",
+    text: "If housing strain stays high, the specialty bench stays thin, and the north corridor ices, access pressure rises in winter. System conditions only."
+  },
+  alignment: {
+    barriers: ["Specialty leaving the county","Housing stock","Winter travel on the north corridor","After-hours coverage"],
+    funding: ["Rural health operating support — cited, not an inventory"],
+    workforce: ["Hospital + three clinics + rotating specialty"],
+    priorities: ["Housing","Behavioral health access","After-hours coverage"]
+  },
+  changed: [
+    { title:"Affordability release refreshed", detail:"2026 8.1% next to 2025 8.9%. Same land. Not a ranking." },
+    { title:"Synthetic CHIP posted", detail:"Housing and after-hours coverage named as priorities." },
+    { title:"Coordination marked planned source", detail:"Shared referral write-back is planned, not live." }
+  ]
+};
+
+function defaultLenses() {
+  return {
+    "00000": { note:"Seat town lens", dimensions: pack({
+      digital: dim("evidenced","Planning View","Portal in use","Seat town has portal uptake. Not last-mile proof for the county.")
+    }) },
+    "00001": { note:"North ridge lens", dimensions: pack({
+      availability: dim("suspected","Planning View","Clinic two days a week","No hospital. Scheduled clinic only."),
+      digital: dim("suspected","Planning View","Service without last-mile","Coverage exists on paper. Winter outages are common."),
+      geography: dim("evidenced","Planning View","Iced corridor","North route is the constraint. Still one of twelve."),
+      trust: missingDim("Validated experience survey")
+    }) },
+    "00002": { note:"River mill lens", dimensions: pack({
+      quality: dim("suspected","Planning View","21-day follow-up","Discharge follow-up leaves the mill."),
+      affordability: dim("evidenced","Source estimate","Cost delay higher than seat","Synthetic 10.2% delayed care due to cost."),
+      trust: dim("suspected","Planning View","After-hours gap named","Listening sessions cluster here.")
+    }) }
+  };
+}
+
+const TOUR = [
+  { t:"The land is terrain.", b:"Hills and corridors are context. Color is the evidence state of the dimension you opened. Not a score." },
+  { t:"Twelve dimensions stay twelve.", b:"Availability, workforce, affordability, administrative access, quality, trust, social conditions, digital access, geography, rural resilience, coordination, resource alignment. Geography is one. It is never the model." },
+  { t:"Missing is not zero.", b:"Hatch means Not available. Open North ridge → Trust to see it. A blank input field becomes hatch, never a rate of zero." },
+  { t:"ZIP codes are planning lenses.", b:"00000, 00001, 00002 are spatial lenses, not labels for people. Tap a plate to change the lens." },
+  { t:"Compare is two dated files.", b:"2026-03-01 next to 2025-03-01. Difference is a change in published files. Not a forecast." },
+  { t:"A scenario is not a prediction.", b:"Winter coverage pressure describes system conditions. It is not a prediction of individual health." },
+  { t:"Resource shows mismatch.", b:"Barriers, cited funds, bench, and CHIP priorities sit side by side. There is no allocate button." },
+  { t:"AI drafts. People decide.", b:"The Decision Record is a draft until a human accepts or rejects it. SozoRock Technology does not accept for the county." }
+];
+
+const STATE = {
+  view: "see",
+  zcta: "00000",
+  dim: "availability",
+  surface: "public",
+  county: SEED.county,
+  fips: SEED.fips,
+  names: Object.assign({}, SEED.names),
+  lenses: defaultLenses(),
+  local: [],
+  record: { status:"none", text:"", owner:"", review:"" },
+  tour: 0,
+  showTour: !localStorage.getItem("cbcap-tour-done")
+};
+
+try {
+  const raw = JSON.parse(localStorage.getItem("cbcap-sozorock-product") || "null");
+  if (raw && raw.lenses) {
+    STATE.county = raw.county || STATE.county;
+    STATE.fips = raw.fips || STATE.fips;
+    STATE.lenses = raw.lenses;
+    STATE.names = raw.names || STATE.names;
+    STATE.local = raw.local || [];
+    if (raw.zcta && STATE.lenses[raw.zcta]) STATE.zcta = raw.zcta;
+  }
+} catch (e) {}
+
+function save() {
+  try {
+    localStorage.setItem("cbcap-sozorock-product", JSON.stringify({
+      county: STATE.county, fips: STATE.fips, zcta: STATE.zcta,
+      names: STATE.names, lenses: STATE.lenses, local: STATE.local
+    }));
+  } catch (e) {}
+}
+function lens() { return STATE.lenses[STATE.zcta] || { dimensions:{} }; }
+function dimObj() { return lens().dimensions[STATE.dim] || missingDim(STATE.dim); }
+function fill(state) {
+  return state === "evidenced" ? "#9bb0ff" : state === "suspected" ? "#f3c48a" : state === "planned" ? "#c5ccd6" : "url(#hatch)";
+}
+
+function paintPlates() {
+  document.querySelectorAll(".plate").forEach(p => {
+    const z = p.dataset.z;
+    const st = (((STATE.lenses[z] || {}).dimensions || {})[STATE.dim] || {}).state || "missing";
+    p.setAttribute("fill", fill(st));
+    p.setAttribute("aria-selected", z === STATE.zcta ? "true" : "false");
+  });
+}
+
+function renderStamps() {
+  document.getElementById("stamps").innerHTML = DIMS.map(([id,label]) => {
+    const st = (lens().dimensions[id] || {}).state || "missing";
+    return `<button class="stamp ${st}" data-id="${id}" aria-pressed="${id===STATE.dim}"><b>${label}</b><i>${st==="missing"?"not available":st}</i></button>`;
+  }).join("");
+  document.querySelectorAll(".stamp").forEach(b => b.onclick = () => { STATE.dim = b.dataset.id; STATE.view = "see"; render(); });
+}
+
+function evidenceBlock(item) {
+  return `<div class="evgrid">
+    <b>Title</b><span>${item.title || "—"}</span>
+    <b>Detail</b><span>${item.detail || "—"}</span>
+    <b>Source</b><span>${item.source || "None"}</span>
+    <b>Date</b><span>${item.date || "n/a"}</span>
+    <b>Geography</b><span>${item.geography || STATE.county}</span>
+    <b>Denominator</b><span>${item.denominator || "n/a"}</span>
+    <b>Missingness</b><span>${item.missingness || "Not available"}</span>
+    <b>Limitations</b><span>${item.limitations || ""}</span>
+    <b>Mark</b><span>${item.mark || ""}</span>
+  </div>`;
+}
+
+function recordText() {
+  const d = DIMS.find(x => x[0] === STATE.dim)[1];
+  const obj = dimObj();
+  const item = (obj.items && obj.items[0]) || {};
+  return `DECISION RECORD
+Status. ${STATE.record.status === "accepted" ? "accepted" : STATE.record.status === "rejected" ? "rejected" : "draft · awaiting human"}
+AI drafts. People decide.
+
+Place. ZIP lens ${STATE.zcta} · ${STATE.names[STATE.zcta] || "custom lens"} · ${STATE.county} (FIPS ${STATE.fips})
+Owner. ${STATE.record.owner || "Unassigned"}
+Review date. ${STATE.record.review || "Unset"}
+
+Open dimension. ${d}
+State. ${obj.state}
+Mark. ${obj.mark}
+Detail. ${item.detail || "No sourced file at this geography."}
+Missingness. ${item.missingness || "Not available — not drawn as zero"}
+
+All twelve dimensions remain separate. Geography is one of twelve.
+
+Scenario. ${SEED.scenario.caption}
+${SEED.scenario.title}, ${SEED.scenario.horizon}.
+${SEED.scenario.text}
+
+Limits. CB-CAP does not diagnose, predict individual health, allocate funds, approve eligibility, or replace CHA/CHIP.
+Honesty. ${SEED.honesty}
+Builder. SozoRock Tech Inc.  Public steward. The SozoRock Foundation, Inc.`;
+}
+
+function exportCounty() {
+  return {
+    version: "cb-cap-county-v1",
+    county: STATE.county,
+    fips: STATE.fips,
+    names: STATE.names,
+    lenses: STATE.lenses,
+    local: STATE.local,
+    honesty: "User-supplied or synthetic. Missing fields must stay Not available."
+  };
+}
+
+function applyCountyPack(pack) {
+  if (!pack || !pack.lenses) throw new Error("Need a county pack with lenses.");
+  STATE.county = pack.county || "Unnamed county";
+  STATE.fips = pack.fips || "00000";
+  STATE.names = pack.names || STATE.names;
+  STATE.lenses = pack.lenses;
+  STATE.local = pack.local || [];
+  STATE.zcta = Object.keys(STATE.lenses)[0];
+  STATE.view = "see";
+  save();
+}
+
+function renderInspect() {
+  const host = document.getElementById("inspect");
+  document.querySelectorAll("nav.flow [data-view]").forEach(b => b.setAttribute("aria-current", b.dataset.view === STATE.view ? "page" : "false"));
+  document.querySelectorAll("[data-surface]").forEach(b => b.setAttribute("aria-pressed", b.dataset.surface === STATE.surface ? "true" : "false"));
+  document.getElementById("brand-sub").textContent = `SOZOROCK TECH INC. · ${STATE.county.toUpperCase()}`;
+
+  if (STATE.view === "input") {
+    host.innerHTML = `
+      <h2>Input a county</h2>
+      <h1>Any county can run the table</h1>
+      <p class="meta">Type values or import a JSON pack. Results stay in this browser. Empty detail → Not available, never zero.</p>
+      <label class="meta">County name</label>
+      <input id="in-county" value="${STATE.county}"/>
+      <label class="meta">FIPS or placeholder</label>
+      <input id="in-fips" value="${STATE.fips}"/>
+      <label class="meta">Lens code</label>
+      <input id="in-zcta" value="${STATE.zcta}"/>
+      <label class="meta">Lens name</label>
+      <input id="in-zname" value="${STATE.names[STATE.zcta] || "Planning lens"}"/>
+      <h2>Twelve dimensions</h2>
+      ${DIMS.map(([id,label]) => {
+        const o = (lens().dimensions[id] || {});
+        const item = (o.items && o.items[0]) || {};
+        return `<label class="meta">${label}</label>
+          <select data-state="${id}">
+            <option value="evidenced" ${o.state==="evidenced"?"selected":""}>Evidenced</option>
+            <option value="suspected" ${o.state==="suspected"?"selected":""}>Suspected gap</option>
+            <option value="planned" ${o.state==="planned"?"selected":""}>Planned source</option>
+            <option value="missing" ${o.state==="missing"?"selected":""}>Not available</option>
+          </select>
+          <textarea data-detail="${id}" placeholder="What is sourced, or leave blank if missing">${item.detail || ""}</textarea>`;
+      }).join("")}
+      <button class="primary" id="btn-apply" type="button">Apply and show results</button>
+      <button class="ghost" id="btn-export" type="button">Download county JSON</button>
+      <label class="meta">Import county JSON</label>
+      <input id="in-file" type="file" accept="application/json"/>
+      <button class="ghost" id="btn-reset" type="button">Reset SozoRock County seed</button>
+      <p class="meta">A Workspace binds these fields to a source agreement. This table shows the product act: input → stamps → record.</p>`;
+    document.getElementById("btn-apply").onclick = applyInput;
+    document.getElementById("btn-reset").onclick = () => {
+      STATE.county = SEED.county; STATE.fips = SEED.fips; STATE.zcta = "00000";
+      STATE.names = Object.assign({}, SEED.names); STATE.lenses = defaultLenses();
+      STATE.local = []; STATE.dim = "availability"; STATE.view = "see"; save(); render();
+    };
+    document.getElementById("btn-export").onclick = () => {
+      const blob = new Blob([JSON.stringify(exportCounty(), null, 2)], { type:"application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = (STATE.county.replace(/\s+/g,"-").toLowerCase()) + "-cbcap.json";
+      a.click();
+    };
+    document.getElementById("in-file").onchange = ev => {
+      const file = ev.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { try { applyCountyPack(JSON.parse(reader.result)); render(); } catch (err) { alert("Could not read that pack."); } };
+      reader.readAsText(file);
+    };
+    return;
+  }
+
+  const obj = dimObj();
+  const item = (obj.items && obj.items[0]) || {};
+  const label = DIMS.find(x => x[0] === STATE.dim)[1];
+  let extra = "";
+  if (STATE.view === "compare") extra = `<div class="compare">
+      ${SEED.releases.map(r => `<section class="scenario" style="border-style:solid"><h3>${r.label}</h3><p class="meta">${r.date}</p><p>${STATE.dim==="affordability" ? (r.id==="syn-2026"?"8.1% delayed care due to cost":"8.9% delayed care due to cost") : "Same evidence state as the current seed unless a dated file changed."}</p></section>`).join("")}
+    </div><p class="meta">Two published releases on the same land. Difference is a change in dated files, not a forecast.</p>`;
+  if (STATE.view === "plan") extra = `<div class="scenario"><strong>${SEED.scenario.caption}</strong><p>${SEED.scenario.title} · ${SEED.scenario.horizon}</p><p>${SEED.scenario.text}</p></div>`;
+  if (STATE.view === "resource") extra = `<div class="matrix">
+      <section><h3>Documented barriers</h3><ul>${SEED.alignment.barriers.map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section><h3>Available funding</h3><ul>${SEED.alignment.funding.map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section><h3>Workforce capacity</h3><ul>${SEED.alignment.workforce.map(x=>`<li>${x}</li>`).join("")}</ul></section>
+      <section><h3>Community priorities</h3><ul>${SEED.alignment.priorities.map(x=>`<li>${x}</li>`).join("")}</ul></section>
+    </div><p class="meta">Mismatch is the object. No allocation.</p>`;
+  if (STATE.view === "track") extra = `<ul>${SEED.changed.concat(STATE.local.map(x=>({title:"Local Evidence added", detail:x}))).map(c=>`<li><strong>${c.title}.</strong> ${c.detail}</li>`).join("")}</ul>
+    ${STATE.surface==="institutional" ? `<label class="meta">Add Local Evidence (citation only)</label><textarea id="local-note" placeholder="Document title, date, locator"></textarea><button class="ghost" id="add-local" type="button">Add to track</button>` : `<p class="meta">Local Evidence is an institutional act.</p>`}`;
+  if (STATE.view === "record") extra = `
+    ${STATE.surface==="institutional" ? `<label class="meta">Owner</label><input id="rec-owner" value="${STATE.record.owner}"/>
+    <label class="meta">Review date</label><input id="rec-date" value="${STATE.record.review}" placeholder="2026-09-10"/>` : `<p class="meta">Public Preview shows the draft. Acceptance is institutional.</p>`}
+    <pre id="record-pre">${recordText()}</pre>
+    <div class="row">
+      <button class="primary" id="btn-draft" type="button">Refresh draft</button>
+    </div>
+    ${STATE.surface==="institutional" ? `<div class="row"><button class="primary" id="btn-accept" type="button">Accept</button><button class="ghost" id="btn-reject" type="button">Reject</button></div>` : ""}
+    <button class="ghost" id="btn-dl" type="button">Download markdown</button>
+    <p class="meta">Status: ${STATE.record.status}. AI never accepts.</p>`;
+
+  host.innerHTML = `
+    <p class="meta">${STATE.county} · ZIP lens ${STATE.zcta} · ${STATE.names[STATE.zcta] || "custom lens"} · FIPS ${STATE.fips} · ${STATE.surface}</p>
+    <select id="zsel">${Object.keys(STATE.lenses).map(z => `<option value="${z}" ${z===STATE.zcta?"selected":""}>${z} · ${STATE.names[z] || "lens"}</option>`).join("")}</select>
+    <h1>${label}</h1>
+    <span class="pill">${obj.mark || ""}</span><span class="pill">${obj.state === "missing" ? "Not available" : obj.state}</span>
+    ${evidenceBlock(item)}
+    <p class="meta">${SEED.honesty}</p>
+    ${extra}
+    ${STATE.view !== "record" ? `<button class="primary" id="goto-record" type="button">Draft Decision Record</button>` : ""}`;
+
+  const zsel = document.getElementById("zsel");
+  if (zsel) zsel.onchange = e => { STATE.zcta = e.target.value; save(); render(); };
+  const go = document.getElementById("goto-record");
+  if (go) go.onclick = () => { STATE.view = "record"; STATE.record.status = STATE.record.status === "none" ? "draft" : STATE.record.status; render(); };
+  const add = document.getElementById("add-local");
+  if (add) add.onclick = () => {
+    const t = document.getElementById("local-note").value.trim();
+    if (!t) return;
+    STATE.local.push(t); save(); render();
+  };
+  const draft = document.getElementById("btn-draft");
+  if (draft) draft.onclick = () => {
+    if (STATE.surface === "institutional") {
+      STATE.record.owner = document.getElementById("rec-owner").value;
+      STATE.record.review = document.getElementById("rec-date").value;
+    }
+    if (STATE.record.status === "none") STATE.record.status = "draft";
+    document.getElementById("record-pre").textContent = recordText();
+  };
+  const acc = document.getElementById("btn-accept");
+  if (acc) acc.onclick = () => {
+    STATE.record.owner = document.getElementById("rec-owner").value || STATE.record.owner;
+    STATE.record.review = document.getElementById("rec-date").value || STATE.record.review;
+    if (!STATE.record.owner || !STATE.record.review) { alert("Owner and review date are required to accept."); return; }
+    STATE.record.status = "accepted"; render();
+  };
+  const rej = document.getElementById("btn-reject");
+  if (rej) rej.onclick = () => { STATE.record.status = "rejected"; render(); };
+  const dl = document.getElementById("btn-dl");
+  if (dl) dl.onclick = () => {
+    const blob = new Blob([recordText()], { type:"text/markdown" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "decision-record.md"; a.click();
+  };
+}
+
+function applyInput() {
+  const county = document.getElementById("in-county").value.trim() || "Unnamed county";
+  const fips = document.getElementById("in-fips").value.trim() || "00000";
+  const zcta = document.getElementById("in-zcta").value.trim() || "00000";
+  const zname = document.getElementById("in-zname").value.trim() || "Planning lens";
+  STATE.county = county; STATE.fips = fips; STATE.zcta = zcta; STATE.names[zcta] = zname;
+  const dims = {};
+  DIMS.forEach(([id]) => {
+    const state = document.querySelector(`[data-state="${id}"]`).value;
+    const detail = document.querySelector(`[data-detail="${id}"]`).value.trim();
+    if (state === "missing" || !detail) dims[id] = missingDim(id);
+    else {
+      const mark = state === "planned" ? "Planned source" : "Planning View";
+      dims[id] = dim(state, mark, id, detail);
+    }
+  });
+  STATE.lenses[zcta] = { note:"User-supplied lens", dimensions: dims };
+  STATE.view = "see"; STATE.dim = "availability"; save(); render();
+}
+
+function renderTour() {
+  const el = document.getElementById("tour");
+  if (!STATE.showTour) { el.hidden = true; return; }
+  const step = TOUR[STATE.tour];
+  el.hidden = false;
+  document.getElementById("tour-title").textContent = step.t;
+  document.getElementById("tour-body").textContent = step.b;
+  document.getElementById("tour-step").textContent = (STATE.tour+1) + " / " + TOUR.length;
+  document.getElementById("tour-next").textContent = STATE.tour === TOUR.length-1 ? "Enter product" : "Next";
+}
+
+function render() {
+  paintPlates();
+  renderStamps();
+  renderInspect();
+  renderTour();
+}
+
+document.querySelectorAll("nav.flow [data-view]").forEach(b => b.onclick = () => { STATE.view = b.dataset.view; render(); });
+document.querySelectorAll("[data-surface]").forEach(b => b.onclick = () => { STATE.surface = b.dataset.surface; render(); });
+document.querySelectorAll(".plate").forEach(p => p.addEventListener("click", () => { STATE.zcta = p.dataset.z; save(); render(); }));
+document.getElementById("btn-tour").onclick = () => { STATE.showTour = true; STATE.tour = 0; render(); };
+document.getElementById("tour-skip").onclick = () => { STATE.showTour = false; localStorage.setItem("cbcap-tour-done","1"); render(); };
+document.getElementById("tour-next").onclick = () => {
+  if (STATE.tour >= TOUR.length-1) { STATE.showTour = false; localStorage.setItem("cbcap-tour-done","1"); }
+  else STATE.tour += 1;
+  render();
+};
+render();
+</script>
+</body>
+</html>

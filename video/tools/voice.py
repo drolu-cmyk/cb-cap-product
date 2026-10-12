@@ -73,8 +73,13 @@ def main():
             if k:
                 t += s.get("gap", script["gap"])
             lead = words[i]["s"] - a                       # silence kept before the first word
-            lines.append({"id": ln["id"], "text": ln["text"], "start": round(t + lead, 3),
-                          "end": round(t + (words[j]["e"] - a), 3)})
+            # Display words borrow timing from the spoken words ("50,000" from "fifty thousand").
+            spoken = [(round(t + w["s"] - a, 3), round(t + w["e"] - a, 3)) for w in words[i:j + 1]]
+            shown = ln["text"].split()
+            wt = [[w, spoken[k * len(spoken) // len(shown)][0],
+                   spoken[min(len(spoken) - 1, (k + 1) * len(spoken) // len(shown) - 1)][1]] for k, w in enumerate(shown)]
+            lines.append({"id": ln["id"], "text": ln["text"], "tag": ln.get("tag"), "start": round(t + lead, 3),
+                          "end": round(t + (words[j]["e"] - a), 3), "words": wt})
             cuts.append((round(t, 3), round(a, 3), round(b - a, 3)))
             t += b - a
         t += s["post"]

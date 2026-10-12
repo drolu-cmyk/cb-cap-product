@@ -1,67 +1,79 @@
 1
-00:00:00,720 --> 00:00:02,540
-The ride never came.
+00:00:00,175 --> 00:00:02,265
+Your county can't fix what it can't see.
 
 2
-00:00:03,440 --> 00:00:06,260
-The clinic closed before her shift ended.
+00:00:02,895 --> 00:00:03,823
+No ride.
 
 3
-00:00:07,080 --> 00:00:09,780
-The form asked for papers she didn't have.
+00:00:04,553 --> 00:00:07,002
+A clinic that closes before your shift ends.
 
 4
-00:00:10,600 --> 00:00:13,540
-The next appointment was six weeks away.
+00:00:07,732 --> 00:00:09,267
+Forms too hard to read.
 
 5
-00:00:14,160 --> 00:00:17,313
-Each one is a barrier on the way to care.
+00:00:09,997 --> 00:00:11,228
+A six-week wait.
 
 6
-00:00:17,470 --> 00:00:19,903
-And most of them are never counted.
+00:00:11,958 --> 00:00:13,732
+No one who speaks your language.
 
 7
-00:00:21,143 --> 00:00:25,243
-Most local health departments serve fewer than 50,000 people.
+00:00:14,412 --> 00:00:15,900
+These are barriers to care.
 
 8
-00:00:25,453 --> 00:00:29,833
-Small teams. Big questions. Every number has to hold up.
+00:00:16,280 --> 00:00:18,342
+And most of them never get counted.
 
 9
-00:00:31,393 --> 00:00:35,533
-CB-CAP. Know where care breaks. Show the proof.
+00:00:19,322 --> 00:00:24,064
+Six in ten local health departments serve fewer than 50,000 people.
 
 10
-00:00:37,253 --> 00:00:40,913
-See where residents drop off, between referral and care.
+00:00:24,444 --> 00:00:26,394
+Small teams. Big jobs.
 
 11
-00:00:42,733 --> 00:00:46,713
-See which barriers stop them, by kind of help and neighborhood.
+00:00:27,374 --> 00:00:30,888
+CB-CAP shows where care breaks, so you know what to fix first.
 
 12
-00:00:49,173 --> 00:00:52,673
-Small counts stay hidden, so no one can be identified.
+00:00:32,268 --> 00:00:34,536
+See where people drop off on the way to care.
 
 13
-00:00:54,533 --> 00:00:58,353
-Every number shows its source, its year, and its range.
+00:00:35,716 --> 00:00:38,002
+See which barriers stop them, by neighborhood.
 
 14
-00:00:59,973 --> 00:01:04,593
-Your plan becomes your yearly report. People approve every word.
+00:00:39,582 --> 00:00:42,618
+Small numbers stay hidden. Privacy comes first.
 
 15
-00:01:05,813 --> 00:01:08,753
-So you walk into the budget meeting with proof.
+00:00:43,994 --> 00:00:46,032
+Every number shows where it came from.
 
 16
-00:01:09,693 --> 00:01:13,873
-Bring CB-CAP to your county. Talk to the SozoRock Foundation.
+00:00:47,312 --> 00:00:50,423
+AI can draft your report. People decide what it says.
 
 17
-00:01:14,613 --> 00:01:17,073
+00:00:51,698 --> 00:00:55,349
+Built for health equity, rural health, and small teams doing more.
+
+18
+00:00:56,629 --> 00:00:59,331
+Walk into your budget meeting with real numbers.
+
+19
+00:01:00,198 --> 00:01:04,336
+Bring CB-CAP to your county. Talk to the SozoRock Foundation.
+
+20
+00:01:05,116 --> 00:01:06,860
 Care. For every zip code.

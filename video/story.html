@@ -17,12 +17,8 @@ body.v{--W:1080px;--H:1920px;--ctop:150px;--cbot:520px;--padx:70px}
 html,body{width:var(--W);height:var(--H);overflow:hidden;background:var(--bg);color:var(--ink);font:400 30px/1.4 var(--sans)}
 #dark{position:absolute;inset:0;background:var(--ink);opacity:0}
 #content{position:absolute;left:0;right:0;top:var(--ctop);bottom:var(--cbot)}
-#cap{position:absolute;left:0;right:0;bottom:0;height:140px;display:flex;align-items:center;justify-content:center;padding:0 60px;z-index:30}
-body.v #cap{top:1410px;bottom:auto;height:230px}
-#cap span{font:600 40px/1.25 var(--sans);max-width:1500px;text-align:center}
-body.v #cap span{font-size:50px}
-#tag{position:absolute;right:36px;top:28px;font:700 18px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:2px solid var(--soft);padding:5px 12px;z-index:20;opacity:0}
-body.v #tag{top:92px;font-size:24px;right:40px}
+#tag{position:absolute;right:36px;bottom:14px;font:700 18px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:2px solid var(--soft);padding:5px 12px;z-index:20;opacity:0}
+body.v #tag{top:92px;bottom:auto;font-size:24px;right:40px}
 .scene{position:absolute;inset:0;opacity:0;padding:0 var(--padx)}
 .center{display:flex;flex-direction:column;justify-content:center}
 .kick{font:700 24px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
@@ -34,20 +30,25 @@ body.v .src{font-size:28px}
 .chip{display:inline-block;font:700 20px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border:2px solid var(--ink)}
 body.v .lonly{display:none!important}
 
-/* cold open: one barrier at a time, on ink */
-#cold .card{position:absolute;left:var(--padx);right:var(--padx);top:50%;transform:translateY(-50%);opacity:0}
-#cold .card p{font:500 112px/1.08 var(--serif);color:#fff;letter-spacing:-.01em}
-body.v #cold .card p{font-size:100px}
-#cold .card span{display:inline-block;margin-top:34px;font:700 24px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-d);border-top:3px solid var(--accent-d);padding-top:12px}
-body.v #cold .card span{font-size:28px}
-/* counted */
-#chips{display:flex;flex-wrap:wrap;gap:18px;max-width:1500px}
-body.v #chips{flex-direction:column}
-#chips div{display:flex;gap:22px;align-items:baseline;border:3px solid var(--accent-d);padding:16px 26px;color:#fff;font:600 40px var(--serif);opacity:0}
-body.v #chips div{font-size:46px}
-#chips div i{font:700 30px var(--sans);font-style:normal;color:var(--accent-d);opacity:0}
-#never{font:600 96px/1.1 var(--serif);color:var(--accent-d);margin-top:56px;opacity:0}
-body.v #never{font-size:88px}
+/* captions: hero (big type, the scene itself) and lower (under the product) */
+#hero{position:absolute;left:var(--padx);right:var(--padx);top:0;bottom:var(--cbot);display:flex;flex-direction:column;justify-content:center;z-index:25;pointer-events:none}
+body.v #hero{top:150px}
+#heroTag{font:700 26px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent-d);margin-bottom:26px;opacity:0}
+body.v #heroTag{font-size:30px}
+#heroTxt{font:600 118px/1.08 var(--serif);letter-spacing:-.015em}
+body.v #heroTxt{font-size:104px}
+#heroTxt span,#lowTxt span{display:inline-block;transform-origin:50% 70%}
+#heroAfter{margin-top:46px}
+#low{position:absolute;left:0;right:0;bottom:0;height:140px;display:flex;align-items:center;justify-content:center;padding:0 60px;z-index:30}
+body.v #low{top:1400px;bottom:auto;height:250px}
+#lowTxt{font:800 46px/1.2 var(--sans);text-align:center;max-width:1600px}
+body.v #lowTxt{font-size:58px}
+
+/* turn */
+#chips{display:flex;flex-wrap:wrap;gap:16px}
+#chips div{border:3px dashed var(--accent-d);padding:12px 22px;color:#fff;font:600 34px var(--serif);opacity:0}
+body.v #chips div{font-size:38px}
+#chips i{font:700 24px var(--sans);font-style:normal;color:var(--accent-d);margin-left:14px}
 /* context */
 #ctxWrap{display:grid;grid-template-columns:1fr 480px;gap:90px;align-items:center}
 body.v #ctxWrap{grid-template-columns:1fr;gap:60px}
@@ -57,20 +58,21 @@ body.v #ctxTxt{font-size:60px}
 #waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
 body.v #waffle{width:600px}
 #waffle i{aspect-ratio:1;background:var(--panel);opacity:0}#waffle i.on{background:var(--accent)}
-#beats{position:absolute;left:var(--padx);right:var(--padx);top:50%;transform:translateY(-50%)}
-#beats div{font:600 112px/1.12 var(--serif);opacity:0}
-body.v #beats div{font-size:100px}
-#beats div:last-child{color:var(--accent)}
-/* promise, benefit, cta, tagline */
-.rise .big>div,#cta .big{opacity:0}
+/* fund */
+#keys{display:flex;flex-wrap:wrap;gap:18px;margin-top:34px}
+#keys div{font:700 36px var(--sans);padding:14px 26px;border:3px solid var(--ink);opacity:0}
+body.v #keys div{font-size:40px;padding:14px 22px}
+#keys div.a{background:var(--accent);border-color:var(--accent);color:#fff}
+/* cta, tagline */
+#cta .btn{font-size:36px;padding:18px 36px;opacity:0}
+body.v #cta .btn{font-size:38px}
+#cta .url{font-size:30px;color:var(--muted);margin-top:18px;opacity:0}
+#tagline .big div{opacity:0}
 #tiles{display:grid;grid-template-columns:repeat(32,1fr);gap:6px;margin-top:56px}
 body.v #tiles{grid-template-columns:repeat(12,1fr)}
 #tiles i{aspect-ratio:1;background:var(--panel)}
 #endfoot{position:absolute;left:var(--padx);right:var(--padx);bottom:24px;font-size:22px;color:var(--muted);border-top:2px solid var(--ink);padding-top:12px;opacity:0}
 body.v #endfoot{font-size:28px;bottom:0}
-#cta .btn{font-size:36px;padding:18px 36px;opacity:0}
-body.v #cta .btn{font-size:38px}
-#cta .url{font-size:30px;color:var(--muted);margin-top:18px;opacity:0}
 /* app */
 #app{position:absolute;left:70px;right:70px;top:40px;bottom:16px;border:2px solid var(--ink);opacity:0;background:var(--bg);overflow:hidden}
 body.v #app{left:36px;right:36px;top:30px;bottom:0}
@@ -136,7 +138,7 @@ body.v .iv{grid-template-columns:1fr auto;grid-template-areas:"lab v" "tr tr";fo
 body.v #evTip{font-size:31px;width:auto;right:34px}
 #evTip b{font-family:var(--serif);font-size:34px}
 #rbox{border-left:6px solid var(--accent);background:var(--panel);padding:24px 30px;font-size:31px;line-height:1.5;min-height:210px}
-body.v #rbox{font-size:38px;min-height:460px}
+body.v #rbox{font-size:38px;min-height:430px}
 #rbox u{text-decoration:none;border-bottom:3px solid var(--accent)}
 #rlog{font:22px/1.7 ui-monospace,Menlo,monospace;color:var(--muted);opacity:0;margin-top:18px}
 body.v #rlog{font-size:27px}
@@ -149,25 +151,12 @@ body.v #rlog{font-size:27px}
 <div id="tag">Illustrative figures</div>
 <div id="content">
 
-<section class="scene" id="cold"></section>
-
-<section class="scene center" id="counted">
-  <div id="chips"></div>
-  <p id="never">Most are never counted.</p>
-</section>
-
 <section class="scene center" id="context">
   <div id="ctxWrap">
-    <div><p id="ctxNum">62%</p><p id="ctxTxt">of local health departments serve fewer than 50,000 people.</p>
-    <p class="src">Source: NACCHO, 2022 National Profile of Local Health Departments (2,512 departments).</p></div>
+    <div><p id="ctxNum">6 in 10</p><p id="ctxTxt">local health departments serve fewer than 50,000 people.</p>
+    <p class="src">Source: NACCHO, 2022 National Profile of Local Health Departments (62% of 2,512 departments).</p></div>
     <div id="waffle"></div>
   </div>
-  <div id="beats"><div>Small teams.</div><div>Big questions.</div><div>Every number has to hold up.</div></div>
-</section>
-
-<section class="scene center rise" id="promise">
-  <p class="kick" style="margin-bottom:28px">CB-CAP</p>
-  <div class="big" style="font-size:var(--pbig)"><div>Know where care breaks.</div><div style="color:var(--accent)">Show the proof.</div></div>
 </section>
 
 <div id="app">
@@ -184,18 +173,19 @@ body.v #rlog{font-size:27px}
   <div id="panes"></div>
 </div>
 
-<section class="scene center rise" id="benefit">
-  <div class="big"><div>Walk into the budget meeting</div><div>with <span style="color:var(--accent)">proof.</span></div></div>
+<section class="scene center" id="fund">
+  <p class="kick">Built for</p>
+  <div id="keys"></div>
 </section>
 
-<section class="scene center rise" id="cta">
+<section class="scene center" id="cta">
   <p class="kick" style="margin-bottom:24px">CB-CAP</p>
   <p class="big" style="margin-bottom:44px">Bring CB-CAP to your county.</p>
   <div><span class="btn pr">Talk to the SozoRock Foundation</span></div>
   <p class="url">sozorockfoundation.org/partner</p>
 </section>
 
-<section class="scene center rise" id="tagline">
+<section class="scene center" id="tagline">
   <p class="kick" style="margin-bottom:24px">The SozoRock Foundation</p>
   <div class="big" style="font-size:var(--tbig)"><div>Care.</div><div style="color:var(--accent)">For Every Zip Code</div></div>
   <div id="tiles"></div>
@@ -203,45 +193,47 @@ body.v #rlog{font-size:27px}
 </section>
 
 </div>
+<div id="hero"><p id="heroTag"></p><p id="heroTxt"></p><div id="heroAfter"><div id="chips"></div></div></div>
 <svg id="cursor" viewBox="0 0 34 44"><path d="M2 2 L2 36 L11 28 L17 42 L23 39 L17 26 L30 26 Z" fill="#0a1b2b" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg>
 <div id="ring"></div>
-<div id="cap"><span id="capText"></span></div>
+<div id="low"><p id="lowTxt"></p></div>
 
 <script src="build/timeline.js"></script>
 <script>
 const V=new URLSearchParams(location.search).get("format")==="vertical";
 if(V)document.body.classList.add("v");
-document.documentElement.style.setProperty("--pbig",V?"104px":"128px");
 document.documentElement.style.setProperty("--tbig",V?"112px":"140px");
 
 /* ---------- illustrative data (same figures as the reference prototype) ---------- */
-const OPEN=[["O1","The ride never came.","Transportation"],["O2","The clinic closed before her shift ended.","Hours conflict with work"],
-  ["O3","The form asked for papers she didn't have.","Paperwork"],["O4","The next appointment was six weeks away.","No appointment available"]];
 const ALL={looked:1065,made:612,comp:356,top:"Transportation"};
 const MH={looked:204,made:111,comp:52,top:"No appointment available"};
-const BARR=[["Transportation",132],["Cost",112],["No appointment available",107],["Paperwork",89],["Phone or internet access",75],["Distance",61],["Waitlist",58],["Hours conflict with work",27]];
+const BARR=[["Transportation",132,1],["Cost",112],["No appointment available",107,1],["Paperwork and forms",89,1],["Phone or internet access",75],["Distance",61],["Hours conflict with work",27,1],["Language",22,1]];
 const AREAS=[["A",66],["B",68],["C",53],["D",41],["E",64],["F",39],["G",65],["H",null],["I",67],["J",null],["K",68],["L",52]];
 const EV=[["Food insecurity, past 12 months",15.8,12.4,19.6,2023],["Loneliness",31.0,26.2,36.1,2023],["Depression",20.7,17.5,24.1,2023],["High blood pressure",35.8,31.9,39.9,2023]];
+const KEYS_FUND=[["Health equity",1],["Rural health",1],["Health access"],["Wait times"],["Transportation"],["Language access"],["Health literacy"],["Workforce capacity",1],["Public health data"],["Privacy"],["AI with people in charge",1]];
 const TABS=[["where","Overview"],["barriers","Barriers"],["hidden","Areas"],["source","Evidence"],["plan","Plan"],["report","Report"]];
 const APP=["where","barriers","hidden","source","report"];
-const NOCAP=["O1","O2","O3","O4","O6","C2","P1","B1","E2"];   // already on screen as type
+const HERO=["hook","barriers_open","turn","promise","benefit"];
+const DARK_END="turn";
+const ZOOM={where:"wFun",barriers:"brRows",hidden:"ta-H",source:"evTip",report:"rApprove"};
 
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
-const TL=window.TIMELINE,SC={},LN={};
+const TL=window.TIMELINE,SC={},LN={},LINES=TL.scenes.flatMap(s=>s.lines.map(l=>({...l,scene:s.id})));
 TL.scenes.forEach(s=>{SC[s.id]=s;s.lines.forEach(l=>LN[l.id]=l);});
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const p=(t,a,d)=>cl((t-a)/d);
 const ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
 const eo=x=>1-Math.pow(1-x,3);
 const fmt=n=>Math.round(n).toLocaleString("en-US");
-const alpha=(t,s,last)=>Math.min(p(t,s.start,.35),last?1:1-p(t,s.end-.35,.35));
-const rise=(el,a,px=26)=>{el.style.opacity=a;el.style.transform=`translateY(${(1-a)*px}px)`;};
+const cut=(t,s,last)=>Math.min(p(t,s.start,.12),last?1:1-p(t,s.end-.12,.12));   // fast, creator-style cuts
+const rise=(el,a,px=22)=>{el.style.opacity=a;el.style.transform=`translateY(${(1-a)*px}px)`;};
 
 /* ---------- static DOM ---------- */
-$("cold").innerHTML=OPEN.map(([id,txt,tag])=>`<div class="card" id="card-${id}"><p>${txt}</p><span>Barrier · ${tag}</span></div>`).join("");
-$("chips").innerHTML=OPEN.map(([id,,tag])=>`<div>${tag}<i>— not counted</i></div>`).join("");
+const TAGS=SC.barriers_open.lines.map(l=>l.tag);
+$("chips").innerHTML=TAGS.map(tg=>`<div>${tg}<i>not counted</i></div>`).join("");
 $("waffle").innerHTML=Array.from({length:100},(_,i)=>`<i class="${i<62?"on":""}"></i>`).join("");
+$("keys").innerHTML=KEYS_FUND.map(([k,a])=>`<div class="${a?"a":""}">${k}</div>`).join("");
 $("tiles").innerHTML=Array.from({length:V?72:96},()=>"<i></i>").join("");
 $("tabs").innerHTML=TABS.map(([k,l])=>`<div class="tab${k==="plan"?" lonly":""}" id="tab-${k}">${l}</div>`).join("");
 const panes={};
@@ -250,42 +242,37 @@ function pane(id,html){const d=document.createElement("div");d.className="pane";
 pane("where",`<p class="pt" id="wTitle"></p><p class="ps" id="wCtx"></p>
 <div class="kpis"><div class="kp"><b id="k0"></b><span>looked for help</span></div><div class="kp"><b id="k1"></b><span>referred</span></div><div class="kp"><b id="k2"></b><span>completed</span></div><div class="kp"><b class="sm" id="k3"></b><span>top barrier</span></div></div>
 <div id="wFun"></div>`);
-
-const OPEN_TAGS=OPEN.map(o=>o[2]);
 pane("barriers",`<p class="pt">Transportation is the most reported barrier</p><p class="ps">All kinds of help · All areas · Full year</p>
-${BARR.map(([k,v],i)=>`<div class="row ${OPEN_TAGS.includes(k)?"hi":"dim"}" id="br${i}"><span class="lab">${k}</span><span class="v">${v}</span><div class="tr"><div class="fl" style="width:${v/132*100}%"></div></div></div>`).join("")}`);
-
+<div id="brRows">${BARR.map(([k,v,h],i)=>`<div class="row ${h?"hi":"dim"}" id="br${i}"><span class="lab">${k}</span><span class="v">${v}</span><div class="tr"><div class="fl" style="width:${v/132*100}%"></div></div></div>`).join("")}</div>`);
 pane("hidden",`<p class="pt">Completion ranges from 39% to 68% across areas</p><p class="ps">All kinds of help · Full year</p>
 <div id="areasWrap"><div class="tiles">${AREAS.map(([a,r])=>{
  if(r===null)return `<div class="tile hid" id="ta-${a}"><b>Area ${a}</b><span>hidden</span></div>`;
  const k=Math.round(12+88*cl((80-r)/50));return `<div class="tile" id="ta-${a}" style="background:color-mix(in srgb,var(--accent) ${k}%,#fff);color:${k>55?"#fff":"var(--ink)"}"><b>Area ${a}</b><span>${r}%</span></div>`;}).join("")}</div>
-<div id="callout">Too few cases in Areas H and J.<br>Hidden before anything is shown.</div></div>`);
-
+<div id="callout">Too few cases in Areas H and J.<br>Hidden before anyone sees them.</div></div>`);
 pane("source",`<p class="pt">Food insecurity affects about one adult in six</p><p class="ps">Dot = estimate. Line = 95% range.</p>
 ${EV.map(([m,v,lo,hi,y],i)=>`<div class="iv" id="ev${i}"><span>${m}</span><span class="v"><b>${v.toFixed(1)}%</b> <span class="muted">(${lo}–${hi}) ${y}</span></span><div class="tr"><div class="ln" style="left:${lo*2}%;width:${(hi-lo)*2}%"></div><div class="dt" style="left:${v*2}%"></div></div></div>`).join("")}
 <div class="iv na" id="evNA"><span>Childhood vaccination</span><span class="v"><b>Not available</b> <span class="muted">never shown as 0</span></span><div class="tr"></div></div>
-<div id="evTip"><b>15.8%</b> food insecurity, past 12 months<br>95% range 12.4–19.6 · Year 2023<br><span class="muted">Source: named public estimate, linked</span></div>`);
-
+<div id="evTip"><b>15.8%</b> food insecurity, past 12 months<br>Range 12.4–19.6 · Year 2023<br><span class="muted">Source: named public estimate, linked</span></div>`);
 const RTEXT=[["Of "],["612",1],[" referrals, "],["58%",1],[" were completed. Top barriers: transportation ("],["132",1],["), cost ("],["112",1],["), no appointment available ("],["107",1],["). Counts below 11 are not reported."]];
-pane("report",`<p class="pt">Yearly report, built from your plan</p><p class="ps">Every figure keeps its link to the evidence.</p>
-<div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:12px;gap:16px"><span class="kick" style="font-size:20px">Challenges and barriers</span><span class="chip" id="rchip">Draft</span></div>
+pane("report",`<p class="pt">Yearly report, built from your plan</p><p class="ps">Every figure keeps its link to the source.</p>
+<div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:12px;gap:16px"><span class="kick" style="font-size:20px">Challenges and barriers</span><span><span class="chip" style="border-color:var(--accent);color:var(--accent);margin-right:10px">Drafted with AI</span><span class="chip" id="rchip">Needs a person</span></span></div>
 <div id="rbox"></div>
 <div style="display:flex;gap:16px;margin-top:20px"><span class="btn pr" id="rApprove">Approve</span><span class="btn">Edit</span></div>
-<div id="rlog">Approved · Health director · History kept</div>`);
+<div id="rlog">Approved by the health director · History kept</div>`);
 
 /* ---------- cursor and its sounds ---------- */
-const clickAt=id=>SC[id].start+(id==="barriers"?.85:.45);
-const pickAt=()=>LN.X1.start+1.6, resetAt=()=>SC.barriers.start+.35, approveAt=()=>LN.X5.start+2.6;
+const clickAt=id=>SC[id].start+(id==="barriers"?.75:.4);
+const pickAt=()=>LN.X1.start+1.0, resetAt=()=>SC.barriers.start+.3, approveAt=()=>LN.X5.end-.2;
 function keys(){return[
-  {t:SC.where.start+.2,el:"tab-where"},{t:clickAt("where"),el:"tab-where",click:1},
-  {t:LN.X1.start+.65,el:"fSvc"},{t:LN.X1.start+.8,el:"fSvc",click:1},
+  {t:SC.where.start+.15,el:"tab-where"},{t:clickAt("where"),el:"tab-where",click:1},
+  {t:LN.X1.start+.25,el:"fSvc"},{t:LN.X1.start+.4,el:"fSvc",click:1},
   {t:pickAt()-.2,el:"dd-mh"},{t:pickAt(),el:"dd-mh",click:1},
   {t:resetAt()-.2,el:"fReset"},{t:resetAt(),el:"fReset",click:1},
   {t:clickAt("barriers"),el:"tab-barriers",click:1},
   {t:clickAt("hidden"),el:"tab-hidden",click:1},
   {t:clickAt("source"),el:"tab-source",click:1},
   {t:clickAt("report"),el:"tab-report",click:1},
-  {t:approveAt()-.25,el:"rApprove"},{t:approveAt(),el:"rApprove",click:1},
+  {t:approveAt()-.3,el:"rApprove"},{t:approveAt(),el:"rApprove",click:1},
   {t:SC.report.end,el:"rApprove"}];}
 let KEYS=null;
 window.sfxCues=()=>TL.sfx.concat(keys().filter(k=>k.click).map(k=>({file:"assets/audio/sfx/click.mp3",t:+k.t.toFixed(3),gain:-9})),
@@ -293,95 +280,105 @@ window.sfxCues=()=>TL.sfx.concat(keys().filter(k=>k.click).map(k=>({file:"assets
 function pos(id){const e=$(id);if(!e)return[500,500];const r=e.getBoundingClientRect();return[r.left+Math.min(r.width/2,90),r.top+r.height/2];}
 const activePane=t=>APP.reduce((k,id)=>t>=clickAt(id)?id:k,APP[0]);
 
+/* ---------- word-by-word captions ---------- */
+function words(el,line,t,dim){
+  if(el.dataset.id!==line.id){el.dataset.id=line.id;el.innerHTML=line.words.map(w=>`<span>${w[0]}</span>`).join(" ");}
+  [...el.children].forEach((s,k)=>{const [,a,b]=line.words[k];const on=t>=a-.04,cur=on&&t<b+.06;
+    s.style.opacity=on?1:dim;s.style.color=cur?(onDark(t)?"var(--accent-d)":"var(--accent)"):"";
+    const pop=p(t,a-.04,.14);s.style.transform=on?`translateY(${(1-eo(pop))*10}px)`:"none";});
+}
+const onDark=t=>t<SC[DARK_END].end-.05;
+
 function render(t){
-  // ink ground for the cold open, white for everything after
-  $("dark").style.opacity=t<SC.context.start?1:1-p(t,SC.counted.end-.35,.5);
-  const onDark=t<SC.counted.end-.1;
-  $("cap").style.color=onDark?"#fff":"var(--ink)";
-
-  ["cold","counted","context","promise","benefit","cta"].forEach(id=>$(id).style.opacity=alpha(t,SC[id]));
-  $("tagline").style.opacity=alpha(t,SC.tagline,true);
+  $("dark").style.opacity=onDark(t)?1:0;
+  ["context","fund","cta"].forEach(id=>$(id).style.opacity=cut(t,SC[id]));
+  $("tagline").style.opacity=cut(t,SC.tagline,true);
   const inApp=t>=SC.where.start&&t<SC.report.end;
-  $("tag").style.opacity=inApp?Math.min(p(t,SC.where.start,.4),1-p(t,SC.report.end-.35,.35)):0;
 
-  // cold open: each barrier holds until the next arrives
-  OPEN.forEach(([id],i)=>{const l=LN[id],nx=OPEN[i+1]?LN[OPEN[i+1][0]].start-.35:SC.cold.end-.3;
-    const a=Math.min(eo(p(t,l.start-.3,.45)),1-p(t,nx,.3));const e=$("card-"+id);e.style.opacity=a;
-    e.style.transform=`translateY(calc(-50% + ${(1-eo(p(t,l.start-.3,.45)))*30 - p(t,nx,.3)*30}px))`;
-    e.querySelector("span").style.opacity=eo(p(t,l.start+.5,.4));});
+  // captions: hero scenes are the type itself; others get a lower caption
+  const line=LINES.find((l,i)=>t>=l.start-.12&&t<(LINES[i+1]?LINES[i+1].start-.12:l.end+.6));
+  const hero=line&&HERO.includes(line.scene)&&t<SC[line.scene].end;
+  $("hero").style.opacity=hero?1:0;$("low").style.opacity=(!hero&&line&&line.scene!=="tagline"&&t<SC[line.scene].end)?1:0;
+  if(line&&hero){words($("heroTxt"),line,t,0);$("heroTxt").style.color=onDark(t)?"#fff":"var(--ink)";
+    $("heroTag").textContent=line.tag?"Barrier · "+line.tag:(line.scene==="promise"?"CB-CAP":"");
+    $("heroTag").style.color=onDark(t)?"var(--accent-d)":"var(--accent)";$("heroTag").style.opacity=line.tag||line.scene==="promise"?eo(p(t,line.start-.1,.25)):0;}
+  if(line&&!hero){words($("lowTxt"),line,t,.18);$("lowTxt").style.color="var(--ink)";}
+  $("heroAfter").style.display=line&&line.scene==="turn"?"block":"none";
+  [...$("chips").children].forEach((c,i)=>rise(c,eo(p(t,LN.T2.start+.3+i*.12,.3))));
 
-  // counted: the four barriers line up, then turn out to be uncounted
-  [...$("chips").children].forEach((c,i)=>{rise(c,eo(p(t,LN.O5.start+.2+i*.25,.45)));c.querySelector("i").style.opacity=eo(p(t,LN.O6.start+.3+i*.15,.35));
-    c.style.borderStyle=t>=LN.O6.start+.3+i*.15?"dashed":"solid";});
-  rise($("never"),eo(p(t,LN.O6.start,.5)));
+  // context
+  [...$("waffle").children].forEach((c,i)=>c.style.opacity=p(t,SC.context.start+.2+i*.012,.2));
+  rise($("ctxNum"),eo(p(t,LN.C1.start-.15,.4)));rise($("ctxTxt"),eo(p(t,LN.C1.start+.3,.4)));
 
-  // context: the national fact, then three beats
-  const beats=p(t,LN.C2.start-.25,.35);
-  $("ctxWrap").style.opacity=1-beats;
-  [...$("waffle").children].forEach((c,i)=>c.style.opacity=p(t,SC.context.start+.3+i*.016,.25));
-  rise($("ctxNum"),eo(p(t,LN.C1.start-.2,.5)));rise($("ctxTxt"),eo(p(t,LN.C1.start+.2,.5)));
-  { const l=LN.C2,d=l.end-l.start;[...$("beats").children].forEach((b,i)=>rise(b,eo(p(t,l.start+d*[0,.2,.42][i]-.1,.4)))); }
+  // fund: the keywords funders search for
+  [...$("keys").children].forEach((c,i)=>rise(c,eo(p(t,LN.F1.start+i*.22,.3))));
 
-  // promise, benefit, cta, tagline
-  [...$("promise").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.P1.start+1.1+i*1.0,.6))));
-  [...$("benefit").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.B1.start-.1+i*.9,.6))));
-  rise($("cta").querySelector(".big"),eo(p(t,LN.E1.start-.1,.5)));
-  $("cta").querySelector(".btn").style.opacity=eo(p(t,LN.E1.start+1.7,.5));
-  $("cta").querySelector(".url").style.opacity=eo(p(t,LN.E1.start+2.1,.5));
-  [...$("tagline").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.E2.start-.1+i*.75,.6))));
-  [...$("tiles").children].forEach((c,i)=>{const n=$("tiles").children.length,k=p(t,LN.E2.end+.1+((i*37)%n)/n*1.4,.25);
+  // cta, tagline
+  rise($("cta").querySelector(".big"),eo(p(t,LN.E1.start-.1,.4)));
+  $("cta").querySelector(".btn").style.opacity=eo(p(t,LN.E1.start+1.6,.4));
+  $("cta").querySelector(".url").style.opacity=eo(p(t,LN.E1.start+2.0,.4));
+  [...$("tagline").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.E2.start-.1+i*.6,.5))));
+  [...$("tiles").children].forEach((c,i)=>{const n=$("tiles").children.length,k=p(t,LN.E2.end+.1+((i*37)%n)/n*1.2,.2);
     c.style.background=`color-mix(in srgb,var(--accent) ${Math.round(k*100)}%,var(--panel))`;});
-  $("endfoot").style.opacity=p(t,LN.E2.end+1.2,.6);
+  $("endfoot").style.opacity=p(t,LN.E2.end+1.0,.5);
 
-  // app frame and panes
-  const appA=Math.min(p(t,SC.where.start,.4),1-p(t,SC.report.end-.35,.35));
-  $("app").style.opacity=appA;
+  // app frame, panes and the tag
+  const appA=Math.min(p(t,SC.where.start,.15),1-p(t,SC.report.end-.15,.15));
+  $("app").style.opacity=appA;$("tag").style.opacity=inApp?appA:0;
   const ap=activePane(t);
   TABS.forEach(([k])=>$("tab-"+k).classList.toggle("on",k===ap));
-  APP.forEach((id,i)=>{const a=i?p(t,clickAt(id),.25):1,nx=APP[i+1],b=nx?1-p(t,clickAt(nx),.2):1;panes[id].style.opacity=Math.min(a,b);});
+  APP.forEach((id,i)=>{const a=i?p(t,clickAt(id),.15):1,nx=APP[i+1],b=nx?1-p(t,clickAt(nx),.12):1;panes[id].style.opacity=Math.min(a,b);});
   const showF=["where","barriers","hidden"].includes(ap);$("fbar").style.display=showF?"flex":"none";
+  $("app").style.transform="none";
   $("panes").style.top=($("tabs").getBoundingClientRect().bottom+(showF?$("fbar").getBoundingClientRect().height:0)-$("app").getBoundingClientRect().top)+"px";
-  const mh=t>=pickAt()&&t<resetAt();$("fSvc").textContent=mh?"Mental health":"All kinds of help";
+  $("fSvc").textContent=t>=pickAt()&&t<resetAt()?"Mental health":"All kinds of help";
 
   // dropdown
   if(!$("dd").dataset.b){$("dd").innerHTML=["All kinds of help","Food assistance","Transportation","Housing","Mental health","Primary care"].map((o,i)=>`<div id="${i===4?"dd-mh":"dd-"+i}">${o}</div>`).join("");$("dd").dataset.b=1;}
-  { const s=$("fSvc").getBoundingClientRect(),a=$("app").getBoundingClientRect(),open=t>=LN.X1.start+.8&&t<pickAt();
+  { const s=$("fSvc").getBoundingClientRect(),a=$("app").getBoundingClientRect(),open=t>=LN.X1.start+.4&&t<pickAt();
     Object.assign($("dd").style,{left:(s.left-a.left)+"px",top:(s.bottom-a.top)+"px",width:s.width+"px",opacity:open?1:0});
-    $("dd-mh").classList.toggle("hov",t>=pickAt()-.3); }
+    $("dd-mh").classList.toggle("hov",t>=pickAt()-.25); }
 
-  // where: the drop-off, then the filtered view
+  // where
   { const k=t>=pickAt()?1:0,c={};["looked","made","comp"].forEach(f=>c[f]=ALL[f]+(MH[f]-ALL[f])*k);
-    $("pane-where").querySelectorAll(".pt,.ps,.kpis,#wFun").forEach(e=>e.style.opacity=.25+.75*eo(p(t,pickAt(),.35)));
-    const rate=Math.round(c.comp/c.made*100),top=k?MH.top:ALL.top;
+    $("pane-where").querySelectorAll(".pt,.ps,.kpis,#wFun").forEach(e=>e.style.opacity=.25+.75*eo(p(t,pickAt(),.3)));
+    const rate=Math.round(c.comp/c.made*100);
     $("wTitle").textContent=`${rate}% of referrals were completed`;
     $("wCtx").textContent=(k?"Mental health":"All kinds of help")+" · All areas · Full year";
-    $("k0").textContent=fmt(c.looked);$("k1").textContent=fmt(c.made);$("k2").textContent=rate+"%";$("k3").textContent=top;
-    const g=ez(p(t,clickAt("where")+.1,1));
+    $("k0").textContent=fmt(c.looked);$("k1").textContent=fmt(c.made);$("k2").textContent=rate+"%";$("k3").textContent=k?MH.top:ALL.top;
+    const g=ez(p(t,clickAt("where")+.05,.8));
     $("wFun").innerHTML=[["Looked for help",c.looked],["Referred",c.made],["Completed",c.comp]].map(([l,v],i)=>
       `<div class="row"><span class="lab">${l}</span><span class="v">${fmt(v)}${i?`<small>${Math.round(v/(i===1?c.looked:c.made)*100)}%</small>`:""}</span><div class="tr"><div class="fl" style="width:${v/c.looked*100*g}%"></div></div></div>`).join(""); }
 
-  // barriers: bars grow; the four from the opening are the ones in blue
-  BARR.forEach((_,i)=>{const r=$("br"+i),a=eo(p(t,clickAt("barriers")+.15+i*.12,.5));r.style.opacity=a;
+  // barriers: the five from the opening are the bold blue rows
+  BARR.forEach((_,i)=>{const r=$("br"+i),a=eo(p(t,clickAt("barriers")+.1+i*.09,.4));r.style.opacity=a;
     const f=r.querySelector(".fl");f.style.transformOrigin="left";f.style.transform=`scaleX(${a})`;});
 
   // hidden
-  AREAS.forEach(([a,r],i)=>{const e=$("ta-"+a);e.style.opacity=eo(p(t,clickAt("hidden")+.15+i*.06,.35));
-    const pl=r===null?eo(p(t,LN.X3.start+.6,.4)):0;e.style.outline=pl?`${Math.round(6*pl)}px solid var(--ink)`:"none";e.style.outlineOffset="-6px";});
-  $("callout").style.opacity=eo(p(t,LN.X3.start+.8,.5));
+  AREAS.forEach(([a,r],i)=>{const e=$("ta-"+a);e.style.opacity=eo(p(t,clickAt("hidden")+.1+i*.04,.3));
+    const pl=r===null?eo(p(t,LN.X3.start+.3,.3)):0;e.style.outline=pl?`${Math.round(6*pl)}px solid var(--ink)`:"none";e.style.outlineOffset="-6px";});
+  $("callout").style.opacity=eo(p(t,LN.X3.start+.5,.4));
 
   // source
-  EV.forEach((_,i)=>{const e=$("ev"+i),a=eo(p(t,clickAt("source")+.15+i*.1,.45));e.style.opacity=a;e.style.transform=`translateX(${(a-1)*20}px)`;});
-  $("evNA").style.opacity=eo(p(t,clickAt("source")+.6,.45));
-  { const a=eo(p(t,LN.X4.start+.5,.4)),pn=panes.source.getBoundingClientRect(),na=$("evNA").getBoundingClientRect();
+  EV.forEach((_,i)=>{const e=$("ev"+i),a=eo(p(t,clickAt("source")+.1+i*.08,.35));e.style.opacity=a;e.style.transform=`translateX(${(a-1)*20}px)`;});
+  $("evNA").style.opacity=eo(p(t,clickAt("source")+.45,.35));
+  { const a=eo(p(t,LN.X4.start+.2,.3)),pn=panes.source.getBoundingClientRect(),na=$("evNA").getBoundingClientRect();
     Object.assign($("evTip").style,{opacity:a,left:(V?34:(na.left-pn.left))+"px",top:(na.bottom-pn.top+(V?40:30))+"px"});
     $("ev0").style.background=`color-mix(in srgb,var(--accent) ${Math.round(a*9)}%,#fff)`; }
 
   // report
-  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.3,approveAt()-clickAt("report")-.9);let left=Math.round(total*k),h="";
+  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.2,LN.X5.start+1.4-clickAt("report"));let left=Math.round(total*k),h="";
     RTEXT.forEach(([s,fig])=>{if(left<=0)return;const piece=s.slice(0,left);left-=s.length;h+=fig?`<u>${piece}</u>`:piece;});
     $("rbox").innerHTML=h+(k<1?'<span style="border-left:3px solid var(--ink);margin-left:2px"></span>':"");
-    const ok=t>=approveAt();$("rchip").textContent=ok?"Approved":"Draft";$("rchip").style.background=ok?"var(--ink)":"none";$("rchip").style.color=ok?"#fff":"var(--ink)";
-    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok);$("rlog").style.opacity=p(t,approveAt()+.2,.4); }
+    const ok=t>=approveAt();$("rchip").textContent=ok?"Approved":"Needs a person";$("rchip").style.background=ok?"var(--ink)":"none";$("rchip").style.color=ok?"#fff":"var(--ink)";
+    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok);$("rlog").style.opacity=p(t,approveAt()+.15,.3); }
+
+  // punch-in: zoom toward the thing the line is about, then back out
+  if(inApp){const sc=SC[ap],target=$(ZOOM[ap]);
+    const z=Math.min(ez(p(t,clickAt(ap)+.35,.7)),1-ez(p(t,sc.end-.45,.35)));
+    const ar=$("app").getBoundingClientRect(),tr=target.getBoundingClientRect();
+    const ox=ar.width/2,oy=tr.top-ar.top+tr.height/2;
+    $("app").style.transformOrigin=`${ox}px ${oy}px`;$("app").style.transform=`scale(${1+(V?.05:.07)*z})`;}
 
   // cursor
   if(!KEYS)KEYS=keys();
@@ -389,13 +386,9 @@ function render(t){
   if(inApp){let i=0;while(i<KEYS.length-1&&KEYS[i+1].t<=t)i++;const A=KEYS[i],B=KEYS[Math.min(i+1,KEYS.length-1)];
     const pa=pos(A.el),pb=pos(B.el),k=B.t>A.t?ez(cl((t-A.t)/(B.t-A.t))):0;
     c.style.left=(pa[0]+(pb[0]-pa[0])*k)+"px";c.style.top=(pa[1]+(pb[1]-pa[1])*k)+"px";c.style.opacity=appA;
-    const lc=KEYS.filter(q=>q.click&&q.t<=t).pop(),rk=lc?p(t,lc.t,.45):1;
+    const lc=KEYS.filter(q=>q.click&&q.t<=t).pop(),rk=lc?p(t,lc.t,.4):1;
     if(lc&&rk<1){const q=pos(lc.el);Object.assign(ring.style,{left:q[0]+"px",top:q[1]+"px",opacity:1-rk,transform:`scale(${.5+rk})`});}else ring.style.opacity=0;
   }else{c.style.opacity=0;ring.style.opacity=0;}
-
-  // captions, except for lines already set as type on screen
-  const cue=TL.scenes.flatMap(s=>s.lines).find(l=>t>=l.start-.05&&t<l.end+.3);
-  $("capText").textContent=cue&&!NOCAP.includes(cue.id)?cue.text:"";
 }
 window.render=render;
 window.DURATION=TL.duration;

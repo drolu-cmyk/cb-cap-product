@@ -1,6 +1,6 @@
 # CB-CAP product story video
 
-A 70-second story video for all stakeholders and social posts. It comes in two formats from one source.
+An 80-second story video for all stakeholders and social posts. It comes in two formats from one source.
 
 | File | Use |
 |---|---|
@@ -15,19 +15,20 @@ Captions are burned in, because most social viewers watch with the sound off.
 
 ## Story
 
-| Time | Beat | Voiceover |
+| Time | Beat | Voiceover (on screen) |
 |---|---|---|
-| 0:00 | Hook | Picture a county where 612 residents were referred for help. / 256 of them never got there. |
-| 0:08 | Why it matters | Most local health departments serve fewer than 50,000 people. |
-| 0:13 | Tension | Their directors are asked to prove what the community needs. / But yearly numbers show need, not where people get stuck. / So every year, the case starts over from a pile of spreadsheets. |
-| 0:25 | Promise | CB-CAP. Know where care breaks. Show the proof. |
-| 0:29 | Proof | See where residents drop off, by kind of help, area and season. |
-| 0:35 | Proof | Small counts stay hidden, so no one can be identified. |
-| 0:41 | Proof | Every figure carries its source, its year and its range. |
-| 0:46 | Proof | Your plan becomes your yearly report. / A person approves every word. |
-| 0:52 | Benefit | Walk into the budget meeting with proof, not a pile of spreadsheets. |
-| 0:57 | Reasons to believe | Sources shown. Nobody identifiable. People decide. |
-| 1:02 | Call to action | Want this for your county? Talk to the SozoRock Foundation. |
+| 0:00 | Barriers, felt | The ride never came. / The clinic closed before her shift ended. / The form asked for papers she didn't have. / The next appointment was six weeks away. (Ink background. Each line is named as a barrier type and has its own real-world sound.) |
+| 0:14 | Insight | Each one is a barrier on the way to care. And most of them are never counted. |
+| 0:21 | Why it matters | Most local health departments serve fewer than 50,000 people. / Small teams. Big questions. Every number has to hold up. |
+| 0:30 | Promise | CB-CAP. Know where care breaks. Show the proof. |
+| 0:36 | Proof | See where residents drop off, between referral and care. |
+| 0:42 | Proof | See which barriers stop them, by kind of help and neighborhood. (The four barriers from the opening, now counted.) |
+| 0:48 | Proof | Small counts stay hidden, so no one can be identified. |
+| 0:54 | Proof | Every number shows its source, its year, and its range. |
+| 0:59 | Proof | Your plan becomes your yearly report. People approve every word. |
+| 1:05 | Benefit | So you walk into the budget meeting with proof. |
+| 1:09 | Call to action | Bring CB-CAP to your county. Talk to the SozoRock Foundation. |
+| 1:14 | Foundation sign-off | Care. For Every Zip Code |
 
 ## Rules applied
 
@@ -48,21 +49,30 @@ Captions are burned in, because most social viewers watch with the sound off.
 2. **Foundation approval** of the call to action and `sozorockfoundation.org/partner`.
 3. **Check the NACCHO figure** against the source PDF.
 
-## Voice, fonts, licenses
+## Sound
 
-- **Voice:** Kokoro-82M, voice `af_heart`, run locally. The model and voices are Apache 2.0, so there is no cost and no account. It is a synthetic voice.
-- **Music:** a quiet chord bed synthesized in `tools/voice.py` that dips under the voice. There are no samples, so there's nothing to license. Set `"music": false` in `script.json` to turn it off.
+- **Voice:** "Katie" from the ElevenLabs voice library (`eleven_v4`), recorded as one continuous take (`assets/audio/vo-take.mp3`).
+  - `tools/voice.py` cuts each line at its word timings (`vo-words.json`, from an ElevenLabs transcript) and spaces the lines out, so the read stays natural.
+  - The transcript matched the script word for word.
+- **Sound effects:** generated with ElevenLabs, in `assets/audio/sfx/`.
+  - Real-world sounds, one for each barrier:
+    - a bus pulling away in the rain
+    - a clinic door locking
+    - papers shuffling
+    - a busy signal
+  - Production sounds: a low impact under the promise and the sign-off, soft transitions, cursor clicks, and a stamp when the report is approved.
+  - Cue times are in `script.json`. The page adds the clicks.
+- **No music yet.** The ElevenLabs connection used here can't make music. Add the full ElevenLabs connector (`https://api.elevenlabs.io/v1/mcp`) or supply a licensed track, and it goes under the voice.
+- **License:** the voice and sound effects were generated on the connected ElevenLabs account. Commercial use depends on that account's plan, so confirm it before paid promotion.
 - **Fonts:** Newsreader and Source Sans 3, under the SIL Open Font License (`assets/fonts/OFL.txt`).
 
 ## Build
 
 ```
-pip install kokoro-onnx soundfile        # in a virtualenv
-# Download kokoro-v1.0.onnx and voices-v1.0.bin from
-# github.com/thewh1teagle/kokoro-onnx/releases (model-files-v1.0)
-KOKORO_DIR=/path/to/models PYTHON=/path/to/venv/python ./build.sh
+./build.sh        # needs python3, ffmpeg, and Node with Playwright
 ```
 
-The build needs Node with Playwright, plus ffmpeg.
-Edit `script.json`, then rebuild: the scene timing follows the voice automatically.
-Use `node tools/render.cjs --vertical` for the vertical cut, and `--stills 12,40` to render review stills.
+- Edit `script.json` to change pauses or sound cues.
+- Changing the words means recording a new take: replace `vo-take.mp3` and `vo-words.json`.
+- If a line in the script can't be found in the take, the build stops.
+- Use `node tools/render.cjs --stills 12,40` (add `--vertical` for the vertical format) for review stills.

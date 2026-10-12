@@ -1,172 +1,247 @@
 {
- "duration": 69.911,
+ "duration": 80.273,
  "scenes": [
   {
-   "id": "hook",
+   "id": "cold",
    "start": 0.0,
-   "end": 8.451,
+   "end": 13.82,
    "lines": [
     {
-     "id": "H1",
-     "text": "Picture a county where 612 residents were referred for help.",
-     "start": 0.3,
-     "end": 4.608
+     "id": "O1",
+     "text": "The ride never came.",
+     "start": 0.72,
+     "end": 2.24
     },
     {
-     "id": "H2",
-     "text": "256 of them never got there.",
-     "start": 5.008,
-     "end": 7.651
+     "id": "O2",
+     "text": "The clinic closed before her shift ended.",
+     "start": 3.44,
+     "end": 5.96
+    },
+    {
+     "id": "O3",
+     "text": "The form asked for papers she didn't have.",
+     "start": 7.08,
+     "end": 9.48
+    },
+    {
+     "id": "O4",
+     "text": "The next appointment was six weeks away.",
+     "start": 10.6,
+     "end": 13.24
+    }
+   ]
+  },
+  {
+   "id": "counted",
+   "start": 13.82,
+   "end": 20.583,
+   "lines": [
+    {
+     "id": "O5",
+     "text": "Each one is a barrier on the way to care.",
+     "start": 14.16,
+     "end": 17.013
+    },
+    {
+     "id": "O6",
+     "text": "And most of them are never counted.",
+     "start": 17.47,
+     "end": 19.603
     }
    ]
   },
   {
    "id": "context",
-   "start": 8.451,
-   "end": 13.454,
+   "start": 20.583,
+   "end": 30.413,
    "lines": [
     {
-     "id": "F1",
+     "id": "C1",
      "text": "Most local health departments serve fewer than 50,000 people.",
-     "start": 8.851,
-     "end": 12.754
-    }
-   ]
-  },
-  {
-   "id": "director",
-   "start": 13.454,
-   "end": 25.04,
-   "lines": [
-    {
-     "id": "D1",
-     "text": "Their directors are asked to prove what the community needs.",
-     "start": 13.754,
-     "end": 16.77
+     "start": 21.143,
+     "end": 24.943
     },
     {
-     "id": "D2",
-     "text": "But yearly numbers show need, not where people get stuck.",
-     "start": 17.17,
-     "end": 20.382
-    },
-    {
-     "id": "D3",
-     "text": "So every year, the case starts over from a pile of spreadsheets.",
-     "start": 20.782,
-     "end": 24.24
+     "id": "C2",
+     "text": "Small teams. Big questions. Every number has to hold up.",
+     "start": 25.453,
+     "end": 29.533
     }
    ]
   },
   {
    "id": "promise",
-   "start": 25.04,
-   "end": 29.202,
+   "start": 30.413,
+   "end": 36.313,
    "lines": [
     {
      "id": "P1",
      "text": "CB-CAP. Know where care breaks. Show the proof.",
-     "start": 25.44,
-     "end": 28.102
+     "start": 31.393,
+     "end": 35.233
     }
    ]
   },
   {
    "id": "where",
-   "start": 29.202,
-   "end": 35.393,
+   "start": 36.313,
+   "end": 41.893,
    "lines": [
     {
-     "id": "W1",
-     "text": "See where residents drop off, by kind of help, area and season.",
-     "start": 30.102,
-     "end": 33.793
+     "id": "X1",
+     "text": "See where residents drop off, between referral and care.",
+     "start": 37.253,
+     "end": 40.613
+    }
+   ]
+  },
+  {
+   "id": "barriers",
+   "start": 41.893,
+   "end": 48.293,
+   "lines": [
+    {
+     "id": "X2",
+     "text": "See which barriers stop them, by kind of help and neighborhood.",
+     "start": 42.733,
+     "end": 46.413
     }
    ]
   },
   {
    "id": "hidden",
-   "start": 35.393,
-   "end": 40.811,
+   "start": 48.293,
+   "end": 53.653,
    "lines": [
     {
-     "id": "S1",
+     "id": "X3",
      "text": "Small counts stay hidden, so no one can be identified.",
-     "start": 36.293,
-     "end": 39.511
+     "start": 49.173,
+     "end": 52.373
     }
    ]
   },
   {
    "id": "source",
-   "start": 40.811,
-   "end": 45.956,
+   "start": 53.653,
+   "end": 59.133,
    "lines": [
     {
-     "id": "S2",
-     "text": "Every figure carries its source, its year and its range.",
-     "start": 41.611,
-     "end": 44.756
+     "id": "X4",
+     "text": "Every number shows its source, its year, and its range.",
+     "start": 54.533,
+     "end": 58.053
     }
    ]
   },
   {
    "id": "report",
-   "start": 45.956,
-   "end": 52.387,
+   "start": 59.133,
+   "end": 65.373,
    "lines": [
     {
-     "id": "R1",
-     "text": "Your plan becomes your yearly report.",
-     "start": 46.756,
-     "end": 48.979
-    },
-    {
-     "id": "R2",
-     "text": "A person approves every word.",
-     "start": 49.379,
-     "end": 51.187
+     "id": "X5",
+     "text": "Your plan becomes your yearly report. People approve every word.",
+     "start": 59.973,
+     "end": 64.293
     }
    ]
   },
   {
    "id": "benefit",
-   "start": 52.387,
-   "end": 57.296,
+   "start": 65.373,
+   "end": 69.333,
    "lines": [
     {
      "id": "B1",
-     "text": "Walk into the budget meeting with proof, not a pile of spreadsheets.",
-     "start": 52.787,
-     "end": 56.496
-    }
-   ]
-  },
-  {
-   "id": "trust",
-   "start": 57.296,
-   "end": 62.229,
-   "lines": [
-    {
-     "id": "T1",
-     "text": "Sources shown. Nobody identifiable. People decide.",
-     "start": 57.596,
-     "end": 61.429
+     "text": "So you walk into the budget meeting with proof.",
+     "start": 65.813,
+     "end": 68.453
     }
    ]
   },
   {
    "id": "cta",
-   "start": 62.229,
-   "end": 69.911,
+   "start": 69.333,
+   "end": 74.193,
    "lines": [
     {
-     "id": "C1",
-     "text": "Want this for your county? Talk to the SozoRock Foundation.",
-     "start": 62.629,
-     "end": 66.311
+     "id": "E1",
+     "text": "Bring CB-CAP to your county. Talk to the SozoRock Foundation.",
+     "start": 69.693,
+     "end": 73.573
     }
    ]
+  },
+  {
+   "id": "tagline",
+   "start": 74.193,
+   "end": 80.273,
+   "lines": [
+    {
+     "id": "E2",
+     "text": "Care. For every zip code.",
+     "start": 74.613,
+     "end": 76.773
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "file": "assets/audio/sfx/bus.mp3",
+   "t": 0.12,
+   "gain": -9,
+   "dur": 4.2
+  },
+  {
+   "file": "assets/audio/sfx/lock.mp3",
+   "t": 3.04,
+   "gain": -8,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/papers.mp3",
+   "t": 6.78,
+   "gain": 2,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/phone.mp3",
+   "t": 10.1,
+   "gain": -13,
+   "dur": 3.4
+  },
+  {
+   "file": "assets/audio/sfx/whoosh.mp3",
+   "t": 20.333,
+   "gain": -12,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/impact.mp3",
+   "t": 30.963,
+   "gain": -5,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/whoosh.mp3",
+   "t": 36.113,
+   "gain": -15,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/whoosh.mp3",
+   "t": 65.173,
+   "gain": -14,
+   "dur": null
+  },
+  {
+   "file": "assets/audio/sfx/impact.mp3",
+   "t": 74.393,
+   "gain": -7,
+   "dur": null
   }
  ]
 }

@@ -1,46 +1,59 @@
 {
   "title": "CB-CAP product story",
-  "voice": "af_heart",
-  "speed": 0.95,
-  "gap": 0.4,
-  "music": true,
+  "voiceover": { "audio": "assets/audio/vo-take.mp3", "words": "assets/audio/vo-words.json", "voice": "ElevenLabs, Katie (eleven_v4)" },
+  "gap": 0.35,
   "scenes": [
-    { "id": "hook", "pre": 0.3, "post": 0.8, "lines": [
-      { "id": "H1", "text": "Picture a county where 612 residents were referred for help." },
-      { "id": "H2", "text": "256 of them never got there.", "say": "Two hundred fifty-six of them never got there." }
+    { "id": "cold", "pre": 0.7, "gap": 1.0, "post": 0.5, "lines": [
+      { "id": "O1", "text": "The ride never came." },
+      { "id": "O2", "text": "The clinic closed before her shift ended." },
+      { "id": "O3", "text": "The form asked for papers she didn't have." },
+      { "id": "O4", "text": "The next appointment was six weeks away." }
     ]},
-    { "id": "context", "pre": 0.4, "post": 0.7, "lines": [
-      { "id": "F1", "text": "Most local health departments serve fewer than 50,000 people.", "say": "Most local health departments serve fewer than fifty thousand people." }
+    { "id": "counted", "pre": 0.3, "post": 0.9, "lines": [
+      { "id": "O5", "text": "Each one is a barrier on the way to care." },
+      { "id": "O6", "text": "And most of them are never counted." }
     ]},
-    { "id": "director", "pre": 0.3, "post": 0.8, "lines": [
-      { "id": "D1", "text": "Their directors are asked to prove what the community needs." },
-      { "id": "D2", "text": "But yearly numbers show need, not where people get stuck." },
-      { "id": "D3", "text": "So every year, the case starts over from a pile of spreadsheets." }
+    { "id": "context", "pre": 0.5, "post": 0.6, "lines": [
+      { "id": "C1", "text": "Most local health departments serve fewer than 50,000 people.", "say": "Most local health departments serve fewer than fifty thousand people." },
+      { "id": "C2", "text": "Small teams. Big questions. Every number has to hold up." }
     ]},
-    { "id": "promise", "pre": 0.4, "post": 1.1, "lines": [
-      { "id": "P1", "text": "CB-CAP. Know where care breaks. Show the proof.", "say": "C. B. Cap. Know where care breaks. Show the proof." }
+    { "id": "promise", "pre": 0.7, "post": 1.0, "lines": [
+      { "id": "P1", "text": "CB-CAP. Know where care breaks. Show the proof.", "say": "C B Cap. Know where care breaks. Show the proof." }
     ]},
-    { "id": "where", "pre": 0.9, "post": 1.6, "lines": [
-      { "id": "W1", "text": "See where residents drop off, by kind of help, area and season." }
+    { "id": "where", "pre": 0.9, "post": 1.2, "lines": [
+      { "id": "X1", "text": "See where residents drop off, between referral and care." }
     ]},
-    { "id": "hidden", "pre": 0.9, "post": 1.3, "lines": [
-      { "id": "S1", "text": "Small counts stay hidden, so no one can be identified." }
+    { "id": "barriers", "pre": 0.8, "post": 1.8, "lines": [
+      { "id": "X2", "text": "See which barriers stop them, by kind of help and neighborhood." }
     ]},
-    { "id": "source", "pre": 0.8, "post": 1.2, "lines": [
-      { "id": "S2", "text": "Every figure carries its source, its year and its range." }
+    { "id": "hidden", "pre": 0.8, "post": 1.2, "lines": [
+      { "id": "X3", "text": "Small counts stay hidden, so no one can be identified." }
     ]},
-    { "id": "report", "pre": 0.8, "post": 1.2, "lines": [
-      { "id": "R1", "text": "Your plan becomes your yearly report." },
-      { "id": "R2", "text": "A person approves every word." }
+    { "id": "source", "pre": 0.8, "post": 1.0, "lines": [
+      { "id": "X4", "text": "Every number shows its source, its year, and its range." }
+    ]},
+    { "id": "report", "pre": 0.8, "post": 1.0, "lines": [
+      { "id": "X5", "text": "Your plan becomes your yearly report. People approve every word." }
     ]},
     { "id": "benefit", "pre": 0.4, "post": 0.8, "lines": [
-      { "id": "B1", "text": "Walk into the budget meeting with proof, not a pile of spreadsheets." }
+      { "id": "B1", "text": "So you walk into the budget meeting with proof." }
     ]},
-    { "id": "trust", "pre": 0.3, "post": 0.8, "lines": [
-      { "id": "T1", "text": "Sources shown. Nobody identifiable. People decide." }
+    { "id": "cta", "pre": 0.3, "post": 0.5, "lines": [
+      { "id": "E1", "text": "Bring CB-CAP to your county. Talk to the SozoRock Foundation.", "say": "Bring C B Cap to your county. Talk to the Sozo Rock Foundation." }
     ]},
-    { "id": "cta", "pre": 0.4, "post": 3.6, "lines": [
-      { "id": "C1", "text": "Want this for your county? Talk to the SozoRock Foundation.", "say": "Want this for your county? Talk to the Sozo Rock Foundation." }
+    { "id": "tagline", "pre": 0.3, "post": 3.2, "lines": [
+      { "id": "E2", "text": "Care. For every zip code." }
     ]}
+  ],
+  "sfx": [
+    { "file": "bus.mp3",    "at": "O1",       "offset": -0.6, "dur": 4.2, "gain": -9 },
+    { "file": "lock.mp3",   "at": "O2",       "offset": -0.4, "gain": -8 },
+    { "file": "papers.mp3", "at": "O3",       "offset": -0.3, "gain": 2 },
+    { "file": "phone.mp3",  "at": "O4",       "offset": -0.5, "dur": 3.4, "gain": -13 },
+    { "file": "whoosh.mp3", "at": "context",  "offset": -0.25, "gain": -12 },
+    { "file": "impact.mp3", "at": "promise",  "offset": 0.55, "gain": -5 },
+    { "file": "whoosh.mp3", "at": "where",    "offset": -0.2, "gain": -15 },
+    { "file": "whoosh.mp3", "at": "benefit",  "offset": -0.2, "gain": -14 },
+    { "file": "impact.mp3", "at": "tagline",  "offset": 0.2, "gain": -7 }
   ]
 }

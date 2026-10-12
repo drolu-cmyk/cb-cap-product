@@ -15,6 +15,25 @@ const [W, H] = VERT ? [1080, 1920] : [1920, 1080];
 const NAME = VERT ? "cb-cap-story-vertical" : "cb-cap-story";
 const exe = process.env.CHROMIUM || (fs.existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 
+// Voice plus sound effects, each placed at its cue, then loudness-normalized.
+function mixAudio(cues, duration) {
+  const out = path.join(ROOT, "build", "mix.wav");
+  const args = ["-v", "error", "-y", "-i", path.join(ROOT, "build", "voice.wav")];
+  const chains = [];
+  cues.forEach((c, i) => {
+    args.push("-i", path.join(ROOT, c.file));
+    let f = `[${i + 1}:a]aformat=sample_rates=48000:channel_layouts=mono`;
+    if (c.dur) f += `,atrim=0:${c.dur},afade=t=out:st=${Math.max(0, c.dur - 0.8)}:d=0.8`;
+    f += `,volume=${c.gain || 0}dB,adelay=${Math.max(0, Math.round(c.t * 1000))}:all=1[s${i}]`;
+    chains.push(f);
+  });
+  const mixIn = "[0:a]" + cues.map((_, i) => `[s${i}]`).join("");
+  chains.push(`${mixIn}amix=inputs=${cues.length + 1}:normalize=0:duration=first,loudnorm=I=-16:TP=-1.5:LRA=11,apad,atrim=0:${duration}[m]`);
+  args.push("-filter_complex", chains.join(";"), "-map", "[m]", "-ar", "48000", "-ac", "2", out);
+  require("child_process").execFileSync("ffmpeg", args, { stdio: "inherit" });
+  return out;
+}
+
 (async () => {
   const browser = await chromium.launch({ executablePath: exe, args: ["--allow-file-access-from-files", "--font-render-hinting=none"] });
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
@@ -36,10 +55,10 @@ const exe = process.env.CHROMIUM || (fs.existsSync("/opt/pw-browsers/chromium-11
   } else {
     fs.mkdirSync(path.join(ROOT, "out"), { recursive: true });
     const out = path.join(ROOT, "out", NAME + ".mp4");
+    const mix = mixAudio(await page.evaluate(() => window.sfxCues()), duration);
     const ff = spawn("ffmpeg", ["-y", "-loglevel", "error",
       "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
-      "-i", path.join(ROOT, "build", "voice.wav"),
-      "-af", "loudnorm=I=-16:TP=-1.5:LRA=11,apad",
+      "-i", mix,
       "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-tune", "stillimage",
       "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-ac", "2", "-shortest", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
     const frames = Math.ceil(duration * FPS);

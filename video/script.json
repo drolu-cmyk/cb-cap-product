@@ -1,66 +1,258 @@
 {
   "title": "CB-CAP product story",
-  "voiceover": { "audio": "assets/audio/scratch-take.wav", "words": "assets/audio/scratch-words.json", "voice": "SCRATCH: local Kokoro voice, replace with final take" },
+  "voiceover": {
+    "audio": "assets/audio/scratch-take.wav",
+    "words": "assets/audio/scratch-words.json",
+    "voice": "SCRATCH: local Kokoro voice, replace with final take"
+  },
   "gap": 0.2,
   "scenes": [
-    { "id": "hook", "pre": 0.15, "post": 0.35, "lines": [
-      { "id": "H1", "text": "Your county can't fix what it can't see." }
-    ]},
-    { "id": "barriers_open", "pre": 0.1, "gap": 0.55, "post": 0.4, "lines": [
-      { "id": "B1", "text": "No ride.", "tag": "Transportation" },
-      { "id": "B2", "text": "A clinic that closes before your shift ends.", "tag": "Work hours" },
-      { "id": "B3", "text": "Forms too hard to read.", "tag": "Health literacy" },
-      { "id": "B4", "text": "A six-week wait.", "say": "A six week wait.", "tag": "Wait times" },
-      { "id": "B5", "text": "No one who speaks your language.", "tag": "Language access" }
-    ]},
-    { "id": "turn", "pre": 0.1, "post": 0.5, "lines": [
-      { "id": "T1", "text": "These are barriers to care." },
-      { "id": "T2", "text": "And most of them never get counted." }
-    ]},
-    { "id": "context", "pre": 0.3, "post": 0.4, "lines": [
-      { "id": "C1", "text": "Six in ten local health departments serve fewer than 50,000 people.", "say": "Six in ten local health departments serve fewer than fifty thousand people." },
-      { "id": "C2", "text": "Small teams. Big jobs." }
-    ]},
-    { "id": "promise", "pre": 0.4, "post": 0.6, "lines": [
-      { "id": "P1", "text": "CB-CAP shows where care breaks, so you know what to fix first.", "say": "C B Cap shows where care breaks, so you know what to fix first." }
-    ]},
-    { "id": "where", "pre": 0.6, "post": 0.5, "lines": [
-      { "id": "X1", "text": "See where people drop off on the way to care." }
-    ]},
-    { "id": "barriers", "pre": 0.5, "post": 0.9, "lines": [
-      { "id": "X2", "text": "See which barriers stop them, by neighborhood." }
-    ]},
-    { "id": "hidden", "pre": 0.5, "post": 0.7, "lines": [
-      { "id": "X3", "text": "Small numbers stay hidden. Privacy comes first." }
-    ]},
-    { "id": "source", "pre": 0.5, "post": 0.6, "lines": [
-      { "id": "X4", "text": "Every number shows where it came from." }
-    ]},
-    { "id": "report", "pre": 0.5, "post": 0.8, "lines": [
-      { "id": "X5", "text": "AI can draft your report. People decide what it says.", "say": "A I can draft your report. People decide what it says." }
-    ]},
-    { "id": "fund", "pre": 0.3, "post": 0.9, "lines": [
-      { "id": "F1", "text": "Built for health equity, rural health, and small teams doing more." }
-    ]},
-    { "id": "benefit", "pre": 0.2, "post": 0.5, "lines": [
-      { "id": "V1", "text": "Walk into your budget meeting with real numbers." }
-    ]},
-    { "id": "cta", "pre": 0.2, "post": 0.4, "lines": [
-      { "id": "E1", "text": "Bring CB-CAP to your county. Talk to the SozoRock Foundation.", "say": "Bring C B Cap to your county. Talk to the Sozo Rock Foundation." }
-    ]},
-    { "id": "tagline", "pre": 0.2, "post": 3.0, "lines": [
-      { "id": "E2", "text": "Care. For every zip code." }
-    ]}
+    {
+      "id": "hook",
+      "pre": 0.15,
+      "post": 0.35,
+      "lines": [
+        {
+          "id": "H1",
+          "text": "Your county can't fix what it can't see."
+        }
+      ]
+    },
+    {
+      "id": "barriers_open",
+      "pre": 0.1,
+      "gap": 0.55,
+      "post": 0.4,
+      "lines": [
+        {
+          "id": "B1",
+          "text": "No ride.",
+          "tag": "Transportation"
+        },
+        {
+          "id": "B2",
+          "text": "A clinic that closes before your shift ends.",
+          "tag": "Work hours"
+        },
+        {
+          "id": "B3",
+          "text": "Forms too hard to read.",
+          "tag": "Health literacy"
+        },
+        {
+          "id": "B4",
+          "text": "A six-week wait.",
+          "say": "A six week wait.",
+          "tag": "Wait times"
+        },
+        {
+          "id": "B5",
+          "text": "No one who speaks your language.",
+          "tag": "Language access"
+        }
+      ]
+    },
+    {
+      "id": "turn",
+      "pre": 0.1,
+      "post": 0.6,
+      "lines": [
+        {
+          "id": "T1",
+          "text": "We count the people who show up."
+        },
+        {
+          "id": "T2",
+          "text": "Not the ones who never made it."
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "pre": 0.3,
+      "post": 0.4,
+      "lines": [
+        {
+          "id": "C1",
+          "text": "Six in ten local health departments serve fewer than 50,000 people.",
+          "say": "Six in ten local health departments serve fewer than fifty thousand people."
+        },
+        {
+          "id": "C2",
+          "text": "Small teams. Big jobs."
+        }
+      ]
+    },
+    {
+      "id": "promise",
+      "pre": 0.4,
+      "post": 0.6,
+      "lines": [
+        {
+          "id": "P1",
+          "text": "CB-CAP shows where care breaks, so you know what to fix first.",
+          "say": "C B Cap shows where care breaks, so you know what to fix first."
+        }
+      ]
+    },
+    {
+      "id": "where",
+      "pre": 0.6,
+      "post": 0.5,
+      "lines": [
+        {
+          "id": "X1",
+          "text": "See where people drop off on the way to care."
+        }
+      ]
+    },
+    {
+      "id": "barriers",
+      "pre": 0.5,
+      "post": 0.9,
+      "lines": [
+        {
+          "id": "X2",
+          "text": "See which barriers stop them, by neighborhood."
+        }
+      ]
+    },
+    {
+      "id": "hidden",
+      "pre": 0.5,
+      "post": 0.7,
+      "lines": [
+        {
+          "id": "X3",
+          "text": "Small numbers stay hidden. Privacy comes first."
+        }
+      ]
+    },
+    {
+      "id": "source",
+      "pre": 0.5,
+      "post": 0.6,
+      "lines": [
+        {
+          "id": "X4",
+          "text": "Every number shows where it came from."
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "pre": 0.5,
+      "post": 0.8,
+      "lines": [
+        {
+          "id": "X5",
+          "text": "AI can draft your report. People decide what it says.",
+          "say": "A I can draft your report. People decide what it says."
+        }
+      ]
+    },
+    {
+      "id": "fund",
+      "pre": 0.3,
+      "post": 0.9,
+      "lines": [
+        {
+          "id": "F1",
+          "text": "Built for health equity, rural health, and small teams doing more."
+        }
+      ]
+    },
+    {
+      "id": "benefit",
+      "pre": 0.2,
+      "post": 0.5,
+      "lines": [
+        {
+          "id": "V1",
+          "text": "Walk into your budget meeting with real numbers."
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "pre": 0.2,
+      "post": 0.4,
+      "lines": [
+        {
+          "id": "E1",
+          "text": "Bring CB-CAP to your county. Talk to the SozoRock Foundation.",
+          "say": "Bring C B Cap to your county. Talk to the Sozo Rock Foundation."
+        }
+      ]
+    },
+    {
+      "id": "tagline",
+      "pre": 0.2,
+      "post": 3.0,
+      "lines": [
+        {
+          "id": "E2",
+          "text": "Care. For every zip code."
+        }
+      ]
+    }
   ],
   "sfx": [
-    { "file": "bus.mp3",    "at": "B1",       "offset": -0.45, "dur": 2.4, "gain": -9 },
-    { "file": "lock.mp3",   "at": "B2",       "offset": -0.25, "gain": -8 },
-    { "file": "papers.mp3", "at": "B3",       "offset": -0.2,  "gain": 2 },
-    { "file": "phone.mp3",  "at": "B4",       "offset": -0.35, "dur": 2.0, "gain": -13 },
-    { "file": "whoosh.mp3", "at": "context",  "offset": -0.2,  "gain": -12 },
-    { "file": "impact.mp3", "at": "promise",  "offset": 0.3,   "gain": -5 },
-    { "file": "whoosh.mp3", "at": "where",    "offset": -0.2,  "gain": -15 },
-    { "file": "whoosh.mp3", "at": "fund",     "offset": -0.2,  "gain": -14 },
-    { "file": "impact.mp3", "at": "tagline",  "offset": 0.15,  "gain": -7 }
+    {
+      "file": "bus.mp3",
+      "at": "B1",
+      "offset": -0.45,
+      "dur": 2.4,
+      "gain": -9
+    },
+    {
+      "file": "lock.mp3",
+      "at": "B2",
+      "offset": -0.25,
+      "gain": -8
+    },
+    {
+      "file": "papers.mp3",
+      "at": "B3",
+      "offset": -0.2,
+      "gain": 2
+    },
+    {
+      "file": "phone.mp3",
+      "at": "B4",
+      "offset": -0.35,
+      "dur": 2.0,
+      "gain": -13
+    },
+    {
+      "file": "whoosh.mp3",
+      "at": "context",
+      "offset": -0.2,
+      "gain": -12
+    },
+    {
+      "file": "impact.mp3",
+      "at": "promise",
+      "offset": 0.3,
+      "gain": -5
+    },
+    {
+      "file": "whoosh.mp3",
+      "at": "where",
+      "offset": -0.2,
+      "gain": -15
+    },
+    {
+      "file": "whoosh.mp3",
+      "at": "fund",
+      "offset": -0.2,
+      "gain": -14
+    },
+    {
+      "file": "impact.mp3",
+      "at": "tagline",
+      "offset": 0.15,
+      "gain": -7
+    }
   ]
 }

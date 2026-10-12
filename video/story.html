@@ -300,8 +300,9 @@ function render(t){
   const hero=line&&HERO.includes(line.scene)&&t<SC[line.scene].end;
   $("hero").style.opacity=hero?1:0;$("low").style.opacity=(!hero&&line&&line.scene!=="tagline"&&t<SC[line.scene].end)?1:0;
   if(line&&hero){words($("heroTxt"),line,t,0);$("heroTxt").style.color=onDark(t)?"#fff":"var(--ink)";
-    $("heroTag").textContent=line.tag?"Barrier · "+line.tag:(line.scene==="promise"?"CB-CAP":"");
-    $("heroTag").style.color=onDark(t)?"var(--accent-d)":"var(--accent)";$("heroTag").style.opacity=line.tag||line.scene==="promise"?eo(p(t,line.start-.1,.25)):0;}
+    const kick={promise:"CB-CAP",turn:"Barriers to care"}[line.scene]||"";
+    $("heroTag").textContent=line.tag?"Barrier · "+line.tag:kick;
+    $("heroTag").style.color=onDark(t)?"var(--accent-d)":"var(--accent)";$("heroTag").style.opacity=line.tag||kick?eo(p(t,line.start-.1,.25)):0;}
   if(line&&!hero){words($("lowTxt"),line,t,.18);$("lowTxt").style.color="var(--ink)";}
   $("heroAfter").style.display=line&&line.scene==="turn"?"block":"none";
   [...$("chips").children].forEach((c,i)=>rise(c,eo(p(t,LN.T2.start+.3+i*.12,.3))));

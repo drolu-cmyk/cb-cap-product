@@ -23,57 +23,57 @@ A six-week wait.
 No one who speaks your language.
 
 7
-00:00:14,412 --> 00:00:15,900
-These are barriers to care.
+00:00:14,412 --> 00:00:16,109
+We count the people who show up.
 
 8
-00:00:16,280 --> 00:00:18,342
-And most of them never get counted.
+00:00:16,489 --> 00:00:18,113
+Not the ones who never made it.
 
 9
-00:00:19,322 --> 00:00:24,064
+00:00:19,193 --> 00:00:23,936
 Six in ten local health departments serve fewer than 50,000 people.
 
 10
-00:00:24,444 --> 00:00:26,394
+00:00:24,316 --> 00:00:26,265
 Small teams. Big jobs.
 
 11
-00:00:27,374 --> 00:00:30,888
+00:00:27,245 --> 00:00:30,760
 CB-CAP shows where care breaks, so you know what to fix first.
 
 12
-00:00:32,268 --> 00:00:34,536
+00:00:32,140 --> 00:00:34,407
 See where people drop off on the way to care.
 
 13
-00:00:35,716 --> 00:00:38,002
+00:00:35,587 --> 00:00:37,874
 See which barriers stop them, by neighborhood.
 
 14
-00:00:39,582 --> 00:00:42,618
+00:00:39,454 --> 00:00:42,490
 Small numbers stay hidden. Privacy comes first.
 
 15
-00:00:43,994 --> 00:00:46,032
+00:00:43,866 --> 00:00:45,904
 Every number shows where it came from.
 
 16
-00:00:47,312 --> 00:00:50,423
+00:00:47,184 --> 00:00:50,294
 AI can draft your report. People decide what it says.
 
 17
-00:00:51,698 --> 00:00:55,349
+00:00:51,570 --> 00:00:55,221
 Built for health equity, rural health, and small teams doing more.
 
 18
-00:00:56,629 --> 00:00:59,331
+00:00:56,501 --> 00:00:59,203
 Walk into your budget meeting with real numbers.
 
 19
-00:01:00,198 --> 00:01:04,336
+00:01:00,070 --> 00:01:04,208
 Bring CB-CAP to your county. Talk to the SozoRock Foundation.
 
 20
-00:01:05,116 --> 00:01:06,860
+00:01:04,988 --> 00:01:06,731
 Care. For every zip code.

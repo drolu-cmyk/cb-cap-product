@@ -8,7 +8,7 @@ A 70-second story video for all stakeholders and social posts. It comes in two f
 
 **Current state: SCRATCH VOICE.** The voice in `out/*-scratch-voice.mp4` is a free local model, used to review timing only. The final voice needs a paid ElevenLabs plan (see Sound).
 
-See `FUNDERS.md` for how the video's words map to funder keywords.
+See `FUNDERS.md` for how the video's words map to funder keywords, and `HOST-SHOTS.md` for the on-camera takes to record on a phone.
 
 | File | Use |
 |---|---|
@@ -27,7 +27,7 @@ Captions are burned in, because most social viewers watch with the sound off.
 |---|---|---|
 | Hook | Your county can't fix what it can't see. | Ink background, words build one at a time |
 | Barriers | No ride. / A clinic that closes before your shift ends. / Forms too hard to read. / A six-week wait. / No one who speaks your language. | Each line labeled: Transportation, Work hours, Health literacy, Wait times, Language access. Real-world sound under the first four. |
-| Turn | These are barriers to care. And most of them never get counted. | The five barriers marked "not counted" |
+| Reframe | We count the people who show up. Not the ones who never made it. | "Barriers to care", with the five barriers marked "not counted" |
 | Scale | Six in ten local health departments serve fewer than 50,000 people. Small teams. Big jobs. | 6 in 10, waffle chart, NACCHO source |
 | Promise | CB-CAP shows where care breaks, so you know what to fix first. | |
 | Product | See where people drop off on the way to care. / See which barriers stop them, by neighborhood. / Small numbers stay hidden. Privacy comes first. / Every number shows where it came from. / AI can draft your report. People decide what it says. | The five opening barriers appear again, now counted |

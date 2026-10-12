@@ -8,7 +8,7 @@ description: Make or revise the CB-CAP product story video and its social cuts (
 The source is `video/`: `script.json` (lines and timing), `story.html` (scenes), `tools/` (voice, render). `./build.sh` renders 1920x1080 and 1080x1920.
 
 ## Story spine
-Hook (2 s) → five barriers as moments → reframe → scale fact → promise → product (drop-off, barriers, privacy, sources) → AI beat → funder keywords → benefit → ask → "Care. For Every Zip Code".
+Hook (2 s) → five barriers as moments → reframe → scale fact → "Counties are rebuilding for the age of AI. Public health can't be left out." → promise → product (drop-off, barriers, privacy, sources) → AI beat → funder keywords → benefit → ask → "Care. For Every Zip Code".
 
 ## Words
 - Plain words, one idea per line, 12 words or fewer. `tools/voice.py` blocks longer lines and banned words.
@@ -29,6 +29,11 @@ Creator-style, after Riley Brown and Shawn Kanungo: hook in 2 seconds, one bold 
 ## Honesty
 - Figures are illustrative: keep the "Illustrative figures" tag on data screens and the line on the end card. Never say "Sample County" publicly.
 - Never present invented data as real. Never imply a county or partner relationship that does not exist.
+
+## Music and look
+- Music: original score from `tools/score.py` on VSCO-2-CE samples (CC0). No library tracks with unclear licenses.
+- Cinematic: letterbox in the dark opening, light grain, slow push-ins, words come into focus as spoken. Keep the white ground clean.
+- Say "AI" as one word in voice scripts. "A I" with a space is read as "uh-eye".
 
 ## Voice and sound licensing
 - Final voice and sound effects must be cleared for commercial use. The ElevenLabs Free tier is not; it needs a paid plan.

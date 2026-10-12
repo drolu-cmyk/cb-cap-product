@@ -84,6 +84,21 @@
       ]
     },
     {
+      "id": "rebuild",
+      "pre": 0.2,
+      "post": 0.5,
+      "lines": [
+        {
+          "id": "R1",
+          "text": "Counties are rebuilding for the age of AI."
+        },
+        {
+          "id": "R2",
+          "text": "Public health can't be left out."
+        }
+      ]
+    },
+    {
       "id": "promise",
       "pre": 0.4,
       "post": 0.6,
@@ -146,8 +161,7 @@
       "lines": [
         {
           "id": "A1",
-          "text": "AI writes the first draft of your report.",
-          "say": "A I writes the first draft of your report."
+          "text": "AI writes the first draft of your report."
         },
         {
           "id": "A2",
@@ -240,12 +254,6 @@
       "gain": -12
     },
     {
-      "file": "impact.mp3",
-      "at": "promise",
-      "offset": 0.3,
-      "gain": -5
-    },
-    {
       "file": "whoosh.mp3",
       "at": "where",
       "offset": -0.2,
@@ -256,12 +264,6 @@
       "at": "fund",
       "offset": -0.2,
       "gain": -14
-    },
-    {
-      "file": "impact.mp3",
-      "at": "tagline",
-      "offset": 0.15,
-      "gain": -7
     }
   ]
 }

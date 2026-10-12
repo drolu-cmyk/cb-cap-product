@@ -29,6 +29,7 @@ Captions are burned in, because most social viewers watch with the sound off.
 | Barriers | No ride. / A clinic that closes before your shift ends. / Forms too hard to read. / A six-week wait. / No one who speaks your language. | Each line labeled: Transportation, Work hours, Health literacy, Wait times, Language access. Real-world sound under the first four. |
 | Reframe | We count the people who show up. Not the ones who never made it. | "Barriers to care", with the five barriers marked "not counted" |
 | Scale | Six in ten local health departments serve fewer than 50,000 people. Small teams. Big jobs. | 6 in 10, waffle chart, NACCHO source |
+| Every county's next version | Counties are rebuilding for the age of AI. Public health can't be left out. | Big type, white ground, letterbox opens |
 | Promise | CB-CAP shows where care breaks, so you know what to fix first. | |
 | Product | See where people drop off on the way to care. / See which barriers stop them, by neighborhood. / Small numbers stay hidden. Privacy comes first. / Every number shows where it came from. | The five opening barriers appear again, now counted |
 | AI | AI writes the first draft of your report. / It never sees private data. It never makes up numbers. / A person checks every word before it goes out. | Report marked "Drafted with AI" and "Needs a person"; "AI never sees private counts · Numbers are counted, not generated"; a person approves |
@@ -73,7 +74,18 @@ Captions are burned in, because most social viewers watch with the sound off.
     - a busy signal
   - Production sounds: a low impact under the promise and the sign-off, soft transitions, cursor clicks, and a stamp when the report is approved.
   - Cue times are in `script.json`. The page adds the clicks.
-- **No music yet.** The ElevenLabs connection used here can't make music. Add the full ElevenLabs connector (`https://api.elevenlabs.io/v1/mcp`) or supply a licensed track, and it goes under the voice.
+- **Music:** an original score by `tools/score.py`, played on real recorded instruments: upright piano, cello, viola and violin sections, contrabass, harp and timpani.
+  - The samples come from VS Chamber Orchestra Community Edition, CC0 1.0 (public domain: commercial use allowed, no credit needed).
+  - Shape: the opening has a low drone, one piano note per barrier, and a timpani roll into the reframe.
+  - The strings move from D minor to F major at "age of AI". Timpani and a full chord land on the promise.
+  - The product section has a steady piano pulse. The music lifts into the ask and resolves under the tagline.
+  - It dips about 10 dB whenever the voice speaks.
+  - Get the samples with `git clone --filter=blob:none --sparse https://github.com/sgossner/VSCO-2-CE`, then run `VSCO_DIR=... python tools/score.py`.
+- **Look:**
+  - Widescreen letterbox bars during the dark opening, opening up when the story turns.
+  - Light film grain throughout.
+  - Slow push-ins on the big type.
+  - Each word comes into focus as it is spoken.
 - **License:** the voice and sound effects were generated on the connected ElevenLabs account. Commercial use depends on that account's plan, so confirm it before paid promotion.
 - **Fonts:** Newsreader and Source Sans 3, under the SIL Open Font License (`assets/fonts/OFL.txt`).
 

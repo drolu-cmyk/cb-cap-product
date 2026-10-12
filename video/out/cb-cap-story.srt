@@ -39,49 +39,57 @@ Six in ten local health departments serve fewer than 50,000 people.
 Small teams. Big jobs.
 
 11
-00:00:27,245 --> 00:00:30,760
-CB-CAP shows where care breaks, so you know what to fix first.
+00:00:27,045 --> 00:00:29,591
+Counties are rebuilding for the age of AI.
 
 12
-00:00:32,140 --> 00:00:34,407
-See where people drop off on the way to care.
+00:00:29,971 --> 00:00:31,797
+Public health can't be left out.
 
 13
-00:00:35,587 --> 00:00:37,874
-See which barriers stop them, by neighborhood.
+00:00:32,877 --> 00:00:36,392
+CB-CAP shows where care breaks, so you know what to fix first.
 
 14
-00:00:39,454 --> 00:00:42,490
-Small numbers stay hidden. Privacy comes first.
+00:00:37,772 --> 00:00:40,039
+See where people drop off on the way to care.
 
 15
-00:00:43,866 --> 00:00:45,904
-Every number shows where it came from.
+00:00:41,219 --> 00:00:43,506
+See which barriers stop them, by neighborhood.
 
 16
-00:00:47,184 --> 00:00:49,459
-AI writes the first draft of your report.
+00:00:45,086 --> 00:00:48,122
+Small numbers stay hidden. Privacy comes first.
 
 17
-00:00:49,889 --> 00:00:53,217
-It never sees private data. It never makes up numbers.
+00:00:49,497 --> 00:00:51,535
+Every number shows where it came from.
 
 18
-00:00:53,637 --> 00:00:56,290
-A person checks every word before it goes out.
+00:00:52,815 --> 00:00:55,284
+AI writes the first draft of your report.
 
 19
-00:00:57,670 --> 00:01:01,320
-Built for health equity, rural health, and small teams doing more.
+00:00:55,714 --> 00:00:59,042
+It never sees private data. It never makes up numbers.
 
 20
-00:01:02,600 --> 00:01:05,303
-Walk into your budget meeting with real numbers.
+00:00:59,462 --> 00:01:02,115
+A person checks every word before it goes out.
 
 21
-00:01:06,170 --> 00:01:10,308
-Bring CB-CAP to your county. Talk to the SozoRock Foundation.
+00:01:03,495 --> 00:01:07,145
+Built for health equity, rural health, and small teams doing more.
 
 22
-00:01:11,088 --> 00:01:12,831
+00:01:08,425 --> 00:01:11,128
+Walk into your budget meeting with real numbers.
+
+23
+00:01:11,995 --> 00:01:16,133
+Bring CB-CAP to your county. Talk to the SozoRock Foundation.
+
+24
+00:01:16,913 --> 00:01:18,656
 Care. For every zip code.

@@ -55,7 +55,9 @@ function mixAudio(cues, duration) {
   } else {
     fs.mkdirSync(path.join(ROOT, "out"), { recursive: true });
     const out = path.join(ROOT, "out", NAME + ".mp4");
-    const mix = mixAudio(await page.evaluate(() => window.sfxCues()), duration);
+    const cues = await page.evaluate(() => window.sfxCues());
+    if (fs.existsSync(path.join(ROOT, "build", "music.wav"))) cues.push({ file: "build/music.wav", t: 0, gain: 0 });
+    const mix = mixAudio(cues, duration);
     const ff = spawn("ffmpeg", ["-y", "-loglevel", "error",
       "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
       "-i", mix,

@@ -142,6 +142,8 @@ body.v #rbox{font-size:38px;min-height:430px}
 #rbox u{text-decoration:none;border-bottom:3px solid var(--accent)}
 #rlog{font:22px/1.7 ui-monospace,Menlo,monospace;color:var(--muted);opacity:0;margin-top:18px}
 body.v #rlog{font-size:27px}
+#grain{position:absolute;inset:0;width:100%;height:100%;z-index:40;pointer-events:none;opacity:.07}
+.lb{position:absolute;left:0;right:0;height:0;background:#000;z-index:35}#lbT{top:0}#lbB{bottom:0}
 #cursor{position:absolute;width:38px;height:50px;z-index:10;opacity:0}
 #ring{position:absolute;width:60px;height:60px;border-radius:50%;border:3px solid var(--accent);z-index:9;opacity:0;margin:-30px 0 0 -30px}
 </style>
@@ -197,6 +199,8 @@ body.v #rlog{font-size:27px}
 <svg id="cursor" viewBox="0 0 34 44"><path d="M2 2 L2 36 L11 28 L17 42 L23 39 L17 26 L30 26 Z" fill="#0a1b2b" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg>
 <div id="ring"></div>
 <div id="low"><p id="lowTxt"></p></div>
+<div class="lb" id="lbT"></div><div class="lb" id="lbB"></div>
+<canvas id="grain" width="960" height="540"></canvas>
 
 <script src="build/timeline.js"></script>
 <script>
@@ -214,7 +218,7 @@ const EV=[["Food insecurity, past 12 months",15.8,12.4,19.6,2023],["Loneliness",
 const KEYS_FUND=[["Health equity",1],["Rural health",1],["Health access"],["Wait times"],["Transportation"],["Language access"],["Health literacy"],["Workforce capacity",1],["Public health data"],["Privacy"],["AI with people in charge",1],["Responsible AI"]];
 const TABS=[["where","Overview"],["barriers","Barriers"],["hidden","Areas"],["source","Evidence"],["plan","Plan"],["report","Report"]];
 const APP=["where","barriers","hidden","source","report"];
-const HERO=["hook","barriers_open","turn","promise","benefit"];
+const HERO=["hook","barriers_open","turn","rebuild","promise","benefit"];
 const DARK_END="turn";
 const ZOOM={where:"wFun",barriers:"brRows",hidden:"ta-H",source:"evTip",report:"rbox"};
 
@@ -285,13 +289,19 @@ const activePane=t=>APP.reduce((k,id)=>t>=clickAt(id)?id:k,APP[0]);
 function words(el,line,t,dim){
   if(el.dataset.id!==line.id){el.dataset.id=line.id;el.innerHTML=line.words.map(w=>`<span>${w[0]}</span>`).join(" ");}
   [...el.children].forEach((s,k)=>{const [,a,b]=line.words[k];const on=t>=a-.04,cur=on&&t<b+.06;
-    s.style.opacity=on?1:dim;s.style.color=cur?(onDark(t)?"var(--accent-d)":"var(--accent)"):"";
+    s.style.opacity=on?1:dim;s.style.filter=on?`blur(${(1-eo(p(t,a-.04,.22)))*7}px)`:"none";s.style.color=cur?(onDark(t)?"var(--accent-d)":"var(--accent)"):"";
     const pop=p(t,a-.04,.14);s.style.transform=on?`translateY(${(1-eo(pop))*10}px)`:"none";});
 }
 const onDark=t=>t<SC[DARK_END].end-.05;
 
 function render(t){
   $("dark").style.opacity=onDark(t)?1:0;
+  // cinematic: letterbox while the story is dark, opening up when it turns; film grain throughout
+  const lb=(V?90:138)*(1-ez(p(t,SC.context.start-.2,.9)))*Math.min(1,p(t,.0,.6)+1);
+  $("lbT").style.height=$("lbB").style.height=lb+"px";
+  { const g=$("grain"),x=g.getContext("2d"),img=x.createImageData(g.width,g.height);let s=(Math.floor(t*30)*2654435761)>>>0;
+    for(let i=0;i<img.data.length;i+=4){s^=s<<13;s^=s>>>17;s^=s<<5;const n=(s>>>0)&255,v=onDark(t)?n>>2:255-(n>>3);img.data[i]=img.data[i+1]=img.data[i+2]=v;img.data[i+3]=255;}
+    x.putImageData(img,0,0);g.style.opacity=onDark(t)?.35:.22;g.style.mixBlendMode=onDark(t)?"screen":"multiply"; }
   ["context","fund","cta"].forEach(id=>$(id).style.opacity=cut(t,SC[id]));
   $("tagline").style.opacity=cut(t,SC.tagline,true);
   const inApp=t>=SC.where.start&&t<SC.report.end;
@@ -300,8 +310,8 @@ function render(t){
   const line=LINES.find((l,i)=>t>=l.start-.12&&t<(LINES[i+1]?LINES[i+1].start-.12:l.end+.6));
   const hero=line&&HERO.includes(line.scene)&&t<SC[line.scene].end;
   $("hero").style.opacity=hero?1:0;$("low").style.opacity=(!hero&&line&&line.scene!=="tagline"&&t<SC[line.scene].end)?1:0;
-  if(line&&hero){words($("heroTxt"),line,t,0);$("heroTxt").style.color=onDark(t)?"#fff":"var(--ink)";
-    const kick={promise:"CB-CAP",turn:"Barriers to care"}[line.scene]||"";
+  if(line&&hero){words($("heroTxt"),line,t,0);$("hero").style.transform=`scale(${1+.035*p(t,line.start-.1,line.end-line.start+1.2)})`;$("hero").style.transformOrigin="30% 50%";$("heroTxt").style.color=onDark(t)?"#fff":"var(--ink)";
+    const kick={promise:"CB-CAP",turn:"Barriers to care",rebuild:"Every county's next version"}[line.scene]||"";
     $("heroTag").textContent=line.tag?"Barrier · "+line.tag:kick;
     $("heroTag").style.color=onDark(t)?"var(--accent-d)":"var(--accent)";$("heroTag").style.opacity=line.tag||kick?eo(p(t,line.start-.1,.25)):0;}
   if(line&&!hero){words($("lowTxt"),line,t,.18);$("lowTxt").style.color="var(--ink)";}

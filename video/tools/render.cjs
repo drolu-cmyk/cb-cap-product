@@ -37,7 +37,7 @@ const exe = process.env.CHROMIUM || (fs.existsSync("/opt/pw-browsers/chromium-11
       "-i", path.join(ROOT, "build", "voice.wav"),
       "-af", "loudnorm=I=-16:TP=-1.5:LRA=11,apad",
       "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-tune", "stillimage",
-      "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-shortest", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
+      "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-ac", "2", "-shortest", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
     const frames = Math.ceil(duration * FPS);
     for (let i = 0; i < frames; i++) {
       await page.evaluate(t => window.render(t), i / FPS);

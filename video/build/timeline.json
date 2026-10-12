@@ -1,0 +1,209 @@
+{
+ "duration": 84.147,
+ "scenes": [
+  {
+   "id": "who",
+   "start": 0.0,
+   "end": 7.99,
+   "lines": [
+    {
+     "id": "L1",
+     "text": "In a small county, the health department is a few people.",
+     "start": 0.8,
+     "end": 4.063
+    },
+    {
+     "id": "L2",
+     "text": "They answer for every number in the yearly report.",
+     "start": 4.513,
+     "end": 7.29
+    }
+   ]
+  },
+  {
+   "id": "frustration",
+   "start": 7.99,
+   "end": 16.828,
+   "lines": [
+    {
+     "id": "L3",
+     "text": "I know what my community needs.",
+     "start": 8.59,
+     "end": 10.365
+    },
+    {
+     "id": "L4",
+     "text": "Proving it means digging through reports and spreadsheets.",
+     "start": 10.815,
+     "end": 13.74
+    },
+    {
+     "id": "L5",
+     "text": "And every year, I start over.",
+     "start": 14.19,
+     "end": 15.928
+    }
+   ]
+  },
+  {
+   "id": "insight",
+   "start": 16.828,
+   "end": 28.307,
+   "lines": [
+    {
+     "id": "L6",
+     "text": "Here is what the yearly numbers usually miss.",
+     "start": 17.428,
+     "end": 20.029
+    },
+    {
+     "id": "L7",
+     "text": "Residents look for help. Many get referred.",
+     "start": 20.479,
+     "end": 23.084
+    },
+    {
+     "id": "L8",
+     "text": "Far fewer complete the step.",
+     "start": 23.534,
+     "end": 25.123
+    },
+    {
+     "id": "L9",
+     "text": "Somewhere on the way, care breaks.",
+     "start": 25.573,
+     "end": 27.407
+    }
+   ]
+  },
+  {
+   "id": "promise",
+   "start": 28.307,
+   "end": 32.373,
+   "lines": [
+    {
+     "id": "L10",
+     "text": "Know where care breaks. Show the proof.",
+     "start": 28.807,
+     "end": 30.973
+    }
+   ]
+  },
+  {
+   "id": "overview",
+   "start": 32.373,
+   "end": 38.662,
+   "lines": [
+    {
+     "id": "L11",
+     "text": "See where residents get stuck, by kind of help, area and season.",
+     "start": 33.373,
+     "end": 37.062
+    }
+   ]
+  },
+  {
+   "id": "barriers",
+   "start": 38.662,
+   "end": 43.231,
+   "lines": [
+    {
+     "id": "L12",
+     "text": "See which barriers come up most often.",
+     "start": 39.462,
+     "end": 41.431
+    }
+   ]
+  },
+  {
+   "id": "areas",
+   "start": 43.231,
+   "end": 48.616,
+   "lines": [
+    {
+     "id": "L13",
+     "text": "Small counts are hidden, so no one can be identified.",
+     "start": 44.031,
+     "end": 47.216
+    }
+   ]
+  },
+  {
+   "id": "evidence",
+   "start": 48.616,
+   "end": 56.967,
+   "lines": [
+    {
+     "id": "L14",
+     "text": "Every figure names its source, its year and its range.",
+     "start": 49.416,
+     "end": 52.56
+    },
+    {
+     "id": "L15",
+     "text": "Missing stays missing. It never becomes a zero.",
+     "start": 53.01,
+     "end": 55.967
+    }
+   ]
+  },
+  {
+   "id": "plan",
+   "start": 56.967,
+   "end": 61.88,
+   "lines": [
+    {
+     "id": "L16",
+     "text": "Each action in your plan links to its evidence.",
+     "start": 57.767,
+     "end": 60.38
+    }
+   ]
+  },
+  {
+   "id": "report",
+   "start": 61.88,
+   "end": 70.459,
+   "lines": [
+    {
+     "id": "L17",
+     "text": "Your yearly report starts from your plan, not a blank page.",
+     "start": 62.68,
+     "end": 66.093
+    },
+    {
+     "id": "L18",
+     "text": "Every draft waits for a person to approve it.",
+     "start": 66.543,
+     "end": 69.059
+    }
+   ]
+  },
+  {
+   "id": "trust",
+   "start": 70.459,
+   "end": 75.814,
+   "lines": [
+    {
+     "id": "L19",
+     "text": "Sources shown. Nobody identifiable. People decide.",
+     "start": 70.959,
+     "end": 74.814
+    }
+   ]
+  },
+  {
+   "id": "cta",
+   "start": 75.814,
+   "end": 84.147,
+   "lines": [
+    {
+     "id": "L20",
+     "text": "Want this for your county? Talk to the SozoRock Foundation.",
+     "start": 76.414,
+     "end": 80.147
+    }
+   ]
+  }
+ ]
+}

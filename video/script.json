@@ -1,0 +1,173 @@
+{
+  "title": "CB-CAP product story",
+  "voice": "af_heart",
+  "speed": 0.94,
+  "gap": 0.45,
+  "scenes": [
+    {
+      "id": "who",
+      "pre": 0.8,
+      "post": 0.7,
+      "lines": [
+        {
+          "id": "L1",
+          "text": "In a small county, the health department is a few people."
+        },
+        {
+          "id": "L2",
+          "text": "They answer for every number in the yearly report."
+        }
+      ]
+    },
+    {
+      "id": "frustration",
+      "pre": 0.6,
+      "post": 0.9,
+      "lines": [
+        {
+          "id": "L3",
+          "text": "I know what my community needs."
+        },
+        {
+          "id": "L4",
+          "text": "Proving it means digging through reports and spreadsheets."
+        },
+        {
+          "id": "L5",
+          "text": "And every year, I start over."
+        }
+      ]
+    },
+    {
+      "id": "insight",
+      "pre": 0.6,
+      "post": 0.9,
+      "lines": [
+        {
+          "id": "L6",
+          "text": "Here is what the yearly numbers usually miss."
+        },
+        {
+          "id": "L7",
+          "text": "Residents look for help. Many get referred."
+        },
+        {
+          "id": "L8",
+          "text": "Far fewer complete the step."
+        },
+        {
+          "id": "L9",
+          "text": "Somewhere on the way, care breaks."
+        }
+      ]
+    },
+    {
+      "id": "promise",
+      "pre": 0.5,
+      "post": 1.4,
+      "lines": [
+        {
+          "id": "L10",
+          "text": "Know where care breaks. Show the proof."
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "pre": 1.0,
+      "post": 1.6,
+      "lines": [
+        {
+          "id": "L11",
+          "text": "See where residents get stuck, by kind of help, area and season."
+        }
+      ]
+    },
+    {
+      "id": "barriers",
+      "pre": 0.8,
+      "post": 1.8,
+      "lines": [
+        {
+          "id": "L12",
+          "text": "See which barriers come up most often."
+        }
+      ]
+    },
+    {
+      "id": "areas",
+      "pre": 0.8,
+      "post": 1.4,
+      "lines": [
+        {
+          "id": "L13",
+          "text": "Small counts are hidden, so no one can be identified."
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "pre": 0.8,
+      "post": 1.0,
+      "lines": [
+        {
+          "id": "L14",
+          "text": "Every figure names its source, its year and its range."
+        },
+        {
+          "id": "L15",
+          "text": "Missing stays missing. It never becomes a zero."
+        }
+      ]
+    },
+    {
+      "id": "plan",
+      "pre": 0.8,
+      "post": 1.5,
+      "lines": [
+        {
+          "id": "L16",
+          "text": "Each action in your plan links to its evidence."
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "pre": 0.8,
+      "post": 1.4,
+      "lines": [
+        {
+          "id": "L17",
+          "text": "Your yearly report starts from your plan, not a blank page."
+        },
+        {
+          "id": "L18",
+          "text": "Every draft waits for a person to approve it."
+        }
+      ]
+    },
+    {
+      "id": "trust",
+      "pre": 0.5,
+      "post": 1.0,
+      "lines": [
+        {
+          "id": "L19",
+          "text": "Sources shown. Nobody identifiable. People decide."
+        }
+      ]
+    },
+    {
+      "id": "cta",
+      "pre": 0.6,
+      "post": 4.0,
+      "lines": [
+        {
+          "id": "L20",
+          "text": "Want this for your county? Talk to the SozoRock Foundation.",
+          "say": "Want this for your county? Talk to the Sozo Rock Foundation."
+        }
+      ]
+    }
+  ]
+}

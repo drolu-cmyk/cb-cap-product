@@ -30,8 +30,9 @@ Captions are burned in, because most social viewers watch with the sound off.
 | Reframe | We count the people who show up. Not the ones who never made it. | "Barriers to care", with the five barriers marked "not counted" |
 | Scale | Six in ten local health departments serve fewer than 50,000 people. Small teams. Big jobs. | 6 in 10, waffle chart, NACCHO source |
 | Promise | CB-CAP shows where care breaks, so you know what to fix first. | |
-| Product | See where people drop off on the way to care. / See which barriers stop them, by neighborhood. / Small numbers stay hidden. Privacy comes first. / Every number shows where it came from. / AI can draft your report. People decide what it says. | The five opening barriers appear again, now counted |
-| Funders | Built for health equity, rural health, and small teams doing more. | Keyword chips: health equity, rural health, health access, wait times, transportation, language access, health literacy, workforce capacity, public health data, privacy, AI with people in charge |
+| Product | See where people drop off on the way to care. / See which barriers stop them, by neighborhood. / Small numbers stay hidden. Privacy comes first. / Every number shows where it came from. | The five opening barriers appear again, now counted |
+| AI | AI writes the first draft of your report. / It never sees private data. It never makes up numbers. / A person checks every word before it goes out. | Report marked "Drafted with AI" and "Needs a person"; "AI never sees private counts · Numbers are counted, not generated"; a person approves |
+| Funders | Built for health equity, rural health, and small teams doing more. | Keyword chips: health equity, rural health, health access, wait times, transportation, language access, health literacy, workforce capacity, public health data, privacy, AI with people in charge, responsible AI |
 | Benefit | Walk into your budget meeting with real numbers. | |
 | Call to action | Bring CB-CAP to your county. Talk to the SozoRock Foundation. | |
 | Sign-off | Care. For every zip code. | The SozoRock Foundation |
@@ -58,6 +59,7 @@ Captions are burned in, because most social viewers watch with the sound off.
 ## Sound
 
 - **Voice (now): scratch only.** `tools/scratch_voice.py` builds a take with a free local model (Kokoro).
+- **Free final-voice option:** Chatterbox (Resemble AI, reportedly MIT). Its model files are on huggingface.co, which this environment's network blocks. Allow that domain, confirm the license on the model card, then record the take locally.
 - **Voice (final):** the ElevenLabs account connected here is on the Free tier, and ElevenLabs has blocked it for "unusual activity" (likely this cloud environment's proxy). The Free tier also does not allow commercial use and requires credit to ElevenLabs. So:
   - Version 3's ElevenLabs voice and sound effects are not cleared for public posting as things stand.
   - On a paid plan, record the script once.

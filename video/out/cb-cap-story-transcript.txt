@@ -16,7 +16,9 @@ See where people drop off on the way to care.
 See which barriers stop them, by neighborhood.
 Small numbers stay hidden. Privacy comes first.
 Every number shows where it came from.
-AI can draft your report. People decide what it says.
+AI writes the first draft of your report.
+It never sees private data. It never makes up numbers.
+A person checks every word before it goes out.
 Built for health equity, rural health, and small teams doing more.
 Walk into your budget meeting with real numbers.
 Bring CB-CAP to your county. Talk to the SozoRock Foundation.

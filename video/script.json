@@ -142,14 +142,23 @@
     {
       "id": "report",
       "pre": 0.5,
-      "post": 0.8,
+      "post": 0.9,
       "lines": [
         {
-          "id": "X5",
-          "text": "AI can draft your report. People decide what it says.",
-          "say": "A I can draft your report. People decide what it says."
+          "id": "A1",
+          "text": "AI writes the first draft of your report.",
+          "say": "A I writes the first draft of your report."
+        },
+        {
+          "id": "A2",
+          "text": "It never sees private data. It never makes up numbers."
+        },
+        {
+          "id": "A3",
+          "text": "A person checks every word before it goes out."
         }
-      ]
+      ],
+      "gap": 0.25
     },
     {
       "id": "fund",

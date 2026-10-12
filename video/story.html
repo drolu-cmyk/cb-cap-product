@@ -203,6 +203,7 @@ body.v #rlog{font-size:27px}
 const V=new URLSearchParams(location.search).get("format")==="vertical";
 if(V)document.body.classList.add("v");
 document.documentElement.style.setProperty("--tbig",V?"112px":"140px");
+document.documentElement.style.setProperty("--rsafe",V?"30px":"24px");
 
 /* ---------- illustrative data (same figures as the reference prototype) ---------- */
 const ALL={looked:1065,made:612,comp:356,top:"Transportation"};
@@ -210,12 +211,12 @@ const MH={looked:204,made:111,comp:52,top:"No appointment available"};
 const BARR=[["Transportation",132,1],["Cost",112],["No appointment available",107,1],["Paperwork and forms",89,1],["Phone or internet access",75],["Distance",61],["Hours conflict with work",27,1],["Language",22,1]];
 const AREAS=[["A",66],["B",68],["C",53],["D",41],["E",64],["F",39],["G",65],["H",null],["I",67],["J",null],["K",68],["L",52]];
 const EV=[["Food insecurity, past 12 months",15.8,12.4,19.6,2023],["Loneliness",31.0,26.2,36.1,2023],["Depression",20.7,17.5,24.1,2023],["High blood pressure",35.8,31.9,39.9,2023]];
-const KEYS_FUND=[["Health equity",1],["Rural health",1],["Health access"],["Wait times"],["Transportation"],["Language access"],["Health literacy"],["Workforce capacity",1],["Public health data"],["Privacy"],["AI with people in charge",1]];
+const KEYS_FUND=[["Health equity",1],["Rural health",1],["Health access"],["Wait times"],["Transportation"],["Language access"],["Health literacy"],["Workforce capacity",1],["Public health data"],["Privacy"],["AI with people in charge",1],["Responsible AI"]];
 const TABS=[["where","Overview"],["barriers","Barriers"],["hidden","Areas"],["source","Evidence"],["plan","Plan"],["report","Report"]];
 const APP=["where","barriers","hidden","source","report"];
 const HERO=["hook","barriers_open","turn","promise","benefit"];
 const DARK_END="turn";
-const ZOOM={where:"wFun",barriers:"brRows",hidden:"ta-H",source:"evTip",report:"rApprove"};
+const ZOOM={where:"wFun",barriers:"brRows",hidden:"ta-H",source:"evTip",report:"rbox"};
 
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
@@ -258,11 +259,11 @@ pane("report",`<p class="pt">Yearly report, built from your plan</p><p class="ps
 <div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:12px;gap:16px"><span class="kick" style="font-size:20px">Challenges and barriers</span><span><span class="chip" style="border-color:var(--accent);color:var(--accent);margin-right:10px">Drafted with AI</span><span class="chip" id="rchip">Needs a person</span></span></div>
 <div id="rbox"></div>
 <div style="display:flex;gap:16px;margin-top:20px"><span class="btn pr" id="rApprove">Approve</span><span class="btn">Edit</span></div>
-<div id="rlog">Approved by the health director · History kept</div>`);
+<div id="rsafe" style="margin-top:16px;font:700 var(--rsafe,24px) var(--sans);color:var(--accent);opacity:0">AI never sees private counts · Numbers are counted, not generated</div><div id="rlog">Approved by the health director · History kept</div>`);
 
 /* ---------- cursor and its sounds ---------- */
 const clickAt=id=>SC[id].start+(id==="barriers"?.75:.4);
-const pickAt=()=>LN.X1.start+1.0, resetAt=()=>SC.barriers.start+.3, approveAt=()=>LN.X5.end-.2;
+const pickAt=()=>LN.X1.start+1.0, resetAt=()=>SC.barriers.start+.3, approveAt=()=>LN.A3.end-.25;
 function keys(){return[
   {t:SC.where.start+.15,el:"tab-where"},{t:clickAt("where"),el:"tab-where",click:1},
   {t:LN.X1.start+.25,el:"fSvc"},{t:LN.X1.start+.4,el:"fSvc",click:1},
@@ -368,11 +369,11 @@ function render(t){
     $("ev0").style.background=`color-mix(in srgb,var(--accent) ${Math.round(a*9)}%,#fff)`; }
 
   // report
-  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.2,LN.X5.start+1.4-clickAt("report"));let left=Math.round(total*k),h="";
+  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.2,LN.A1.end+.2-clickAt("report"));let left=Math.round(total*k),h="";
     RTEXT.forEach(([s,fig])=>{if(left<=0)return;const piece=s.slice(0,left);left-=s.length;h+=fig?`<u>${piece}</u>`:piece;});
     $("rbox").innerHTML=h+(k<1?'<span style="border-left:3px solid var(--ink);margin-left:2px"></span>':"");
     const ok=t>=approveAt();$("rchip").textContent=ok?"Approved":"Needs a person";$("rchip").style.background=ok?"var(--ink)":"none";$("rchip").style.color=ok?"#fff":"var(--ink)";
-    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok);$("rlog").style.opacity=p(t,approveAt()+.15,.3); }
+    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok);$("rlog").style.opacity=p(t,approveAt()+.15,.3);$("rsafe").style.opacity=eo(p(t,LN.A2.start,.3)); }
 
   // punch-in: zoom toward the thing the line is about, then back out
   if(inApp){const sc=SC[ap],target=$(ZOOM[ap]);

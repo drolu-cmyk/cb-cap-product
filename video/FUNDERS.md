@@ -15,7 +15,7 @@ Use the same words in grant summaries, so the video and the proposal match.
 | Long wait times | No-appointment barrier counted | "A six-week wait." |
 | Public health data modernization / system intelligence | Every number has a source, year and range; one shared record over years | "Every number shows where it came from." |
 | Privacy | Small counts hidden on the server before anyone sees them | "Small numbers stay hidden. Privacy comes first." |
-| AI and society / responsible AI | AI drafts, a person approves; every change logged | "AI can draft your report. People decide what it says." |
+| AI and society / responsible AI | AI drafts; it never sees private counts and never makes up numbers; a person approves; every change logged | "AI writes the first draft of your report." / "It never sees private data. It never makes up numbers." / "A person checks every word before it goes out." |
 | Research | De-identified pathway counts across counties and years (once counties opt in) | Not in the video yet. Add once data-sharing terms exist. |
 
 ## Funding context checked so far (October 2026)

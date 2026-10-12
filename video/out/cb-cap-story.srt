@@ -1,79 +1,59 @@
 1
-00:00:00,800 --> 00:00:04,363
-In a small county, the health department is a few people.
+00:00:00,300 --> 00:00:04,908
+Picture a county where 612 residents were referred for help.
 
 2
-00:00:04,513 --> 00:00:07,590
-They answer for every number in the yearly report.
+00:00:05,008 --> 00:00:07,951
+256 of them never got there.
 
 3
-00:00:08,590 --> 00:00:10,665
-I know what my community needs.
+00:00:08,851 --> 00:00:13,054
+Most local health departments serve fewer than 50,000 people.
 
 4
-00:00:10,815 --> 00:00:14,040
-Proving it means digging through reports and spreadsheets.
+00:00:13,754 --> 00:00:17,070
+Their directors are asked to prove what the community needs.
 
 5
-00:00:14,190 --> 00:00:16,228
-And every year, I start over.
+00:00:17,170 --> 00:00:20,682
+But yearly numbers show need, not where people get stuck.
 
 6
-00:00:17,428 --> 00:00:20,329
-Here is what the yearly numbers usually miss.
+00:00:20,782 --> 00:00:24,540
+So every year, the case starts over from a pile of spreadsheets.
 
 7
-00:00:20,479 --> 00:00:23,384
-Residents look for help. Many get referred.
+00:00:25,440 --> 00:00:28,402
+CB-CAP. Know where care breaks. Show the proof.
 
 8
-00:00:23,534 --> 00:00:25,423
-Far fewer complete the step.
+00:00:30,102 --> 00:00:34,093
+See where residents drop off, by kind of help, area and season.
 
 9
-00:00:25,573 --> 00:00:27,707
-Somewhere on the way, care breaks.
+00:00:36,293 --> 00:00:39,811
+Small counts stay hidden, so no one can be identified.
 
 10
-00:00:28,807 --> 00:00:31,273
-Know where care breaks. Show the proof.
+00:00:41,611 --> 00:00:45,056
+Every figure carries its source, its year and its range.
 
 11
-00:00:33,373 --> 00:00:37,362
-See where residents get stuck, by kind of help, area and season.
+00:00:46,756 --> 00:00:49,279
+Your plan becomes your yearly report.
 
 12
-00:00:39,462 --> 00:00:41,731
-See which barriers come up most often.
+00:00:49,379 --> 00:00:51,487
+A person approves every word.
 
 13
-00:00:44,031 --> 00:00:47,516
-Small counts are hidden, so no one can be identified.
+00:00:52,787 --> 00:00:56,796
+Walk into the budget meeting with proof, not a pile of spreadsheets.
 
 14
-00:00:49,416 --> 00:00:52,860
-Every figure names its source, its year and its range.
-
-15
-00:00:53,010 --> 00:00:56,267
-Missing stays missing. It never becomes a zero.
-
-16
-00:00:57,767 --> 00:01:00,680
-Each action in your plan links to its evidence.
-
-17
-00:01:02,680 --> 00:01:06,393
-Your yearly report starts from your plan, not a blank page.
-
-18
-00:01:06,543 --> 00:01:09,359
-Every draft waits for a person to approve it.
-
-19
-00:01:10,959 --> 00:01:15,114
+00:00:57,596 --> 00:01:01,729
 Sources shown. Nobody identifiable. People decide.
 
-20
-00:01:16,414 --> 00:01:20,447
+15
+00:01:02,629 --> 00:01:06,611
 Want this for your county? Talk to the SozoRock Foundation.

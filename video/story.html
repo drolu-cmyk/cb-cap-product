@@ -3,380 +3,375 @@
 <head>
 <meta charset="utf-8">
 <title>CB-CAP story</title>
-<!-- 1920x1080 composition. Every frame is a pure function of time: render(t).
-     Timing comes from build/timeline.js, written by tools/voice.py. -->
+<!-- One composition, two formats: 1920x1080 (default) and 1080x1920 (?format=vertical).
+     Every frame is a pure function of time: render(t). Timing comes from build/timeline.js. -->
 <style>
 @font-face{font-family:"Newsreader";src:url(assets/fonts/Newsreader.ttf) format("truetype");font-weight:200 800}
 @font-face{font-family:"Source Sans 3";src:url(assets/fonts/SourceSans3.ttf) format("truetype");font-weight:200 900}
 :root{--bg:#fff;--panel:#f2f5f9;--ink:#0a1b2b;--muted:#52606e;--line:#d3dae2;--accent:#1f4fd8;--soft:#c3cedc;
 --serif:"Newsreader",Georgia,serif;--sans:"Source Sans 3",system-ui,sans-serif;
---hatch:repeating-linear-gradient(135deg,var(--soft) 0 7px,transparent 7px 14px)}
+--hatch:repeating-linear-gradient(135deg,var(--soft) 0 8px,transparent 8px 16px);
+--W:1920px;--H:1080px;--ctop:0px;--cbot:140px;--padx:200px}
+body.v{--W:1080px;--H:1920px;--ctop:150px;--cbot:520px;--padx:70px}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:var(--bg);color:var(--ink);font:400 30px/1.4 var(--sans)}
-#strip{position:absolute;inset:0 0 auto 0;height:44px;background:var(--ink);color:#fff;font:600 17px/44px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-align:center}
-#stage{position:absolute;left:0;right:0;top:44px;height:886px}
-#cap{position:absolute;left:0;right:0;bottom:0;height:150px;display:flex;align-items:center;justify-content:center}
-#cap span{font:600 38px/1.25 var(--sans);max-width:1500px;text-align:center}
-.scene{position:absolute;inset:0;opacity:0}
-.kick{font:700 22px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-.big{font:600 104px/1.08 var(--serif);letter-spacing:-.01em}
-.mid{font:600 64px/1.15 var(--serif)}
-.src{font-size:20px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
-.chip{display:inline-block;font:700 18px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border:2px solid var(--ink)}
-.center{display:flex;flex-direction:column;justify-content:center;padding:0 220px}
+html,body{width:var(--W);height:var(--H);overflow:hidden;background:var(--bg);color:var(--ink);font:400 30px/1.4 var(--sans)}
+#content{position:absolute;left:0;right:0;top:var(--ctop);bottom:var(--cbot)}
+#cap{position:absolute;left:0;right:0;bottom:0;height:140px;display:flex;align-items:center;justify-content:center;padding:0 60px}
+body.v #cap{top:1410px;bottom:auto;height:230px}
+#cap span{font:600 40px/1.25 var(--sans);max-width:1500px;text-align:center}
+body.v #cap span{font-size:50px}
+#tag{position:absolute;right:36px;top:28px;font:700 18px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:2px solid var(--soft);padding:5px 12px;z-index:20;opacity:0}
+body.v #tag{top:92px;font-size:24px;right:40px}
+.scene{position:absolute;inset:0;opacity:0;padding:0 var(--padx)}
+.center{display:flex;flex-direction:column;justify-content:center}
+.kick{font:700 24px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+body.v .kick{font-size:30px}
+.big{font:600 108px/1.06 var(--serif);letter-spacing:-.01em}
+body.v .big{font-size:100px}
+.src{font-size:22px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+body.v .src{font-size:28px}
+.chip{display:inline-block;font:700 20px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:5px 14px;border:2px solid var(--ink)}
+body.v .lonly{display:none!important}
 
-/* who */
-#who .big div{opacity:0}
-/* frustration */
-#quote{font:400 66px/1.3 var(--serif);border-left:6px solid var(--accent);padding-left:44px;max-width:1300px}
-#quote .w{opacity:.12}
-#attrib{margin:34px 0 0 50px;font-size:26px;color:var(--muted)}
-/* insight */
-.fn{display:grid;grid-template-columns:330px 1fr 190px;align-items:center;gap:28px;margin:22px 0}
-.fn .lab{font-size:32px}
-.fn .tr{height:64px;background:var(--panel);position:relative}
-.fn .fl{position:absolute;inset:0 auto 0 0;background:var(--accent)}
-.fn .v{font:600 52px var(--serif);font-variant-numeric:tabular-nums}
-#gap{position:absolute;height:64px;border:3px solid var(--ink);border-left:0;background:var(--hatch);opacity:0}
-#gapLab{position:absolute;font:600 34px var(--serif);opacity:0;white-space:nowrap}
+/* hook */
+#hN{display:block;font:600 280px/0.95 var(--serif);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+body.v #hN{font-size:300px}
+#hNl{font:600 52px/1.2 var(--serif);margin:10px 0 50px}
+.split{display:flex;height:96px;width:100%;margin-bottom:120px}
+.split div{position:relative}
+#hGot{background:var(--accent)}#hLost{background:var(--hatch);border:4px solid var(--ink);border-left:0}
+.split b{position:absolute;top:110px;font:600 64px/1 var(--serif);white-space:nowrap}.split span{position:absolute;top:182px;font-size:28px;color:var(--muted);white-space:nowrap}
+#hLost b,#hLost span{left:24px}#hGot b,#hGot span{left:0}
+body.v .split b{font-size:72px}body.v .split span{font-size:32px;top:190px}
+/* context */
+#ctxWrap{display:grid;grid-template-columns:1fr 520px;gap:90px;align-items:center}
+body.v #ctxWrap{grid-template-columns:1fr;gap:60px}
+#ctxNum{font:600 230px/0.95 var(--serif);color:var(--accent)}
+#ctxTxt{font:600 54px/1.2 var(--serif);margin:16px 0 30px}
+body.v #ctxTxt{font-size:60px}
+#waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:8px}
+body.v #waffle{width:640px}
+#waffle i{aspect-ratio:1;background:var(--panel);opacity:0}#waffle i.on{background:var(--accent)}
+/* director */
+#grid{position:absolute;inset:0;overflow:hidden;font:400 22px/44px ui-monospace,Menlo,monospace;color:#e1e6ec;white-space:pre}
+#director .lines{position:relative}
+#director .lines div{font:600 84px/1.1 var(--serif);opacity:0;margin:18px 0;background:var(--bg);display:inline-block;padding:4px 14px 8px;margin-left:-14px}
+body.v #director .lines div{font-size:82px}
+#director .lines div.m{color:var(--muted)}
 /* promise */
-#promise .big div{opacity:0}
-/* app frame */
-#app{position:absolute;left:80px;right:80px;top:34px;bottom:10px;border:2px solid var(--ink);opacity:0;background:var(--bg)}
+#promise .big div,#benefit .big div{opacity:0}
+/* app */
+#app{position:absolute;left:70px;right:70px;top:40px;bottom:16px;border:2px solid var(--ink);opacity:0;background:var(--bg);overflow:hidden}
+body.v #app{left:36px;right:36px;top:30px;bottom:0}
 #ahead{display:flex;justify-content:space-between;align-items:baseline;padding:16px 28px;border-bottom:2px solid var(--ink)}
-#ahead b{font:600 34px var(--serif)}#ahead small{font:700 16px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:14px}
-#ahead span{font-size:22px;color:var(--muted)}
+#ahead b{font:600 36px var(--serif)}#ahead small{font:700 17px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:14px}
+#ahead span{font-size:24px;color:var(--muted)}
+body.v #ahead small{display:none}
 #tabs{display:flex;background:var(--panel);border-bottom:1px solid var(--ink)}
-.tab{font:600 24px var(--sans);padding:14px 26px;color:var(--muted);border-bottom:4px solid transparent}
+.tab{font:600 26px var(--sans);padding:14px 26px;color:var(--muted);border-bottom:5px solid transparent}
+body.v .tab{font-size:30px;padding:16px 24px}
 .tab.on{color:var(--ink);background:var(--bg);border-bottom-color:var(--accent)}
 #fbar{display:flex;gap:26px;align-items:end;background:var(--panel);padding:14px 28px;border-bottom:1px solid var(--line)}
-.fld label{display:block;font:700 15px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.sel{font:600 22px var(--sans);border:2px solid var(--ink);background:var(--bg);padding:6px 40px 6px 12px;min-width:230px;position:relative}
-.sel:after{content:"";position:absolute;right:14px;top:50%;width:10px;height:10px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg)}
-.btn{font:700 22px var(--sans);border:2px solid var(--ink);padding:6px 18px;background:var(--bg)}
+.fld label{display:block;font:700 16px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+body.v .fld label{font-size:22px}
+.sel{font:600 24px var(--sans);border:2px solid var(--ink);background:var(--bg);padding:7px 44px 7px 14px;min-width:250px;position:relative}
+body.v .sel{font-size:32px;min-width:420px}
+.sel:after{content:"";position:absolute;right:16px;top:50%;width:11px;height:11px;border-right:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:translateY(-70%) rotate(45deg)}
+.btn{font:700 24px var(--sans);border:2px solid var(--ink);padding:7px 20px;background:var(--bg);display:inline-block}
+body.v .btn{font-size:32px;padding:10px 26px}
 .btn.pr{background:var(--accent);border-color:var(--accent);color:#fff}
-#dd{position:absolute;background:var(--bg);border:2px solid var(--ink);font:600 22px var(--sans);z-index:5;opacity:0;box-shadow:0 8px 0 rgba(10,27,43,.06)}
-#dd div{padding:7px 14px}#dd .hov{background:var(--accent);color:#fff}
-.pane{position:absolute;left:0;right:0;bottom:0;padding:26px 30px;opacity:0}
-.pt{font:600 40px/1.2 var(--serif)}.ps{font-size:22px;color:var(--muted);margin:4px 0 18px}
-.sub{font:700 17px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-bottom:22px}
-.kp{border-top:3px solid var(--ink);padding-top:8px}.kp b{display:block;font:600 58px/1.05 var(--serif);font-variant-numeric:tabular-nums}.kp b.sm{font-size:34px;line-height:1.7}.kp span{font-size:20px;color:var(--muted)}
-.two{display:grid;grid-template-columns:1.05fr 1fr;gap:50px}
-.bar{display:grid;grid-template-columns:300px 1fr 110px;gap:16px;align-items:center;margin:9px 0;font-size:23px}
-.bar .tr{height:26px;background:var(--panel);position:relative}
-.bar .fl{position:absolute;inset:0 auto 0 0;background:var(--accent)}
-.bar .fl.h{background:var(--hatch);width:100%!important}
-.bar .v{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
-.bar.hl span:first-child{color:var(--accent);font-weight:700}
-.tiles{display:grid;grid-template-columns:repeat(4,170px);gap:8px}
-.tile{height:116px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0}
-.tile b{font:700 16px var(--sans);letter-spacing:.08em;text-transform:uppercase}.tile span{font:600 40px var(--serif);font-variant-numeric:tabular-nums}.tile small{font-size:16px}
-.tile.hid{background:var(--hatch);color:var(--muted)}.tile.hid span{font:600 22px var(--sans)}
-#callout{border-left:6px solid var(--ink);padding:6px 0 6px 22px;font:600 34px/1.3 var(--serif);opacity:0}
-.iv{display:grid;grid-template-columns:470px 1fr 330px;gap:20px;align-items:center;margin:9px 0;font-size:23px;opacity:0}
-.iv .tr{height:30px;position:relative;background:linear-gradient(90deg,transparent calc(25% - 1px),var(--line) 0 calc(25% + 1px),transparent 0 calc(50% - 1px),var(--line) 0 calc(50% + 1px),transparent 0 calc(75% - 1px),var(--line) 0 calc(75% + 1px),transparent 0)}
-.iv .ln{position:absolute;top:13px;height:4px;background:var(--ink)}.iv .dt{position:absolute;top:5px;width:20px;height:20px;border-radius:50%;background:var(--accent);margin-left:-10px}
+#dd{position:absolute;background:var(--bg);border:2px solid var(--ink);font:600 24px var(--sans);z-index:5;opacity:0}
+body.v #dd{font-size:32px}
+#dd div{padding:8px 14px}#dd .hov{background:var(--accent);color:#fff}
+#panes{position:absolute;left:0;right:0;bottom:0}
+.pane{position:absolute;inset:0;padding:26px 30px;opacity:0}
+body.v .pane{padding:30px 34px}
+.pt{font:600 44px/1.18 var(--serif)}.ps{font-size:24px;color:var(--muted);margin:6px 0 22px}
+body.v .pt{font-size:54px}body.v .ps{font-size:30px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-bottom:26px}
+body.v .kpis{grid-template-columns:1fr 1fr;gap:26px 30px}
+.kp{border-top:3px solid var(--ink);padding-top:8px}.kp b{display:block;font:600 66px/1.05 var(--serif);font-variant-numeric:tabular-nums}.kp b.sm{font-size:36px;line-height:1.85}.kp span{font-size:22px;color:var(--muted)}
+body.v .kp b{font-size:84px}body.v .kp b.sm{font-size:40px;line-height:1.15;padding:10px 0 6px}body.v .kp span{font-size:28px}
+.row{display:grid;grid-template-columns:300px 1fr 200px;grid-template-areas:"lab tr v";gap:8px 20px;align-items:center;margin:14px 0;font-size:28px}
+body.v .row{grid-template-columns:1fr auto;grid-template-areas:"lab v" "tr tr";font-size:34px;margin:20px 0}
+.row .lab{grid-area:lab}.row .v{grid-area:v;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.row .tr{grid-area:tr;height:40px;background:var(--panel);position:relative}
+.row .fl{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.row small{color:var(--muted);font-weight:400;font-size:.75em;margin-left:8px}
+.tiles{display:grid;grid-template-columns:repeat(4,180px);gap:8px}
+body.v .tiles{grid-template-columns:repeat(3,1fr)}
+.tile{height:122px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0}
+body.v .tile{height:112px}
+.tile b{font:700 17px var(--sans);letter-spacing:.08em;text-transform:uppercase}.tile span{font:600 44px var(--serif);font-variant-numeric:tabular-nums}
+body.v .tile b{font-size:20px}body.v .tile span{font-size:46px}
+.tile.hid{background:var(--hatch);color:var(--muted)}.tile.hid span{font:700 26px var(--sans)}
+#areasWrap{display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center}
+body.v #areasWrap{grid-template-columns:1fr;gap:28px}
+#callout{border-left:6px solid var(--ink);padding:6px 0 6px 22px;font:600 38px/1.3 var(--serif);opacity:0}
+body.v #callout{font-size:44px}
+.iv{display:grid;grid-template-columns:440px 1fr 300px;grid-template-areas:"lab tr v";gap:6px 20px;align-items:center;margin:14px 0;font-size:27px;opacity:0}
+body.v .iv{grid-template-columns:1fr auto;grid-template-areas:"lab v" "tr tr";font-size:32px;margin:22px 0}
+.iv>span:first-child{grid-area:lab}.iv>.v{grid-area:v;text-align:right}
+.iv .tr{grid-area:tr;height:30px;position:relative;background:linear-gradient(90deg,transparent calc(25% - 1px),var(--line) 0 calc(25% + 1px),transparent 0 calc(50% - 1px),var(--line) 0 calc(50% + 1px),transparent 0 calc(75% - 1px),var(--line) 0 calc(75% + 1px),transparent 0)}
+.iv .ln{position:absolute;top:13px;height:4px;background:var(--ink)}.iv .dt{position:absolute;top:4px;width:22px;height:22px;border-radius:50%;background:var(--accent);margin-left:-11px}
 .iv.na .tr{border:2px dashed var(--soft)}
-.iv .muted{color:var(--muted)}
-#evTip{position:absolute;border:2px solid var(--ink);background:var(--bg);padding:14px 20px;font-size:22px;line-height:1.5;opacity:0;width:560px}
-#evTip b{font-family:var(--serif);font-size:28px}
-table{border-collapse:collapse;width:100%;font-size:23px}
-th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font:700 16px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:3px solid var(--ink)}
-td .m{display:block;color:var(--muted);font-size:19px}
-td.ev{position:relative}
-td.ev i{position:absolute;inset:4px;border:3px solid var(--accent);opacity:0}
-.st{font:700 16px var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border:2px solid var(--ink);white-space:nowrap}
-.st.c{background:var(--ink);color:#fff}.st.p{border-color:var(--accent);color:var(--accent)}.st.n{border-color:var(--soft);color:var(--muted)}
-.seg{display:flex;height:36px;border:2px solid var(--ink);margin-bottom:8px}.seg div{display:flex;align-items:center;justify-content:center;font:700 17px var(--sans)}
-#rbox{border-left:6px solid var(--accent);background:var(--panel);padding:22px 28px;font-size:28px;line-height:1.5;min-height:200px}
+.muted{color:var(--muted)}
+#evTip{position:absolute;border:3px solid var(--ink);background:var(--bg);padding:16px 22px;font-size:25px;line-height:1.5;opacity:0;width:720px}
+body.v #evTip{font-size:31px;width:auto;right:34px}
+#evTip b{font-family:var(--serif);font-size:34px}
+#rbox{border-left:6px solid var(--accent);background:var(--panel);padding:24px 30px;font-size:31px;line-height:1.5;min-height:210px}
+body.v #rbox{font-size:38px;min-height:520px}
 #rbox u{text-decoration:none;border-bottom:3px solid var(--accent)}
-#rlog{font:20px/1.7 ui-monospace,Menlo,monospace;color:var(--muted);opacity:0;margin-top:18px}
+#rlog{font:22px/1.7 ui-monospace,Menlo,monospace;color:var(--muted);opacity:0;margin-top:18px}
+body.v #rlog{font-size:27px}
 /* trust */
 .trust{display:grid;grid-template-columns:repeat(3,1fr);gap:56px;margin-top:40px}
-.trust div{border-top:4px solid var(--ink);padding-top:18px;opacity:0}
-.trust h3{font:600 48px/1.1 var(--serif);margin-bottom:12px}.trust p{font-size:28px;color:var(--muted)}
+body.v .trust{grid-template-columns:1fr;gap:44px}
+.trust div{border-top:4px solid var(--ink);padding-top:16px;opacity:0}
+.trust h3{font:600 54px/1.1 var(--serif);margin-bottom:10px}.trust p{font-size:30px;color:var(--muted)}
+body.v .trust h3{font-size:64px}body.v .trust p{font-size:36px}
 /* cta */
-#cta .btn{display:inline-block;font-size:34px;padding:16px 34px;opacity:0}
-#cta .url{font-size:28px;color:var(--muted);margin-top:16px;opacity:0}
-#endfoot{position:absolute;left:220px;right:220px;bottom:30px;font-size:21px;color:var(--muted);border-top:2px solid var(--ink);padding-top:12px;opacity:0}
-#cursor{position:absolute;width:34px;height:44px;z-index:10;opacity:0;pointer-events:none}
-#ring{position:absolute;width:56px;height:56px;border-radius:50%;border:3px solid var(--accent);z-index:9;opacity:0;margin:-28px 0 0 -28px}
+#cta .btn{font-size:36px;padding:18px 36px;opacity:0}
+body.v #cta .btn{font-size:40px}
+#cta .url{font-size:30px;color:var(--muted);margin-top:18px;opacity:0}
+#endfoot{margin-top:70px;font-size:22px;color:var(--muted);border-top:2px solid var(--ink);padding-top:12px;opacity:0}
+body.v #endfoot{font-size:28px}
+#cursor{position:absolute;width:38px;height:50px;z-index:10;opacity:0}
+#ring{position:absolute;width:60px;height:60px;border-radius:50%;border:3px solid var(--accent);z-index:9;opacity:0;margin:-30px 0 0 -30px}
 </style>
 </head>
 <body>
-<div id="strip">Sample County is fictional · All figures shown are illustrative</div>
-<div id="stage">
+<div id="tag">Illustrative figures</div>
+<div id="content">
 
-<section class="scene center" id="who">
-  <p class="kick" style="margin-bottom:28px">For county health departments</p>
-  <div class="big"><div>A few people.</div><div>Every number, on the record.</div></div>
+<section class="scene center" id="hook">
+  <p class="kick" style="margin-bottom:24px">The path to care</p>
+  <b id="hN">0</b>
+  <p id="hNl">residents referred for help</p>
+  <div class="split" id="hSplit"><div id="hGot"><b>356</b><span>got there</span></div><div id="hLost"><b>256</b><span>never got there</span></div></div>
 </section>
 
-<section class="scene center" id="frustration">
-  <p class="kick" style="margin-bottom:30px">The everyday problem</p>
-  <p id="quote"></p>
-  <p id="attrib">County health director, composite of many conversations</p>
+<section class="scene center" id="context">
+  <div id="ctxWrap">
+    <div><p id="ctxNum">62%</p><p id="ctxTxt">of local health departments serve fewer than 50,000 people.</p>
+    <p class="src">Source: NACCHO, 2022 National Profile of Local Health Departments (2,512 departments).</p></div>
+    <div id="waffle"></div>
+  </div>
 </section>
 
-<section class="scene" id="insight" style="padding:130px 220px 0">
-  <p class="kick">The path to care · one year</p>
-  <p class="mid" style="margin:10px 0 40px">Many look for help. Fewer get there.</p>
-  <div id="funnelBig"></div>
-  <div id="gap"></div><div id="gapLab">Where care breaks: 256 referrals not completed</div>
-  <p class="src" style="margin-top:100px">Sample County, fictional. Illustrative counts.</p>
+<section class="scene center" id="director">
+  <div id="grid"></div>
+  <div class="lines"><div>Asked to prove need.</div><br><div class="m">Given numbers that hide where people get stuck.</div><br><div>Every year, start over.</div></div>
 </section>
 
 <section class="scene center" id="promise">
   <p class="kick" style="margin-bottom:28px">CB-CAP</p>
-  <div class="big" style="font-size:124px"><div>Know where care breaks.</div><div style="color:var(--accent)">Show the proof.</div></div>
+  <div class="big" style="font-size:var(--pbig)"><div>Know where care breaks.</div><div style="color:var(--accent)">Show the proof.</div></div>
 </section>
 
 <div id="app">
-  <div id="ahead"><div><b>CB-CAP</b><small>Community Access Platform</small></div><span>Sample County (fictional)</span></div>
+  <div id="ahead"><div><b>CB-CAP</b><small>Community Access Platform</small></div><span>Your county</span></div>
   <div id="tabs"></div>
   <div id="fbar">
     <div class="fld"><label>Kind of help</label><div class="sel" id="fSvc">All kinds of help</div></div>
-    <div class="fld"><label>Area</label><div class="sel" id="fArea">All areas</div></div>
-    <div class="fld"><label>Period</label><div class="sel" id="fQ">Full year</div></div>
-    <div class="fld"><label>Hide counts below</label><div class="sel" style="min-width:120px">11</div></div>
+    <div class="fld lonly"><label>Area</label><div class="sel">All areas</div></div>
+    <div class="fld lonly"><label>Period</label><div class="sel">Full year</div></div>
+    <div class="fld lonly"><label>Hide counts below</label><div class="sel" style="min-width:120px">11</div></div>
     <div class="fld"><div class="btn" id="fReset">Reset</div></div>
   </div>
   <div id="dd"></div>
   <div id="panes"></div>
 </div>
 
+<section class="scene center" id="benefit">
+  <div class="big"><div>Walk in with proof.</div><div style="color:var(--muted)">Not a pile of spreadsheets.</div></div>
+</section>
+
 <section class="scene center" id="trust">
   <p class="kick">Built to be trusted</p>
   <div class="trust">
     <div><h3>Sources shown</h3><p>Every figure names its source, year and range.</p></div>
-    <div><h3>Nobody identifiable</h3><p>Grouped counts only. Small counts are hidden.</p></div>
-    <div><h3>People decide</h3><p>Suggested wording is a draft until a person approves it.</p></div>
+    <div><h3>Nobody identifiable</h3><p>Grouped counts only. Small counts stay hidden.</p></div>
+    <div><h3>People decide</h3><p>Every draft waits for a person to approve it.</p></div>
   </div>
 </section>
 
 <section class="scene center" id="cta">
-  <p class="kick" style="margin-bottom:24px">CB-CAP · Know where care breaks. Show the proof.</p>
+  <p class="kick" style="margin-bottom:24px">CB-CAP</p>
   <p class="big" style="margin-bottom:44px">Want this for your county?</p>
   <div><span class="btn pr">Talk to the SozoRock Foundation</span></div>
   <p class="url">sozorockfoundation.org/partner</p>
-  <p id="endfoot">Sample County and every figure shown for it are fictional and illustrative. For real counties, figures come from published public sources, each shown with its source and year.</p>
+  <p id="endfoot">Figures shown are illustrative. For a real county, each figure comes from a published public source, shown with its year.</p>
 </section>
 
+</div>
 <svg id="cursor" viewBox="0 0 34 44"><path d="M2 2 L2 36 L11 28 L17 42 L23 39 L17 26 L30 26 Z" fill="#0a1b2b" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/></svg>
 <div id="ring"></div>
-</div>
 <div id="cap"><span id="capText"></span></div>
 
 <script src="build/timeline.js"></script>
 <script>
-/* ---------- data (fictional Sample County, matches the prototype) ---------- */
+const V=new URLSearchParams(location.search).get("format")==="vertical";
+if(V)document.body.classList.add("v");
+document.documentElement.style.setProperty("--pbig",V?"108px":"128px");
+
+/* ---------- illustrative data (same figures as the reference prototype) ---------- */
 const ALL={looked:1065,made:612,comp:356,top:"Transportation"};
 const MH={looked:204,made:111,comp:52,top:"No appointment available"};
-const BY_SVC=[["Food assistance",70],["Primary care",68],["Transportation",49],["Mental health",47],["Housing",39]];
-const BARR_MH=[["No appointment available",63],["Cost",34],["Transportation",29],["Trust or stigma",21],["Phone or internet access",14,1],["Childcare",8,1]];
-const AREAS=[["A",66,100],["B",68,80],["C",53,60],["D",41,51],["E",64,70],["F",39,31],["G",65,55],["H",null,24],["I",67,18],["J",null,14],["K",68,44],["L",52,65]];
-const EV=[["Food insecurity, past 12 months",15.8,12.4,19.6,2023],["Housing insecurity, past 12 months",12.9,10.2,15.8,2023],["Lack of reliable transportation",9.3,7.6,11.2,2023],["Loneliness",31.0,26.2,36.1,2023],["Depression",20.7,17.5,24.1,2023],["Diagnosed diabetes",11.9,10.1,13.9,2023],["High blood pressure",35.8,31.9,39.9,2023]];
-const TABS=[["overview","Overview"],["barriers","Barriers"],["areas","Areas"],["evidence","Evidence"],["plan","Plan"],["report","Report"]];
-const APP_SCENES=TABS.map(t=>t[0]);
+const AREAS=[["A",66],["B",68],["C",53],["D",41],["E",64],["F",39],["G",65],["H",null],["I",67],["J",null],["K",68],["L",52]];
+const EV=[["Food insecurity, past 12 months",15.8,12.4,19.6,2023],["Loneliness",31.0,26.2,36.1,2023],["Depression",20.7,17.5,24.1,2023],["High blood pressure",35.8,31.9,39.9,2023]];
+const TABS=[["where","Overview"],["barriers","Barriers"],["hidden","Areas"],["source","Evidence"],["plan","Plan"],["report","Report"]];
+const APP=["where","hidden","source","report"];
 
 /* ---------- helpers ---------- */
 const $=id=>document.getElementById(id);
 const TL=window.TIMELINE,SC={},LN={};
 TL.scenes.forEach(s=>{SC[s.id]=s;s.lines.forEach(l=>LN[l.id]=l);});
 const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
-const p=(t,a,d)=>cl((t-a)/d);                       // linear progress
-const ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;    // ease in-out cubic
-const eo=x=>1-Math.pow(1-x,3);                      // ease out
+const p=(t,a,d)=>cl((t-a)/d);
+const ez=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const eo=x=>1-Math.pow(1-x,3);
 const fmt=n=>Math.round(n).toLocaleString("en-US");
-function sceneAlpha(t,s,fade=.35,last=false){const a=p(t,s.start,fade),b=last?1:1-p(t,s.end-fade,fade);return Math.min(a,b);}
+const alpha=(t,s,last)=>Math.min(p(t,s.start,.35),last?1:1-p(t,s.end-.35,.35));
+const rise=(el,a,px=26)=>{el.style.opacity=a;el.style.transform=`translateY(${(1-a)*px}px)`;};
 
-/* ---------- build static DOM ---------- */
-$("quote").innerHTML=["I know what my community needs.","Proving it means digging through reports and spreadsheets.","And every year, I start over."]
-  .map((s,i)=>`<span data-q="${i}">`+s.split(" ").map(w=>`<span class="w">${w}</span>`).join(" ")+"</span>").join(" ");
-$("funnelBig").innerHTML=[["Looked for help",ALL.looked],["Referred",ALL.made],["Completed",ALL.comp]].map(([l,v],i)=>
-  `<div class="fn"><span class="lab">${l}</span><div class="tr"><div class="fl" id="fb${i}"></div></div><span class="v" id="fv${i}">0</span></div>`).join("");
-$("tabs").innerHTML=TABS.map(([k,l])=>`<div class="tab" id="tab-${k}">${l}</div>`).join("");
-
+/* ---------- static DOM ---------- */
+$("waffle").innerHTML=Array.from({length:100},(_,i)=>`<i class="${i<62?"on":""}"></i>`).join("");
+{ let s=0x2f6e2b1;const r=()=>{s=(s*1103515245+12345)&0x7fffffff;return s/0x7fffffff;};
+  $("grid").textContent=Array.from({length:40},()=>Array.from({length:16},()=>String(Math.floor(r()*9000)+100).padStart(6," ")).join("   ")).join("\n"); }
+$("tabs").innerHTML=TABS.map(([k,l])=>`<div class="tab${["barriers","plan"].includes(k)?" lonly":""}" id="tab-${k}">${l}</div>`).join("");
 const panes={};
 function pane(id,html){const d=document.createElement("div");d.className="pane";d.id="pane-"+id;d.innerHTML=html;$("panes").appendChild(d);panes[id]=d;}
-const barRow=(id,label,ratio,val,h)=>`<div class="bar" id="${id}"><span>${label}</span><div class="tr"><div class="fl${h?" h":""}" style="width:${ratio*100}%"></div></div><span class="v">${h?"hidden":val}</span></div>`;
 
-pane("overview",`<p class="pt" id="ovTitle"></p><p class="ps" id="ovCtx"></p>
+pane("where",`<p class="pt" id="wTitle"></p><p class="ps" id="wCtx"></p>
 <div class="kpis"><div class="kp"><b id="k0"></b><span>looked for help</span></div><div class="kp"><b id="k1"></b><span>referred</span></div><div class="kp"><b id="k2"></b><span>completed</span></div><div class="kp"><b class="sm" id="k3"></b><span>top barrier</span></div></div>
-<div class="two"><div><p class="sub">From need to result</p><div id="ovFun"></div></div>
-<div><p class="sub">Completion by kind of help</p>${BY_SVC.map(([k,v],i)=>barRow("ovS"+i,k,v/100,v+"%")).join("")}</div></div>
-<p class="src" style="margin-top:14px">Illustrative counts, fictional county. Counts below 11 are hidden.</p>`);
+<div id="wFun"></div>`);
 
-pane("barriers",`<p class="pt">No appointment available is the most reported barrier</p><p class="ps">Mental health · All areas · Full year</p>
-<p class="sub">Most reported barriers</p><div style="max-width:1300px">${BARR_MH.map(([k,v,h],i)=>barRow("br"+i,k,v/63,v,h)).join("")}</div>
-<p class="src" style="margin-top:22px" id="brNote">2 hidden to protect privacy. When one count is hidden, the next smallest is hidden too.</p>`);
-
-pane("areas",`<p class="pt">Completion ranges from 39% to 68% across areas</p><p class="ps">All kinds of help · Full year · Twelve fictional areas</p>
-<div style="display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center"><div class="tiles">${AREAS.map(([a,r,m])=>{
+pane("hidden",`<p class="pt">Completion ranges from 39% to 68% across areas</p><p class="ps">All kinds of help · Full year</p>
+<div id="areasWrap"><div class="tiles">${AREAS.map(([a,r])=>{
  if(r===null)return `<div class="tile hid" id="ta-${a}"><b>Area ${a}</b><span>hidden</span></div>`;
- const k=Math.round(12+88*cl((80-r)/50));return `<div class="tile" id="ta-${a}" style="background:color-mix(in srgb,var(--accent) ${k}%,#fff);color:${k>55?"#fff":"var(--ink)"}"><b>Area ${a}</b><span>${r}%</span><small>of ${m} referred</small></div>`;}).join("")}</div>
-<div id="callout">Too few completed referrals in Areas H and J.<br>Hidden before anything is shown.</div></div>
-<p class="src" style="margin-top:20px">Darker = lower completion. Hatched = hidden. Counts below 11 never leave the server.</p>`);
+ const k=Math.round(12+88*cl((80-r)/50));return `<div class="tile" id="ta-${a}" style="background:color-mix(in srgb,var(--accent) ${k}%,#fff);color:${k>55?"#fff":"var(--ink)"}"><b>Area ${a}</b><span>${r}%</span></div>`;}).join("")}</div>
+<div id="callout">Too few cases in Areas H and J.<br>Hidden before anything is shown.</div></div>`);
 
-pane("evidence",`<p class="pt">Food insecurity affects about one adult in six</p><p class="ps">Dot = estimate. Line = 95% range; a wider line means less certainty.</p>
-${EV.map(([m,v,lo,hi,y],i)=>`<div class="iv" id="ev${i}"><span>${m}</span><div class="tr"><div class="ln" style="left:${lo*2}%;width:${(hi-lo)*2}%"></div><div class="dt" style="left:${v*2}%"></div></div><span><b>${v.toFixed(1)}%</b> <span class="muted">(${lo}–${hi}) ${y}</span></span></div>`).join("")}
-<div class="iv na" id="evNA"><span>Childhood vaccination, ages 19–35 months</span><div class="tr"></div><span><b>Not available</b> <span class="muted">no estimate</span></span></div>
-<div id="evTip"><b>15.8%</b> food insecurity, past 12 months<br>95% range 12.4–19.6 · Year 2023<br><span style="color:var(--muted)">Source: public model estimate (illustrative)</span></div>
-<p class="src" style="margin-top:16px">Scale 0–50%. Illustrative values in the format of published county estimates.</p>`);
-
-pane("plan",`<p class="pt">1 of 3 actions completed, 1 in progress</p><p class="ps">Every action names the evidence it rests on.</p>
-<div class="seg"><div style="width:33.3%;background:var(--soft)">1 not started</div><div style="width:33.3%;background:color-mix(in srgb,var(--accent) 55%,#fff)">1 in progress</div><div style="width:33.4%;background:var(--accent);color:#fff">1 completed</div></div>
-<table><tr><th>Priority</th><th>Action</th><th>Evidence</th><th>Status</th><th>Progress</th></tr>
-<tr><td>Mental well-being<span class="m">Widen access to counseling</span></td><td>Telehealth room at the library</td><td class="ev">Depression<span class="m">20.7% · 2023</span><i id="pe0"></i></td><td><span class="st p">In progress</span></td><td>38 sessions to date</td></tr>
-<tr><td>Food and nutrition security<span class="m">Raise completed food referrals</span></td><td>Follow-up calls after referral</td><td class="ev">Food insecurity<span class="m">15.8% · 2023</span><i id="pe1"></i></td><td><span class="st c">Completed</span></td><td>70% of referrals completed</td></tr>
-<tr><td>Transportation<span class="m">Reduce missed appointments</span></td><td>Volunteer ride pilot</td><td class="ev">Lack of reliable transportation<span class="m">9.3% · 2023</span><i id="pe2"></i></td><td><span class="st n">Not started</span></td><td style="color:var(--muted)">–</td></tr></table>`);
+pane("source",`<p class="pt">Food insecurity affects about one adult in six</p><p class="ps">Dot = estimate. Line = 95% range.</p>
+${EV.map(([m,v,lo,hi,y],i)=>`<div class="iv" id="ev${i}"><span>${m}</span><span class="v"><b>${v.toFixed(1)}%</b> <span class="muted">(${lo}–${hi}) ${y}</span></span><div class="tr"><div class="ln" style="left:${lo*2}%;width:${(hi-lo)*2}%"></div><div class="dt" style="left:${v*2}%"></div></div></div>`).join("")}
+<div class="iv na" id="evNA"><span>Childhood vaccination</span><span class="v"><b>Not available</b> <span class="muted">never shown as 0</span></span><div class="tr"></div></div>
+<div id="evTip"><b>15.8%</b> food insecurity, past 12 months<br>95% range 12.4–19.6 · Year 2023<br><span class="muted">Source: named public estimate, linked</span></div>`);
 
 const RTEXT=[["Of "],["612",1],[" referrals, "],["58%",1],[" were completed. Top barriers: transportation ("],["132",1],["), cost ("],["112",1],["), no appointment available ("],["107",1],["). Counts below 11 are not reported."]];
-pane("report",`<p class="pt">Yearly report, built from your plan</p><p class="ps">Edit anything. Every figure keeps its link to the evidence.</p>
-<div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:10px"><p class="sub" style="margin:0">Challenges and barriers</p><span class="chip" id="rchip">Draft · not approved</span></div>
+pane("report",`<p class="pt">Yearly report, built from your plan</p><p class="ps">Every figure keeps its link to the evidence.</p>
+<div style="display:flex;justify-content:space-between;align-items:end;margin-bottom:12px;gap:16px"><span class="kick" style="font-size:20px">Challenges and barriers</span><span class="chip" id="rchip">Draft</span></div>
 <div id="rbox"></div>
-<div style="display:flex;gap:16px;margin-top:18px"><span class="btn pr" id="rApprove">Approve</span><span class="btn">Edit</span><span class="btn">Download</span></div>
-<div id="rlog">Approved · Health director · Change history kept</div>`);
+<div style="display:flex;gap:16px;margin-top:20px"><span class="btn pr" id="rApprove">Approve</span><span class="btn">Edit</span></div>
+<div id="rlog">Approved · Health director · History kept</div>`);
 
-/* ---------- cursor path ---------- */
-// Targets resolve to element centres; each key: time, target, click?
+/* ---------- cursor ---------- */
 const clickAt=id=>SC[id].start+.45;
-function cursorKeys(){
-  const L11=LN.L11,L18=LN.L18,ar=SC.areas;
-  return [
-    {t:SC.overview.start+.2,el:"tab-overview"},
-    {t:clickAt("overview"),el:"tab-overview",click:1},
-    {t:L11.start+.9,el:"fSvc"},{t:L11.start+1.05,el:"fSvc",click:1,open:1},
-    {t:L11.start+1.75,el:"dd-mh"},{t:L11.start+1.9,el:"dd-mh",click:1,pick:1},
-    {t:clickAt("barriers")-.45,el:"fSvc"},
-    {t:clickAt("barriers"),el:"tab-barriers",click:1},
-    {t:clickAt("areas"),el:"tab-areas",click:1},
-    {t:ar.start+1.2,el:"fReset",click:1,reset:1},
-    {t:clickAt("evidence"),el:"tab-evidence",click:1},
-    {t:clickAt("plan"),el:"tab-plan",click:1},
-    {t:clickAt("report"),el:"tab-report",click:1},
-    {t:L18.start+.9,el:"rApprove"},{t:L18.start+1.1,el:"rApprove",click:1,approve:1},
-    {t:SC.report.end,el:"rApprove"}
-  ];
-}
+const pickAt=()=>LN.W1.start+1.7, resetAt=()=>SC.hidden.start+1.05, approveAt=()=>LN.R2.start+.5;
+function keys(){return[
+  {t:SC.where.start+.2,el:"tab-where"},{t:clickAt("where"),el:"tab-where",click:1},
+  {t:LN.W1.start+.75,el:"fSvc"},{t:LN.W1.start+.9,el:"fSvc",click:1},
+  {t:pickAt()-.2,el:"dd-mh"},{t:pickAt(),el:"dd-mh",click:1},
+  {t:clickAt("hidden")-.45,el:"fSvc"},{t:clickAt("hidden"),el:"tab-hidden",click:1},
+  {t:resetAt()-.2,el:"fReset"},{t:resetAt(),el:"fReset",click:1},
+  {t:clickAt("source"),el:"tab-source",click:1},
+  {t:clickAt("report"),el:"tab-report",click:1},
+  {t:approveAt()-.25,el:"rApprove"},{t:approveAt(),el:"rApprove",click:1},
+  {t:SC.report.end,el:"rApprove"}];}
 let KEYS=null;
-function pos(id){const e=$(id),s=$("stage").getBoundingClientRect();if(!e)return[960,500];const r=e.getBoundingClientRect();
-  return[r.left-s.left+Math.min(r.width/2,90),r.top-s.top+r.height/2];}
-
-/* ---------- state over time ---------- */
-const svcPick=()=>LN.L11.start+1.9, resetAt=()=>SC.areas.start+1.2, approveAt=()=>LN.L18.start+1.1;
-function activePane(t){let k=APP_SCENES[0];APP_SCENES.forEach(id=>{if(t>=clickAt(id))k=id;});return k;}
+function pos(id){const e=$(id);if(!e)return[500,500];const r=e.getBoundingClientRect();return[r.left+Math.min(r.width/2,90),r.top+r.height/2];}
+const activePane=t=>APP.reduce((k,id)=>t>=clickAt(id)?id:k,APP[0]);
 
 function render(t){
-  // scene layers
-  ["who","frustration","insight","promise","trust"].forEach(id=>$(id).style.opacity=sceneAlpha(t,SC[id]));
-  $("cta").style.opacity=sceneAlpha(t,SC.cta,.35,true);
+  ["context","director","promise","benefit","trust"].forEach(id=>$(id).style.opacity=alpha(t,SC[id]));
+  $("hook").style.opacity=1-p(t,SC.hook.end-.35,.35);   // full strength on frame one (thumbnail)
+  $("cta").style.opacity=alpha(t,SC.cta,true);
+  const inApp=t>=SC.where.start&&t<SC.report.end;
+  $("tag").style.opacity=Math.max(1-p(t,SC.hook.end-.35,.35),inApp?1:0);
 
-  // who
-  [...$("who").querySelectorAll(".big div")].forEach((d,i)=>{const a=eo(p(t,LN["L"+(i+1)].start-.1,.6));d.style.opacity=a;d.style.transform=`translateY(${(1-a)*24}px)`;});
+  // hook: count up, then the split
+  { const k=eo(p(t,0,1.1))*.85+.15;$("hN").textContent=fmt(Math.max(1,612*k));
+    const s=eo(p(t,LN.H2.start-.1,.9));$("hGot").style.width=(356/612*100*s)+"%";$("hLost").style.width=(256/612*100*s)+"%";
+    $("hLost").style.opacity=s;[...$("hSplit").querySelectorAll("b,span")].forEach(e=>e.style.opacity=p(t,LN.H2.start+.4,.4)); }
 
-  // frustration: words light up as they are spoken
-  ["L3","L4","L5"].forEach((id,i)=>{const l=LN[id],ws=[...$("quote").querySelectorAll(`[data-q="${i}"] .w`)];
-    ws.forEach((w,j)=>w.style.opacity=.12+.88*eo(p(t,l.start+(l.end-l.start)*j/ws.length,.25)));});
-  $("attrib").style.opacity=p(t,LN.L5.end,.5);
+  // context: waffle fills
+  [...$("waffle").children].forEach((c,i)=>c.style.opacity=p(t,SC.context.start+.3+i*.018,.25));
+  rise($("ctxNum"),eo(p(t,LN.F1.start-.2,.5)));rise($("ctxTxt"),eo(p(t,LN.F1.start+.2,.5)));
 
-  // insight funnel
-  const fb=[[LN.L7.start,ALL.looked],[LN.L7.start+1.2,ALL.made],[LN.L8.start,ALL.comp]];
-  fb.forEach(([a,v],i)=>{const k=ez(p(t,a,1.1));$("fb"+i).style.width=(v/ALL.looked*100*k)+"%";$("fv"+i).textContent=fmt(v*k);});
-  { const tr=$("fb1").parentElement,ins=$("insight").getBoundingClientRect(),r=tr.getBoundingClientRect(),r2=$("fb2").parentElement.getBoundingClientRect();
-    const x0=r.left-ins.left+r.width*ALL.comp/ALL.looked,x1=r.left-ins.left+r.width*ALL.made/ALL.looked,k=eo(p(t,LN.L9.start,.6));
-    Object.assign($("gap").style,{left:x0+"px",width:(x1-x0)+"px",top:(r2.top-ins.top)+"px",opacity:k});
-    Object.assign($("gapLab").style,{left:x0+"px",top:(r2.bottom-ins.top+14)+"px",opacity:k}); }
+  // director: the spreadsheet drifts, lines land on cue
+  $("grid").style.transform=`translateY(${-(t-SC.director.start)*22}px)`;
+  [...$("director").querySelectorAll(".lines div")].forEach((d,i)=>rise(d,eo(p(t,LN["D"+(i+1)].start-.1,.5))));
 
-  // promise
-  [...$("promise").querySelectorAll(".big div")].forEach((d,i)=>{const a=eo(p(t,LN.L10.start+i*1.05-.1,.6));d.style.opacity=a;d.style.transform=`translateY(${(1-a)*24}px)`;});
+  // promise and benefit
+  [...$("promise").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.P1.start+.7+i*1.0,.6))));
+  [...$("benefit").querySelectorAll(".big div")].forEach((d,i)=>rise(d,eo(p(t,LN.B1.start-.1+i*1.9,.6))));
 
-  // app frame
-  const appA=Math.min(p(t,SC.overview.start,.4),1-p(t,SC.report.end-.35,.35));
+  // app frame and panes
+  const appA=Math.min(p(t,SC.where.start,.4),1-p(t,SC.report.end-.35,.35));
   $("app").style.opacity=appA;
   const ap=activePane(t);
   TABS.forEach(([k])=>$("tab-"+k).classList.toggle("on",k===ap));
-  APP_SCENES.forEach((id,i)=>{const a=p(t,clickAt(id),.25),nx=APP_SCENES[i+1],b=nx?1-p(t,clickAt(nx),.2):1;panes[id].style.opacity=i===0?b:Math.min(a,b);});
-  const showF=["overview","barriers","areas"].includes(ap);$("fbar").style.display=showF?"flex":"none";
-  const pt=$("tabs").getBoundingClientRect().bottom+(showF?$("fbar").getBoundingClientRect().height:0)-$("app").getBoundingClientRect().top;
-  $("panes").style.cssText=`position:absolute;left:0;right:0;top:${pt}px;bottom:0`;
-  Object.values(panes).forEach(el=>el.style.top="0");
-  const mh=t>=svcPick()&&t<resetAt();
-  $("fSvc").textContent=mh?"Mental health":"All kinds of help";
+  APP.forEach((id,i)=>{const a=i?p(t,clickAt(id),.25):1,nx=APP[i+1],b=nx?1-p(t,clickAt(nx),.2):1;panes[id].style.opacity=Math.min(a,b);});
+  const showF=ap==="where"||ap==="hidden";$("fbar").style.display=showF?"flex":"none";
+  $("panes").style.top=($("tabs").getBoundingClientRect().bottom+(showF?$("fbar").getBoundingClientRect().height:0)-$("app").getBoundingClientRect().top)+"px";
+  const mh=t>=pickAt()&&t<resetAt();$("fSvc").textContent=mh?"Mental health":"All kinds of help";
 
   // dropdown
-  const open=t>=LN.L11.start+1.05&&t<svcPick();
-  const ddOpts=["All kinds of help","Food assistance","Transportation","Housing","Mental health","Primary care"];
-  if(!$("dd").dataset.b){$("dd").innerHTML=ddOpts.map((o,i)=>`<div id="${i===4?"dd-mh":"dd-"+i}">${o}</div>`).join("");$("dd").dataset.b=1;}
-  { const s=$("fSvc").getBoundingClientRect(),a=$("app").getBoundingClientRect();
+  if(!$("dd").dataset.b){$("dd").innerHTML=["All kinds of help","Food assistance","Transportation","Housing","Mental health","Primary care"].map((o,i)=>`<div id="${i===4?"dd-mh":"dd-"+i}">${o}</div>`).join("");$("dd").dataset.b=1;}
+  { const s=$("fSvc").getBoundingClientRect(),a=$("app").getBoundingClientRect(),open=t>=LN.W1.start+.9&&t<pickAt();
     Object.assign($("dd").style,{left:(s.left-a.left)+"px",top:(s.bottom-a.top)+"px",width:s.width+"px",opacity:open?1:0});
-    $("dd-mh").classList.toggle("hov",t>=LN.L11.start+1.6); }
+    $("dd-mh").classList.toggle("hov",t>=pickAt()-.3); }
 
-  // overview numbers tween to the filtered view
-  { const k=ez(p(t,svcPick(),.7)),cur={};["looked","made","comp"].forEach(f=>cur[f]=ALL[f]+(MH[f]-ALL[f])*k);
-    const rate=Math.round(cur.comp/cur.made*100),top=k<.5?ALL.top:MH.top;
-    $("ovTitle").textContent=`${rate}% of referrals were completed; ${top.toLowerCase()} was the top barrier.`;
-    $("ovCtx").textContent=(k<.5?"All kinds of help":"Mental health")+" · All areas · Full year";
-    $("k0").textContent=fmt(cur.looked);$("k1").textContent=fmt(cur.made);$("k2").textContent=rate+"%";$("k3").textContent=top;
-    const grow=ez(p(t,clickAt("overview")+.1,1));
-    $("ovFun").innerHTML=[["Looked for help",cur.looked],["Referred",cur.made],["Completed",cur.comp]].map(([l,v],i)=>
-      barRow("of"+i,l,v/cur.looked*grow,fmt(v)+(i?` <span style="color:var(--muted);font-weight:400;font-size:18px">${Math.round(v/(i===1?cur.looked:cur.made)*100)}%</span>`:""))).join("");
-    BY_SVC.forEach(([s],i)=>{const r=$("ovS"+i);r.classList.toggle("hl",k>=.5&&s==="Mental health");r.querySelector(".fl").style.transform=`scaleX(${grow})`;r.querySelector(".fl").style.transformOrigin="left";}); }
+  // where: numbers move to the filtered view
+  { const k=t>=pickAt()?1:0,c={};$("pane-where").querySelectorAll(".pt,.ps,.kpis,#wFun").forEach(e=>e.style.opacity=.25+.75*eo(p(t,pickAt(),.35)));["looked","made","comp"].forEach(f=>c[f]=ALL[f]+(MH[f]-ALL[f])*k);
+    const rate=Math.round(c.comp/c.made*100),top=k<.5?ALL.top:MH.top;
+    $("wTitle").textContent=`${rate}% of referrals were completed`;
+    $("wCtx").textContent=(k<.5?"All kinds of help":"Mental health")+" · All areas · Full year";
+    $("k0").textContent=fmt(c.looked);$("k1").textContent=fmt(c.made);$("k2").textContent=rate+"%";$("k3").textContent=top;
+    const g=ez(p(t,clickAt("where")+.1,1));
+    $("wFun").innerHTML=[["Looked for help",c.looked],["Referred",c.made],["Completed",c.comp]].map(([l,v],i)=>
+      `<div class="row"><span class="lab">${l}</span><span class="v">${fmt(v)}${i?`<small>${Math.round(v/(i===1?c.looked:c.made)*100)}%</small>`:""}</span><div class="tr"><div class="fl" style="width:${v/c.looked*100*g}%"></div></div></div>`).join(""); }
 
-  // barriers: bars grow in order, hidden rows land last
-  BARR_MH.forEach((b,i)=>{const r=$("br"+i),a=eo(p(t,clickAt("barriers")+.2+i*.18,.6));r.style.opacity=a;r.querySelector(".fl").style.transform=`scaleX(${b[2]?1:a})`;r.querySelector(".fl").style.transformOrigin="left";});
-  $("brNote").style.opacity=p(t,clickAt("barriers")+1.5,.5);
+  // hidden
+  AREAS.forEach(([a,r],i)=>{const e=$("ta-"+a);e.style.opacity=eo(p(t,resetAt()+.15+i*.06,.35));
+    const pl=r===null?eo(p(t,LN.S1.start+.6,.4)):0;e.style.outline=pl?`${Math.round(6*pl)}px solid var(--ink)`:"none";e.style.outlineOffset="-6px";});
+  $("callout").style.opacity=eo(p(t,LN.S1.start+.8,.5));
 
-  // areas: tiles fill in, then the hidden ones are called out
-  const reset=resetAt();
-  AREAS.forEach(([a,r],i)=>{const e=$("ta-"+a);const k=eo(p(t,reset+.15+i*.07,.4));e.style.opacity=k;
-    const pulse=r===null?eo(p(t,LN.L13.start+.3,.4)):0;e.style.outline=pulse?`${Math.round(5*pulse)}px solid var(--ink)`:"none";e.style.outlineOffset="-5px";});
-  $("callout").style.opacity=eo(p(t,LN.L13.start+.5,.5));
+  // source
+  EV.forEach((_,i)=>{const e=$("ev"+i),a=eo(p(t,clickAt("source")+.15+i*.1,.45));e.style.opacity=a;e.style.transform=`translateX(${(a-1)*20}px)`;});
+  $("evNA").style.opacity=eo(p(t,clickAt("source")+.6,.45));
+  { const a=eo(p(t,LN.S2.start+.5,.4)),pn=panes.source.getBoundingClientRect(),na=$("evNA").getBoundingClientRect();
+    Object.assign($("evTip").style,{opacity:a,left:(V?34:(na.left-pn.left))+"px",top:(na.bottom-pn.top+(V?40:30))+"px"});
+    $("ev0").style.background=`color-mix(in srgb,var(--accent) ${Math.round(a*9)}%,#fff)`; }
 
-  // evidence
-  EV.forEach((_,i)=>{const a=eo(p(t,clickAt("evidence")+.15+i*.1,.45));$("ev"+i).style.opacity=a;$("ev"+i).style.transform=`translateX(${(1-a)*-20}px)`;});
-  { const a=eo(p(t,LN.L14.start+.4,.4))*(1-p(t,LN.L15.start-.2,.3)),r0=$("ev0").getBoundingClientRect(),pn=panes.evidence.getBoundingClientRect();
-    const tr0=$("ev0").querySelector(".tr").getBoundingClientRect();
-    const na0=$("evNA").getBoundingClientRect();Object.assign($("evTip").style,{opacity:a,left:(tr0.left-pn.left)+"px",top:(na0.bottom-pn.top+60)+"px",width:"700px"});
-    $("ev0").style.background=a>0?`color-mix(in srgb,var(--accent) ${Math.round(a*8)}%,#fff)`:"";
-    const na=eo(p(t,LN.L15.start,.5));$("evNA").style.opacity=na;$("evNA").style.outline=na?`3px solid var(--ink)`:"none";$("evNA").style.outlineOffset="6px"; }
-
-  // plan: evidence cells light up one after another
-  [0,1,2].forEach(i=>{$("pe"+i).style.opacity=eo(p(t,LN.L16.start+.5+i*.45,.35));});
-
-  // report: draft types itself, then is approved
-  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.4,(LN.L17.end-clickAt("report")-.4));let left=Math.round(total*k),h="";
+  // report
+  { const total=RTEXT.reduce((n,s)=>n+s[0].length,0),k=p(t,clickAt("report")+.3,LN.R1.end-clickAt("report"));let left=Math.round(total*k),h="";
     RTEXT.forEach(([s,fig])=>{if(left<=0)return;const piece=s.slice(0,left);left-=s.length;h+=fig?`<u>${piece}</u>`:piece;});
     $("rbox").innerHTML=h+(k<1?'<span style="border-left:3px solid var(--ink);margin-left:2px"></span>':"");
-    const ok=t>=approveAt();$("rchip").textContent=ok?"Approved":"Draft · not approved";$("rchip").style.background=ok?"var(--ink)":"none";$("rchip").style.color=ok?"#fff":"var(--ink)";
-    $("rlog").style.opacity=p(t,approveAt()+.2,.4);
-    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok); }
+    const ok=t>=approveAt();$("rchip").textContent=ok?"Approved":"Draft";$("rchip").style.background=ok?"var(--ink)":"none";$("rchip").style.color=ok?"#fff":"var(--ink)";
+    $("rApprove").textContent=ok?"Approved":"Approve";$("rApprove").classList.toggle("pr",!ok);$("rlog").style.opacity=p(t,approveAt()+.2,.4); }
 
-  // trust: three columns on the three phrases of L19
-  { const l=LN.L19,d=l.end-l.start;[...$("trust").querySelectorAll(".trust div")].forEach((c,i)=>{const a=eo(p(t,l.start+d*[0,.3,.63][i]-.1,.5));c.style.opacity=a;c.style.transform=`translateY(${(1-a)*20}px)`;}); }
+  // trust: one column per phrase
+  { const l=LN.T1,d=l.end-l.start;[...$("trust").querySelectorAll(".trust div")].forEach((c,i)=>rise(c,eo(p(t,l.start+d*[0,.3,.63][i]-.1,.5)))); }
 
   // cta
-  $("cta").querySelector(".btn").style.opacity=eo(p(t,LN.L20.start+1.6,.5));
-  $("cta").querySelector(".url").style.opacity=eo(p(t,LN.L20.start+2,.5));
-  $("endfoot").style.opacity=p(t,LN.L20.end+.3,.6);
+  $("cta").querySelector(".btn").style.opacity=eo(p(t,LN.C1.start+1.6,.5));
+  $("cta").querySelector(".url").style.opacity=eo(p(t,LN.C1.start+2,.5));
+  $("endfoot").style.opacity=p(t,LN.C1.end+.3,.6);
 
   // cursor
-  if(!KEYS)KEYS=cursorKeys();
-  const inApp=t>=SC.overview.start&&t<SC.report.end;
-  let c=$("cursor"),ring=$("ring");
+  if(!KEYS)KEYS=keys();
+  const c=$("cursor"),ring=$("ring");
   if(inApp){let i=0;while(i<KEYS.length-1&&KEYS[i+1].t<=t)i++;const A=KEYS[i],B=KEYS[Math.min(i+1,KEYS.length-1)];
-    const pa=pos(A.el),pb=pos(B.el),k=B.t>A.t?ez(cl((t-A.t)/(B.t-A.t))):0;const x=pa[0]+(pb[0]-pa[0])*k,y=pa[1]+(pb[1]-pa[1])*k;
-    c.style.left=x+"px";c.style.top=y+"px";c.style.opacity=appA;
-    const lastClick=KEYS.filter(q=>q.click&&q.t<=t).pop(),rk=lastClick?p(t,lastClick.t,.45):1;
-    if(lastClick&&rk<1){const q=pos(lastClick.el);Object.assign(ring.style,{left:q[0]+"px",top:q[1]+"px",opacity:1-rk,transform:`scale(${.5+rk})`});}else ring.style.opacity=0;
+    const pa=pos(A.el),pb=pos(B.el),k=B.t>A.t?ez(cl((t-A.t)/(B.t-A.t))):0;
+    c.style.left=(pa[0]+(pb[0]-pa[0])*k)+"px";c.style.top=(pa[1]+(pb[1]-pa[1])*k)+"px";c.style.opacity=appA;
+    const lc=KEYS.filter(q=>q.click&&q.t<=t).pop(),rk=lc?p(t,lc.t,.45):1;
+    if(lc&&rk<1){const q=pos(lc.el);Object.assign(ring.style,{left:q[0]+"px",top:q[1]+"px",opacity:1-rk,transform:`scale(${.5+rk})`});}else ring.style.opacity=0;
   }else{c.style.opacity=0;ring.style.opacity=0;}
 
-  // captions
+  // captions (the promise is already on screen)
   const cue=TL.scenes.flatMap(s=>s.lines).find(l=>t>=l.start-.05&&t<l.end+.3);
-  // Lines already set on screen (quote, promise) are not repeated as captions.
-  $("capText").textContent=cue&&!["L3","L4","L5","L10"].includes(cue.id)?cue.text:"";
+  $("capText").textContent=cue&&cue.id!=="P1"?cue.text:"";
 }
 window.render=render;
 window.DURATION=TL.duration;

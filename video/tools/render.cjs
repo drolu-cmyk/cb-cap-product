@@ -1,6 +1,7 @@
 // Render story.html to MP4, frame by frame, with the voiceover track.
 // Usage: node tools/render.cjs                 full video -> out/cb-cap-story.mp4
 //        node tools/render.cjs --stills 5,30   PNG stills -> build/stills/
+//        add --vertical for the 1080x1920 cut (-> out/cb-cap-story-vertical.mp4)
 // Needs Playwright (NODE_PATH or local install) and ffmpeg.
 const { chromium } = require("playwright");
 const { spawn } = require("child_process");
@@ -9,21 +10,24 @@ const path = require("path");
 
 const ROOT = path.resolve(__dirname, "..");
 const FPS = 30;
+const VERT = process.argv.includes("--vertical");
+const [W, H] = VERT ? [1080, 1920] : [1920, 1080];
+const NAME = VERT ? "cb-cap-story-vertical" : "cb-cap-story";
 const exe = process.env.CHROMIUM || (fs.existsSync("/opt/pw-browsers/chromium-1194/chrome-linux/chrome") ? "/opt/pw-browsers/chromium-1194/chrome-linux/chrome" : undefined);
 
 (async () => {
   const browser = await chromium.launch({ executablePath: exe, args: ["--allow-file-access-from-files", "--font-render-hinting=none"] });
-  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
   const errors = [];
   page.on("pageerror", e => errors.push(String(e)));
   page.on("console", m => { if (m.type() === "error") errors.push(m.text()); });
-  await page.goto("file://" + path.join(ROOT, "story.html"));
+  await page.goto("file://" + path.join(ROOT, "story.html") + (VERT ? "?format=vertical" : ""));
   await page.waitForFunction(() => window.READY === true);
   const duration = await page.evaluate(() => window.DURATION);
 
   const si = process.argv.indexOf("--stills");
   if (si > -1) {
-    const dir = path.join(ROOT, "build", "stills");
+    const dir = path.join(ROOT, "build", "stills", VERT ? "v" : "h");
     fs.mkdirSync(dir, { recursive: true });
     for (const t of process.argv[si + 1].split(",").map(Number)) {
       await page.evaluate(t => window.render(t), t);
@@ -31,7 +35,7 @@ const exe = process.env.CHROMIUM || (fs.existsSync("/opt/pw-browsers/chromium-11
     }
   } else {
     fs.mkdirSync(path.join(ROOT, "out"), { recursive: true });
-    const out = path.join(ROOT, "out", "cb-cap-story.mp4");
+    const out = path.join(ROOT, "out", NAME + ".mp4");
     const ff = spawn("ffmpeg", ["-y", "-loglevel", "error",
       "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
       "-i", path.join(ROOT, "build", "voice.wav"),

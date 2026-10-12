@@ -1,63 +1,57 @@
 # CB-CAP product story video
 
-An 84-second story video for all stakeholders: county health departments, the Foundation, funders and partners.
-It is 1920×1080 at 30 fps, with a voiceover and burned-in captions.
-Sample County is fictional, and every figure shown is illustrative.
+A 70-second story video for all stakeholders and social posts. It comes in two formats from one source.
 
-| File | What it is |
+| File | Use |
 |---|---|
-| `out/cb-cap-story.mp4` | The video |
-| `out/cb-cap-story.srt` | Caption file for players that support captions |
+| `out/cb-cap-story.mp4` | 1920×1080, for YouTube, LinkedIn, websites and presentations |
+| `out/cb-cap-story-vertical.mp4` | 1080×1920, for Reels, Shorts and TikTok. Text stays clear of the platforms' top and bottom buttons. |
+| `out/cb-cap-story.srt` | Caption file to upload alongside the video |
 | `out/cb-cap-story-transcript.txt` | Plain transcript |
 | `script.json` | Voiceover lines and scene timing. **The source of truth.** |
-| `story.html` | Animated scenes. Open it with `?t=40` to see a single moment. |
-| `tools/voice.py` | Copy check, voiceover, timeline, captions |
-| `tools/render.cjs` | Renders each frame and encodes the MP4 |
+| `story.html` | Animated scenes. Add `?format=vertical` for the vertical version, `&t=40` for a single moment. |
 
-## Story (P&G order)
+Captions are burned in, because most social viewers watch with the sound off.
+
+## Story
 
 | Time | Beat | Voiceover |
 |---|---|---|
-| 0:00 | Who | In a small county, the health department is a few people. / They answer for every number in the yearly report. |
-| 0:08 | Frustration | I know what my community needs. / Proving it means digging through reports and spreadsheets. / And every year, I start over. |
-| 0:17 | Insight | Here is what the yearly numbers usually miss. / Residents look for help. Many get referred. / Far fewer complete the step. / Somewhere on the way, care breaks. |
-| 0:28 | Promise | Know where care breaks. Show the proof. |
-| 0:32 | Proof: Overview | See where residents get stuck, by kind of help, area and season. |
-| 0:39 | Proof: Barriers | See which barriers come up most often. |
-| 0:43 | Proof: Areas | Small counts are hidden, so no one can be identified. |
-| 0:49 | Proof: Evidence | Every figure names its source, its year and its range. / Missing stays missing. It never becomes a zero. |
-| 0:57 | Proof: Plan | Each action in your plan links to its evidence. |
-| 1:02 | Proof: Report | Your yearly report starts from your plan, not a blank page. / Every draft waits for a person to approve it. |
-| 1:10 | Reasons to believe | Sources shown. Nobody identifiable. People decide. |
-| 1:16 | Call to action | Want this for your county? Talk to the SozoRock Foundation. |
+| 0:00 | Hook | Picture a county where 612 residents were referred for help. / 256 of them never got there. |
+| 0:08 | Why it matters | Most local health departments serve fewer than 50,000 people. |
+| 0:13 | Tension | Their directors are asked to prove what the community needs. / But yearly numbers show need, not where people get stuck. / So every year, the case starts over from a pile of spreadsheets. |
+| 0:25 | Promise | CB-CAP. Know where care breaks. Show the proof. |
+| 0:29 | Proof | See where residents drop off, by kind of help, area and season. |
+| 0:35 | Proof | Small counts stay hidden, so no one can be identified. |
+| 0:41 | Proof | Every figure carries its source, its year and its range. |
+| 0:46 | Proof | Your plan becomes your yearly report. / A person approves every word. |
+| 0:52 | Benefit | Walk into the budget meeting with proof, not a pile of spreadsheets. |
+| 0:57 | Reasons to believe | Sources shown. Nobody identifiable. People decide. |
+| 1:02 | Call to action | Want this for your county? Talk to the SozoRock Foundation. |
 
-## Copy rules applied
+## Rules applied
 
-- The brief's story and promise are used: "Know where care breaks. Show the proof."
-- `tools/voice.py` stops the build if any line is over twelve words or uses a banned word from the brief or from `docs/product/00-LOCKED-COPY.md` (including rank, score, grade and index).
-- Barrier charts say "most reported", never "ranked".
-- "Free" is not used anywhere until the Foundation approves that wording.
-- No state names and no technology or platform names.
-- The optional Ask feature is not shown.
-- The fictional-county label stays on screen the whole time.
-- The quote is labeled a composite, not a real person.
-- Privacy is shown, not just claimed:
-  - Barriers: two counts are hatched, one under 11 and one hidden as a follow-on so the first can't be worked out.
-  - Areas: two tiles are hidden.
-  - Evidence: one measure says "Not available" instead of zero.
+- No "Sample County" or "fictional" anywhere public-facing.
+  - The voiceover frames the opening as a hypothetical ("Picture a county").
+  - The app header says "Your county".
+  - A small "Illustrative figures" tag appears on the screens that show data, and the end card says the same.
+  - The brief requires invented data to be labeled. Health officials will check this, so unlabeled made-up numbers would cost credibility.
+- The one real-world figure is sourced on screen:
+  - NACCHO, *2022 National Profile of Local Health Departments*: 62% of the 2,512 departments studied serve fewer than 50,000 people.
+  - Confirm the figure against the report before publishing.
+- `tools/voice.py` stops the build on any line over twelve words, or any banned word from the brief or `docs/product/00-LOCKED-COPY.md`.
+- No "free", no state names, no technology or platform names. The optional Ask feature is not shown.
 
-## Needs sign-off before outside use (Maven)
+## Before posting publicly
 
-1. **Copy freeze.** This follows the brief, which differs from the locked copy:
-   - The name "Community Access Platform" vs. the category "County planning for health access".
-   - "Sample County" vs. "SozoRock County".
-   - Update the locked copy, or ask for a re-cut in locked lines.
-2. **The call to action** "Talk to the SozoRock Foundation" and `sozorockfoundation.org/partner` need Foundation approval of the partnership wording.
-3. **The composite quote** should be checked against real conversations.
+1. **Copy freeze (Maven):** this follows the brief's naming and promise, not `00-LOCKED-COPY.md`.
+2. **Foundation approval** of the call to action and `sozorockfoundation.org/partner`.
+3. **Check the NACCHO figure** against the source PDF.
 
 ## Voice, fonts, licenses
 
 - **Voice:** Kokoro-82M, voice `af_heart`, run locally. The model and voices are Apache 2.0, so there is no cost and no account. It is a synthetic voice.
+- **Music:** a quiet chord bed synthesized in `tools/voice.py` that dips under the voice. There are no samples, so there's nothing to license. Set `"music": false` in `script.json` to turn it off.
 - **Fonts:** Newsreader and Source Sans 3, under the SIL Open Font License (`assets/fonts/OFL.txt`).
 
 ## Build
@@ -71,9 +65,4 @@ KOKORO_DIR=/path/to/models PYTHON=/path/to/venv/python ./build.sh
 
 The build needs Node with Playwright, plus ffmpeg.
 Edit `script.json`, then rebuild: the scene timing follows the voice automatically.
-Use `node tools/render.cjs --stills 12,40` to render review stills into `build/stills/`.
-
-## Next cuts
-
-- 30 seconds: promise, Overview, Areas, trust, call to action.
-- 15 seconds, vertical 1080×1920, for social posts.
+Use `node tools/render.cjs --vertical` for the vertical cut, and `--stills 12,40` to render review stills.

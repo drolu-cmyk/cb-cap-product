@@ -1,207 +1,170 @@
 {
- "duration": 84.147,
+ "duration": 69.911,
  "scenes": [
   {
-   "id": "who",
+   "id": "hook",
    "start": 0.0,
-   "end": 7.99,
+   "end": 8.451,
    "lines": [
     {
-     "id": "L1",
-     "text": "In a small county, the health department is a few people.",
-     "start": 0.8,
-     "end": 4.063
+     "id": "H1",
+     "text": "Picture a county where 612 residents were referred for help.",
+     "start": 0.3,
+     "end": 4.608
     },
     {
-     "id": "L2",
-     "text": "They answer for every number in the yearly report.",
-     "start": 4.513,
-     "end": 7.29
+     "id": "H2",
+     "text": "256 of them never got there.",
+     "start": 5.008,
+     "end": 7.651
     }
    ]
   },
   {
-   "id": "frustration",
-   "start": 7.99,
-   "end": 16.828,
+   "id": "context",
+   "start": 8.451,
+   "end": 13.454,
    "lines": [
     {
-     "id": "L3",
-     "text": "I know what my community needs.",
-     "start": 8.59,
-     "end": 10.365
-    },
-    {
-     "id": "L4",
-     "text": "Proving it means digging through reports and spreadsheets.",
-     "start": 10.815,
-     "end": 13.74
-    },
-    {
-     "id": "L5",
-     "text": "And every year, I start over.",
-     "start": 14.19,
-     "end": 15.928
+     "id": "F1",
+     "text": "Most local health departments serve fewer than 50,000 people.",
+     "start": 8.851,
+     "end": 12.754
     }
    ]
   },
   {
-   "id": "insight",
-   "start": 16.828,
-   "end": 28.307,
+   "id": "director",
+   "start": 13.454,
+   "end": 25.04,
    "lines": [
     {
-     "id": "L6",
-     "text": "Here is what the yearly numbers usually miss.",
-     "start": 17.428,
-     "end": 20.029
+     "id": "D1",
+     "text": "Their directors are asked to prove what the community needs.",
+     "start": 13.754,
+     "end": 16.77
     },
     {
-     "id": "L7",
-     "text": "Residents look for help. Many get referred.",
-     "start": 20.479,
-     "end": 23.084
+     "id": "D2",
+     "text": "But yearly numbers show need, not where people get stuck.",
+     "start": 17.17,
+     "end": 20.382
     },
     {
-     "id": "L8",
-     "text": "Far fewer complete the step.",
-     "start": 23.534,
-     "end": 25.123
-    },
-    {
-     "id": "L9",
-     "text": "Somewhere on the way, care breaks.",
-     "start": 25.573,
-     "end": 27.407
+     "id": "D3",
+     "text": "So every year, the case starts over from a pile of spreadsheets.",
+     "start": 20.782,
+     "end": 24.24
     }
    ]
   },
   {
    "id": "promise",
-   "start": 28.307,
-   "end": 32.373,
+   "start": 25.04,
+   "end": 29.202,
    "lines": [
     {
-     "id": "L10",
-     "text": "Know where care breaks. Show the proof.",
-     "start": 28.807,
-     "end": 30.973
+     "id": "P1",
+     "text": "CB-CAP. Know where care breaks. Show the proof.",
+     "start": 25.44,
+     "end": 28.102
     }
    ]
   },
   {
-   "id": "overview",
-   "start": 32.373,
-   "end": 38.662,
+   "id": "where",
+   "start": 29.202,
+   "end": 35.393,
    "lines": [
     {
-     "id": "L11",
-     "text": "See where residents get stuck, by kind of help, area and season.",
-     "start": 33.373,
-     "end": 37.062
+     "id": "W1",
+     "text": "See where residents drop off, by kind of help, area and season.",
+     "start": 30.102,
+     "end": 33.793
     }
    ]
   },
   {
-   "id": "barriers",
-   "start": 38.662,
-   "end": 43.231,
+   "id": "hidden",
+   "start": 35.393,
+   "end": 40.811,
    "lines": [
     {
-     "id": "L12",
-     "text": "See which barriers come up most often.",
-     "start": 39.462,
-     "end": 41.431
+     "id": "S1",
+     "text": "Small counts stay hidden, so no one can be identified.",
+     "start": 36.293,
+     "end": 39.511
     }
    ]
   },
   {
-   "id": "areas",
-   "start": 43.231,
-   "end": 48.616,
+   "id": "source",
+   "start": 40.811,
+   "end": 45.956,
    "lines": [
     {
-     "id": "L13",
-     "text": "Small counts are hidden, so no one can be identified.",
-     "start": 44.031,
-     "end": 47.216
-    }
-   ]
-  },
-  {
-   "id": "evidence",
-   "start": 48.616,
-   "end": 56.967,
-   "lines": [
-    {
-     "id": "L14",
-     "text": "Every figure names its source, its year and its range.",
-     "start": 49.416,
-     "end": 52.56
-    },
-    {
-     "id": "L15",
-     "text": "Missing stays missing. It never becomes a zero.",
-     "start": 53.01,
-     "end": 55.967
-    }
-   ]
-  },
-  {
-   "id": "plan",
-   "start": 56.967,
-   "end": 61.88,
-   "lines": [
-    {
-     "id": "L16",
-     "text": "Each action in your plan links to its evidence.",
-     "start": 57.767,
-     "end": 60.38
+     "id": "S2",
+     "text": "Every figure carries its source, its year and its range.",
+     "start": 41.611,
+     "end": 44.756
     }
    ]
   },
   {
    "id": "report",
-   "start": 61.88,
-   "end": 70.459,
+   "start": 45.956,
+   "end": 52.387,
    "lines": [
     {
-     "id": "L17",
-     "text": "Your yearly report starts from your plan, not a blank page.",
-     "start": 62.68,
-     "end": 66.093
+     "id": "R1",
+     "text": "Your plan becomes your yearly report.",
+     "start": 46.756,
+     "end": 48.979
     },
     {
-     "id": "L18",
-     "text": "Every draft waits for a person to approve it.",
-     "start": 66.543,
-     "end": 69.059
+     "id": "R2",
+     "text": "A person approves every word.",
+     "start": 49.379,
+     "end": 51.187
+    }
+   ]
+  },
+  {
+   "id": "benefit",
+   "start": 52.387,
+   "end": 57.296,
+   "lines": [
+    {
+     "id": "B1",
+     "text": "Walk into the budget meeting with proof, not a pile of spreadsheets.",
+     "start": 52.787,
+     "end": 56.496
     }
    ]
   },
   {
    "id": "trust",
-   "start": 70.459,
-   "end": 75.814,
+   "start": 57.296,
+   "end": 62.229,
    "lines": [
     {
-     "id": "L19",
+     "id": "T1",
      "text": "Sources shown. Nobody identifiable. People decide.",
-     "start": 70.959,
-     "end": 74.814
+     "start": 57.596,
+     "end": 61.429
     }
    ]
   },
   {
    "id": "cta",
-   "start": 75.814,
-   "end": 84.147,
+   "start": 62.229,
+   "end": 69.911,
    "lines": [
     {
-     "id": "L20",
+     "id": "C1",
      "text": "Want this for your county? Talk to the SozoRock Foundation.",
-     "start": 76.414,
-     "end": 80.147
+     "start": 62.629,
+     "end": 66.311
     }
    ]
   }

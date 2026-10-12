@@ -61,7 +61,7 @@ function mixAudio(cues, duration) {
     const ff = spawn("ffmpeg", ["-y", "-loglevel", "error",
       "-f", "image2pipe", "-framerate", String(FPS), "-c:v", "mjpeg", "-i", "-",
       "-i", mix,
-      "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-pix_fmt", "yuv420p", "-tune", "stillimage",
+      "-c:v", "libx264", "-preset", "slow", "-crf", "22", "-maxrate", "6M", "-bufsize", "12M", "-tune", "film", "-pix_fmt", "yuv420p",
       "-c:a", "aac", "-b:a", "160k", "-ar", "48000", "-ac", "2", "-shortest", "-movflags", "+faststart", out], { stdio: ["pipe", "inherit", "inherit"] });
     const frames = Math.ceil(duration * FPS);
     for (let i = 0; i < frames; i++) {
